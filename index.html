@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Video Editor | Short Form Content</title>
+    <!-- Importing a clean, modern font -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================================
+           1. MODIFIABLE SETTINGS (COLORS & FONTS)
+           Change these values to match your personal brand!
+           ========================================================= */
+        :root {
+            --bg-dark: #09090b;       /* Main background color */
+            --bg-card: #18181b;       /* Card/Section background */
+            --bg-card-hover: #27272a; /* Card hover state */
+            --text-main: #ffffff;     /* Main text color */
+            --text-muted: #a1a1aa;    /* Secondary/muted text */
+            --accent: #3b82f6;        /* Primary accent (Blue) - Change this! e.g., #10b981 for green */
+            --accent-glow: rgba(59, 130, 246, 0.4); 
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --border-color: #27272a;
+        }
+
+        /* =========================================================
+           2. BASE STYLES & RESET
+           ========================================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        
+        /* Container to keep content centered and nice */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* =========================================================
+           3. NAVIGATION BAR
+           ========================================================= */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover { color: var(--text-main); }
+
+        .btn-primary {
+            background-color: var(--text-main);
+            color: var(--bg-dark);
+            padding: 0.75rem 1.5rem;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--text-main);
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--text-main);
+            transform: translateY(-2px);
+        }
+
+        /* =========================================================
+           4. HERO SECTION (The Hook)
+           ========================================================= */
+        .hero {
+            padding: 12rem 0 6rem;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Subtle background glow */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981; /* Green for 'Available' */
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+            margin-inline: auto;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        /* =========================================================
+           5. STATS / SOCIAL PROOF
+           ========================================================= */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-dark);
+        }
+
+        .stat-item { text-align: center; }
+        .stat-num { font-size: 2.5rem; font-weight: 800; color: var(--text-main); }
+        .stat-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600;}
+
+        /* =========================================================
+           6. PORTFOLIO GRID (Vertical Videos)
+           ========================================================= */
+        .work-section { padding: 6rem 0; }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.5px; }
+        .section-header p { color: var(--text-muted); }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            aspect-ratio: 9 / 16; /* Forces vertical format */
+            group: hover;
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .video-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.3s ease;
+            filter: brightness(0.8);
+        }
+
+        .video-card:hover .video-thumb {
+            transform: scale(1.05);
+            filter: brightness(0.5);
+        }
+
+        /* Hover Overlay UI */
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+
+        .video-badge {
+            align-self: flex-start;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .play-btn {
+            align-self: center;
+            width: 64px;
+            height: 64px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .video-card:hover .play-btn {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .play-btn svg { width: 24px; height: 24px; fill: white; margin-left: 4px; }
+
+        .video-info h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .video-info p { font-size: 0.9rem; color: #d4d4d8; }
+
+        /* =========================================================
+           7. PROCESS SECTION (Organization & Trust)
+           ========================================================= */
+        .process-section { padding: 6rem 0; background: var(--bg-card); border-radius: 40px; margin-bottom: 6rem; }
+        
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .process-card {
+            padding: 2rem;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+        }
+
+        .step-num {
+            width: 40px; height: 40px;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .process-card h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
+        .process-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* =========================================================
+           8. FOOTER / CONTACT CTA
+           ========================================================= */
+        footer {
+            padding: 6rem 0 3rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: ''; position: absolute; bottom: -50%; left: 50%;
+            transform: translateX(-50%); width: 800px; height: 800px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+            z-index: -1; opacity: 0.3;
+        }
+
+        .footer-content h2 { font-size: 3rem; font-weight: 800; margin-bottom: 1rem; }
+        .footer-content p { color: var(--text-muted); margin-bottom: 2.5rem; font-size: 1.1rem;}
+
+        .social-links { margin-top: 4rem; display: flex; justify-content: center; gap: 2rem; }
+        .social-links a { color: var(--text-muted); font-weight: 600; transition: color 0.2s ease; }
+        .social-links a:hover { color: var(--text-main); }
+
+        .copyright { margin-top: 4rem; color: #52525b; font-size: 0.85rem; }
+
+        /* =========================================================
+           9. VIDEO MODAL POPUP
+           ========================================================= */
+        .modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px); z-index: 999;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+
+        .modal.active { opacity: 1; pointer-events: auto; }
+
+        .modal-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            width: 100%;
+            max-width: 450px; /* Perfect width for vertical video */
+            background: #18181b;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            will-change: top, left, transform;
+        }
+
+        .modal.active .modal-container { transform: translate(-50%, -50%) scale(1); }
+        .modal.active .modal-container.is-dragging { transition: none; }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--bg-card-hover);
+            cursor: grab;
+            user-select: none;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .modal-header:active { cursor: grabbing; }
+
+        .drag-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .drag-title svg { width: 18px; height: 18px; fill: currentColor; }
+
+        .modal-close {
+            background: none; border: none; color: white;
+            font-size: 1.8rem; cursor: pointer; opacity: 0.7;
+            transition: opacity 0.2s;
+            line-height: 1;
+        }
+        .modal-close:hover { opacity: 1; color: var(--accent); }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            background: #000;
+        }
+
+        .iframe-blocker {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            display: none;
+        }
+
+        .modal-container.is-dragging .iframe-blocker {
+            display: block;
+        }
+
+        .modal iframe, .modal video { width: 100%; height: 100%; border: none; display: block; }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .stats { flex-direction: column; gap: 2rem; }
+            .nav-links { display: none; } /* Hide links on small mobile, keep CTA */
+            .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="container nav-wrapper">
+            <div class="logo">
+                <div class="logo-dot"></div>
+                Jaideep Markam
+            </div>
+            <ul class="nav-links">
+                <li><a href="#work">Featured Work</a></li>
+                <li><a href="#process">My Process</a></li>
+            </ul>
+            <a href="#contact" class="btn-primary">Hire Me</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="container">
+            <div class="status-badge">
+                <div class="status-dot"></div>
+                Available for Projects
+            </div>
+            <h1>Creative video editing that <span>hooks and holds attention.</span></h1>
+            <p>Passionate video editor specializing in TikTok, Reels, and Shorts. I use fast pacing, dynamic captions, typography, basic color corrections, and sound design to make your content stand out.</p>
+            <a href="#work" class="btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">View My Sample Edits</a>
+        </div>
+    </header>
+
+    <!-- STATS / SOCIAL PROOF -->
+    <section class="stats">
+        <div class="container" style="display: flex; justify-content: center; gap: 4vw; flex-wrap: wrap;">
+            <div class="stat-item">
+                <div class="stat-num">100%</div>
+                <div class="stat-label">Dedication to Quality</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">Trendy</div>
+                <div class="stat-label">Editing Styles</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">Fast</div>
+                <div class="stat-label">Turnaround Time</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO GRID -->
+    <section id="work" class="work-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2>Sample Edits</h2>
+                    <p>Click any video to watch my creative concepts and editing style.</p>
+                </div>
+            </div>
+
+            <div class="video-grid">
+                
+                <!-- VIDEO ITEM 1 (Empty Slot) -->
+                <!-- When ready, add your link inside openModal('YOUR_LINK_HERE') -->
+                <div class="video-card" onclick="openModal('')">
+                    <!-- When ready, replace this image src with your video thumbnail -->
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="Placeholder Thumbnail" class="video-thumb">
+                    <div class="video-overlay">
+                        <div class="video-badge">Coming Soon</div>
+                        <div class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <div class="video-info">
+                            <h3>Project Title 1</h3>
+                            <p>Video details will appear here</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIDEO ITEM 2 (Empty Slot) -->
+                <div class="video-card" onclick="openModal('')">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="Placeholder Thumbnail" class="video-thumb">
+                    <div class="video-overlay">
+                        <div class="video-badge">Coming Soon</div>
+                        <div class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <div class="video-info">
+                            <h3>Project Title 2</h3>
+                            <p>Video details will appear here</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIDEO ITEM 3 (Empty Slot) -->
+                <div class="video-card" onclick="openModal('')">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="Placeholder Thumbnail" class="video-thumb">
+                    <div class="video-overlay">
+                        <div class="video-badge">Coming Soon</div>
+                        <div class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <div class="video-info">
+                            <h3>Project Title 3</h3>
+                            <p>Video details will appear here</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIDEO ITEM 4 (Empty Slot) -->
+                <div class="video-card" onclick="openModal('')">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="Placeholder Thumbnail" class="video-thumb">
+                    <div class="video-overlay">
+                        <div class="video-badge">Coming Soon</div>
+                        <div class="play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <div class="video-info">
+                            <h3>Project Title 4</h3>
+                            <p>Video details will appear here</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS SECTION -->
+    <section id="process" class="container">
+        <div class="process-section">
+            <div class="container" style="width: 90%;">
+                <div class="section-header" style="margin-bottom: 1rem;">
+                    <div>
+                        <h2>How It Works</h2>
+                        <p>A simple, zero-headache workflow designed for creators.</p>
+                    </div>
+                </div>
+                
+                <div class="process-grid">
+                    <div class="process-card">
+                        <div class="step-num">1</div>
+                        <h3>Send Footage</h3>
+                        <p>Upload your raw clips or long-form videos to a shared Google Drive/Dropbox folder.</p>
+                    </div>
+                    <div class="process-card">
+                        <div class="step-num">2</div>
+                        <h3>I Edit & Enhance</h3>
+                        <p>I find the best hooks, cut the fluff, add engaging captions, b-roll, and sound effects.</p>
+                    </div>
+                    <div class="process-card">
+                        <div class="step-num">3</div>
+                        <h3>Review & Post</h3>
+                        <p>You review the draft via Frame.io. After a quick revision, it's ready to go viral.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER / CONTACT -->
+    <footer id="contact">
+        <div class="container footer-content">
+            <h2>Let's create something awesome.</h2>
+            <p>Ready to give my editing style a try? Send me a message and let's discuss your project.</p>
+            <!-- Change this email to yours -->
+            <a href="mailto:jaideep.markam@gmail.com" class="btn-primary" style="padding: 1.2rem 2.5rem; font-size: 1.1rem;">
+                Email: jaideep.markam@gmail.com
+            </a>
+            
+            <div class="social-links">
+                <a href="https://instagram.com/editoralchemy" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </div>
+
+            <div class="copyright">
+                &copy; 2026 Jaideep Markam. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE VIDEO MODAL -->
+    <div class="modal" id="videoModal">
+        <div class="modal-container" id="modalContainer">
+            <div class="modal-header" id="modalHeader">
+                <div class="drag-title">
+                    <svg viewBox="0 0 24 24"><path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"/></svg>
+                    Drag to move
+                </div>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="video-wrapper">
+                <div class="iframe-blocker" id="iframeBlocker"></div>
+                <!-- Robust iframe settings for YouTube compatibility -->
+                <iframe id="videoPlayer" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="Video Player"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT FOR INTERACTIVITY -->
+    <script>
+        const modal = document.getElementById('videoModal');
+        const modalContainer = document.getElementById('modalContainer');
+        const modalHeader = document.getElementById('modalHeader');
+        const videoPlayer = document.getElementById('videoPlayer');
+
+        // --- Dragging Logic ---
+        let isDragging = false;
+        let startX, startY, initialLeft, initialTop;
+
+        modalHeader.addEventListener('mousedown', dragStart);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', dragEnd);
+
+        // Touch support for mobile dragging
+        modalHeader.addEventListener('touchstart', dragStart, {passive: false});
+        document.addEventListener('touchmove', drag, {passive: false});
+        document.addEventListener('touchend', dragEnd);
+
+        function dragStart(e) {
+            isDragging = true;
+            modalContainer.classList.add('is-dragging');
+            
+            if (e.type === 'touchstart') {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+            } else {
+                startX = e.clientX;
+                startY = e.clientY;
+            }
+
+            // Lock position to explicit pixels to start dragging from current center
+            const rect = modalContainer.getBoundingClientRect();
+            modalContainer.style.left = rect.left + 'px';
+            modalContainer.style.top = rect.top + 'px';
+            modalContainer.style.transform = 'none'; // Clear the translate(-50%, -50%)
+
+            initialLeft = rect.left;
+            initialTop = rect.top;
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            e.preventDefault(); // Prevent scrolling while dragging
+
+            let currentX, currentY;
+            if (e.type === 'touchmove') {
+                currentX = e.touches[0].clientX;
+                currentY = e.touches[0].clientY;
+            } else {
+                currentX = e.clientX;
+                currentY = e.clientY;
+            }
+
+            const dx = currentX - startX;
+            const dy = currentY - startY;
+
+            modalContainer.style.left = (initialLeft + dx) + 'px';
+            modalContainer.style.top = (initialTop + dy) + 'px';
+        }
+
+        function dragEnd() {
+            isDragging = false;
+            modalContainer.classList.remove('is-dragging');
+        }
+
+        // Function to Open Modal and Auto-Play Video
+        function openModal(videoUrl) {
+            // Reset position to center each time it opens
+            modalContainer.style.left = '';
+            modalContainer.style.top = '';
+            modalContainer.style.transform = '';
+
+            let finalUrl = videoUrl;
+
+            // Smart YouTube URL Converter (Accepts ANY YouTube link)
+            if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
+                let videoId = '';
+                
+                // Extract ID from shorts: youtube.com/shorts/ID
+                if (videoUrl.includes('/shorts/')) {
+                    videoId = videoUrl.split('/shorts/')[1].split('?')[0];
+                } 
+                // Extract ID from standard: youtube.com/watch?v=ID
+                else if (videoUrl.includes('watch?v=')) {
+                    videoId = videoUrl.split('watch?v=')[1].split('&')[0];
+                }
+                // Extract ID from youtu.be/ID
+                else if (videoUrl.includes('youtu.be/')) {
+                    videoId = videoUrl.split('youtu.be/')[1].split('?')[0];
+                }
+                // Already an embed format
+                else if (videoUrl.includes('/embed/')) {
+                    videoId = videoUrl.split('/embed/')[1].split('?')[0];
+                }
+
+                // If we found a valid YouTube ID, format it perfectly for websites
+                if (videoId) {
+                    finalUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&controls=1&playsinline=1`;
+                }
+            }
+            
+            videoPlayer.src = finalUrl;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        // Function to Close Modal and Stop Audio
+        function closeModal() {
+            modal.classList.remove('active');
+            videoPlayer.src = ""; // Clears the src, stopping the video/audio instantly
+            document.body.style.overflow = 'auto'; // Restore background scrolling
+        }
+
+        // Close modal when clicking outside the video container
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close modal on 'Escape' key press
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
