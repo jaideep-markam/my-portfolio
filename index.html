@@ -3,792 +3,801 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pro Video Editor | Short Form Content</title>
-    <!-- Importing a clean, modern font -->
+    <meta name="description" content="Jaideep Markam — Short-Form Video Editor specializing in TikTok, Reels, and YouTube Shorts.">
+    <title>Jaideep Markam | Short-Form Video Editor</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* =========================================================
-           1. MODIFIABLE SETTINGS (COLORS & FONTS)
-           Change these values to match your personal brand!
-           ========================================================= */
         :root {
-            --bg-dark: #09090b;       /* Main background color */
-            --bg-card: #18181b;       /* Card/Section background */
-            --bg-card-hover: #27272a; /* Card hover state */
-            --text-main: #ffffff;     /* Main text color */
-            --text-muted: #a1a1aa;    /* Secondary/muted text */
-            --accent: #3b82f6;        /* Primary accent (Blue) - Change this! e.g., #10b981 for green */
-            --accent-glow: rgba(59, 130, 246, 0.4); 
+            --bg-dark: #09090b;
+            --bg-card: #18181b;
+            --bg-card-hover: #27272a;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59,130,246,0.4);
             --font-main: 'Plus Jakarta Sans', sans-serif;
-            --border-color: #27272a;
+            --border: #27272a;
+        }
+        *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+        body{font-family:var(--font-main);background:var(--bg-dark);color:var(--text-main);line-height:1.6;overflow-x:hidden;}
+        a{text-decoration:none;color:inherit;}
+        ul{list-style:none;}
+        .container{width:90%;max-width:1200px;margin:0 auto;}
+
+        /* ── NAV ── */
+        nav{position:fixed;top:0;width:100%;padding:1.25rem 0;background:rgba(9,9,11,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);z-index:200;transition:all .3s;}
+        .nav-wrapper{display:flex;justify-content:space-between;align-items:center;}
+        .logo{font-size:1.2rem;font-weight:800;letter-spacing:-.5px;display:flex;align-items:center;gap:8px;}
+        .logo-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 10px var(--accent-glow);}
+        .nav-links{display:flex;gap:2rem;}
+        .nav-links a{font-weight:500;font-size:.95rem;color:var(--text-muted);transition:color .2s;}
+        .nav-links a:hover{color:var(--text-main);}
+        .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+        .hamburger span{display:block;width:22px;height:2px;background:var(--text-main);border-radius:2px;transition:all .3s;}
+        .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+        .hamburger.open span:nth-child(2){opacity:0;}
+        .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+        .mobile-menu{display:none;position:fixed;top:65px;left:0;right:0;background:rgba(9,9,11,.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:1.5rem 2rem;z-index:199;flex-direction:column;gap:1.25rem;}
+        .mobile-menu.open{display:flex;}
+        .mobile-menu a{font-size:1.1rem;font-weight:600;color:var(--text-muted);transition:color .2s;padding:.5rem 0;border-bottom:1px solid var(--border);}
+        .mobile-menu a:last-child{border-bottom:none;}
+        .mobile-menu a:hover{color:var(--text-main);}
+        .btn-primary{background:var(--text-main);color:var(--bg-dark);padding:.75rem 1.5rem;border-radius:100px;font-weight:700;font-size:.95rem;transition:all .3s;border:2px solid var(--text-main);cursor:pointer;display:inline-block;}
+        .btn-primary:hover{background:transparent;color:var(--text-main);transform:translateY(-2px);}
+
+        /* ── HERO ── */
+        .hero{padding:11rem 0 6rem;text-align:center;position:relative;}
+        .hero::before{content:'';position:absolute;top:-10%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);z-index:-1;opacity:.5;}
+        .status-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid var(--border);padding:.5rem 1rem;border-radius:100px;font-size:.85rem;font-weight:600;margin-bottom:2rem;color:var(--text-muted);}
+        .status-dot{width:8px;height:8px;background:#10b981;border-radius:50%;animation:pulse 2s infinite;}
+        @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(16,185,129,.4);}70%{box-shadow:0 0 0 6px rgba(16,185,129,0);}100%{box-shadow:0 0 0 0 rgba(16,185,129,0);}}
+        .hero h1{font-size:clamp(2.4rem,5vw,4.5rem);font-weight:800;line-height:1.1;letter-spacing:-1px;margin-bottom:1.5rem;max-width:900px;margin-inline:auto;}
+        .hero h1 span{color:var(--accent);}
+        .hero p{font-size:1.1rem;color:var(--text-muted);max-width:600px;margin:0 auto 3rem;}
+
+        /* ── STATS ── */
+        .stats{display:flex;justify-content:center;gap:4rem;flex-wrap:wrap;padding:3rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+        .stat-item{text-align:center;}
+        .stat-num{font-size:2.5rem;font-weight:800;}
+        .stat-label{font-size:.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;font-weight:600;}
+
+        /* ── SKILLS ── */
+        .skills-section{padding:6rem 0;}
+        .section-title{font-size:2.5rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.5rem;}
+        .section-sub{color:var(--text-muted);margin-bottom:3rem;}
+        .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.25rem;}
+        .skill-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:all .3s ease;cursor:default;}
+        .skill-card:hover{border-color:var(--accent);background:var(--bg-card-hover);transform:translateY(-4px);box-shadow:0 8px 30px rgba(59,130,246,.15);}
+        .skill-icon{font-size:1.8rem;margin-bottom:.75rem;}
+        .skill-card h3{font-size:1rem;font-weight:700;margin-bottom:.25rem;}
+        .skill-card p{font-size:.85rem;color:var(--text-muted);}
+
+        /* ── PORTFOLIO ── */
+        .work-section{padding:6rem 0;}
+        .section-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;}
+        .section-header h2{font-size:2.5rem;font-weight:800;letter-spacing:-.5px;}
+        .section-header p{color:var(--text-muted);}
+        .video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2rem;}
+
+        .video-card{background:var(--bg-card);border-radius:20px;border:1px solid var(--border);overflow:hidden;position:relative;aspect-ratio:9/16;transition:all .3s ease;}
+        .video-card.clickable{cursor:pointer;}
+        .video-card.locked{cursor:default;opacity:.6;}
+        .video-card.clickable:hover{transform:translateY(-8px);border-color:var(--accent);box-shadow:0 20px 40px rgba(0,0,0,.5);}
+        .video-card.clickable:focus{outline:2px solid var(--accent);outline-offset:3px;}
+        .video-thumb{width:100%;height:100%;object-fit:cover;transition:transform .5s ease,filter .3s ease;filter:brightness(.8);}
+        .video-card.clickable:hover .video-thumb{transform:scale(1.05);filter:brightness(.45);}
+        .video-overlay{position:absolute;inset:0;padding:1.5rem;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none;}
+        .video-badge{align-self:flex-start;background:rgba(0,0,0,.65);backdrop-filter:blur(4px);padding:.4rem .8rem;border-radius:8px;font-size:.8rem;font-weight:700;border:1px solid rgba(255,255,255,.1);}
+        .video-badge.live{color:#10b981;}
+        .video-badge.soon{color:var(--text-muted);}
+        .play-btn{align-self:center;width:64px;height:64px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.8);transition:all .3s ease;box-shadow:0 0 20px var(--accent-glow);}
+        .video-card.clickable:hover .play-btn{opacity:1;transform:scale(1);}
+        .play-btn svg{width:24px;height:24px;fill:white;margin-left:4px;}
+        .video-info h3{font-size:1.15rem;font-weight:700;margin-bottom:.2rem;}
+        .video-info p{font-size:.85rem;color:#d4d4d8;}
+
+        /* ── PROCESS ── */
+        .process-section{padding:6rem 0;background:var(--bg-card);border-radius:40px;margin-bottom:6rem;}
+        .process-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-top:3rem;}
+        .process-card{padding:2rem;background:var(--bg-dark);border:1px solid var(--border);border-radius:20px;transition:all .3s;}
+        .process-card:hover{border-color:var(--accent);transform:translateY(-4px);}
+        .step-num{width:40px;height:40px;background:rgba(59,130,246,.1);color:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;margin-bottom:1.5rem;}
+        .process-card h3{margin-bottom:.5rem;font-size:1.2rem;}
+        .process-card p{color:var(--text-muted);font-size:.95rem;}
+
+        /* ── TESTIMONIALS ── */
+        .testimonials-section{padding:6rem 0;}
+        .testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem;}
+        .testimonial-card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:2rem;transition:all .3s;}
+        .testimonial-card:hover{border-color:var(--accent);transform:translateY(-4px);}
+        .stars{color:#fbbf24;font-size:.85rem;margin-bottom:1rem;}
+        .testimonial-card p{color:var(--text-muted);font-size:.95rem;line-height:1.7;margin-bottom:1.5rem;font-style:italic;}
+        .author-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#8b5cf6);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;}
+        .testimonial-author{display:flex;align-items:center;gap:.75rem;}
+        .author-name{font-weight:700;font-size:.95rem;}
+        .author-handle{font-size:.8rem;color:var(--text-muted);}
+
+        /* ── FOOTER ── */
+        footer{padding:6rem 0 3rem;text-align:center;border-top:1px solid var(--border);position:relative;overflow:hidden;}
+        footer::before{content:'';position:absolute;bottom:-50%;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 60%);z-index:-1;opacity:.3;}
+        .footer-content h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:1rem;}
+        .footer-content p{color:var(--text-muted);margin-bottom:2.5rem;font-size:1.1rem;}
+        .social-links{margin-top:4rem;display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;}
+        .social-links a{color:var(--text-muted);font-weight:600;transition:color .2s;}
+        .social-links a:hover{color:var(--text-main);}
+        .copyright{margin-top:4rem;color:#52525b;font-size:.85rem;}
+
+        /* ── VIDEO SLIDE ── */
+        .video-slide{position:fixed;inset:0;background:#000;z-index:999;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .4s ease;}
+        .video-slide.active{opacity:1;pointer-events:auto;}
+
+        .slide-header{display:flex;justify-content:space-between;align-items:center;padding:.85rem 1.25rem;background:linear-gradient(to bottom,rgba(0,0,0,.95) 0%,rgba(0,0,0,0) 100%);position:absolute;top:0;left:0;right:0;z-index:20;}
+        .slide-back-btn{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.75);border:2px solid rgba(255,255,255,.9);color:#fff;padding:.5rem 1.1rem;border-radius:100px;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;text-shadow:0 1px 4px rgba(0,0,0,.8);box-shadow:0 2px 12px rgba(0,0,0,.5);font-family:var(--font-main);}
+        .slide-back-btn:hover{background:rgba(255,255,255,.2);}
+        .slide-title-pill{font-size:.9rem;font-weight:700;color:#fff;background:rgba(0,0,0,.6);padding:.3rem .9rem;border-radius:100px;border:1px solid rgba(255,255,255,.2);text-shadow:0 1px 6px rgba(0,0,0,.9);white-space:nowrap;max-width:40vw;overflow:hidden;text-overflow:ellipsis;}
+        .slide-close-btn{width:40px;height:40px;border-radius:50%;background:rgba(239,68,68,.9);border:2px solid rgba(255,255,255,.9);color:#fff;font-size:1.1rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.6);transition:all .2s;flex-shrink:0;font-family:var(--font-main);}
+        .slide-close-btn:hover{background:#ef4444;transform:scale(1.1);}
+
+        .slide-video-area{flex:1;display:flex;align-items:center;justify-content:center;background:#000;overflow:hidden;}
+        .slide-video-wrap{position:relative;width:100%;max-width:380px;aspect-ratio:9/16;background:#000;border-radius:20px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.8);}
+
+        @media(max-height:700px),(orientation:landscape){
+            .slide-video-wrap{max-width:none;width:auto;height:100vh;max-height:100vh;border-radius:0;aspect-ratio:unset;}
         }
 
-        /* =========================================================
-           2. BASE STYLES & RESET
-           ========================================================= */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
+        .slide-video-wrap video{width:100%;height:100%;object-fit:contain;background:#000;display:block;}
+
+        /* Center tap/click overlay */
+        .center-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:6;pointer-events:none;cursor:pointer;}
+        .video-slide.active .center-overlay{pointer-events:auto;}
+        .center-btn{width:76px;height:76px;border-radius:50%;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:2.5px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.6);transition:opacity .25s,transform .25s;box-shadow:0 4px 24px rgba(0,0,0,.5);}
+        .center-btn svg{width:34px;height:34px;fill:#fff;filter:drop-shadow(0 1px 4px rgba(0,0,0,.6));}
+        .center-btn .play-i{margin-left:5px;}
+        .slide-video-wrap:hover .center-btn,
+        .slide-video-wrap.show-ctrl .center-btn{opacity:1;transform:scale(1);}
+        .center-btn.flash{animation:flashAnim .25s ease;}
+        @keyframes flashAnim{0%{transform:scale(1);}50%{transform:scale(1.2);background:rgba(255,255,255,.25);}100%{transform:scale(1);}}
+
+        /* PiP bottom controls */
+        .pip-bar{
+            position:absolute;bottom:0;left:0;right:0;
+            background:linear-gradient(to top,
+                rgba(0,0,0,1) 0%,
+                rgba(0,0,0,.95) 30%,
+                rgba(0,0,0,.7) 60%,
+                transparent 100%);
+            padding:3.5rem 1rem 1rem;
+            z-index:7;opacity:1;transition:opacity .3s ease;
         }
-
-        body {
-            font-family: var(--font-main);
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
+        .slide-video-wrap.hide-ctrl .pip-bar{opacity:0;pointer-events:none;}
+        .pip-progress{cursor:pointer;padding:6px 0;margin-bottom:8px;position:relative;}
+        .pip-track{width:100%;height:5px;background:rgba(255,255,255,.35);border-radius:4px;position:relative;overflow:visible;box-shadow:0 1px 4px rgba(0,0,0,.8);}
+        .pip-fill{height:100%;width:0%;background:var(--accent);border-radius:4px;position:relative;transition:width .1s linear;box-shadow:0 0 8px var(--accent-glow);}
+        .pip-fill::after{content:'';position:absolute;right:-7px;top:-5px;width:15px;height:15px;background:#fff;border-radius:50%;box-shadow:0 0 8px rgba(0,0,0,.8);opacity:0;transition:opacity .2s;}
+        .pip-progress:hover .pip-track{height:7px;}
+        .pip-progress:hover .pip-fill::after{opacity:1;}
+        .pip-row{display:flex;justify-content:space-between;align-items:center;}
+        .pip-left,.pip-right{display:flex;align-items:center;gap:4px;}
+        .pip-btn{
+            background:rgba(255,255,255,0.12);
+            border:1.5px solid rgba(255,255,255,0.25);
+            color:#fff;cursor:pointer;
+            width:40px;height:40px;
+            display:flex;align-items:center;justify-content:center;
+            border-radius:10px;transition:all .2s;padding:0;flex-shrink:0;
+            box-shadow:0 2px 8px rgba(0,0,0,0.5);
         }
-
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
-        
-        /* Container to keep content centered and nice */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
+        .pip-btn svg{width:20px;height:20px;fill:currentColor;filter:drop-shadow(0 1px 4px rgba(0,0,0,1));}
+        .pip-btn:hover{background:rgba(255,255,255,.28);border-color:rgba(255,255,255,.6);transform:scale(1.08);}
+        .pip-btn:active{transform:scale(.95);}
+        .pip-vol-wrap{display:flex;align-items:center;gap:4px;}
+        .pip-vol-slider{
+            -webkit-appearance:none;appearance:none;
+            width:60px;height:5px;
+            background:rgba(255,255,255,.35);
+            border-radius:3px;outline:none;cursor:pointer;
+            box-shadow:0 1px 4px rgba(0,0,0,.8);
         }
-
-        /* =========================================================
-           3. NAVIGATION BAR
-           ========================================================= */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 0;
-            background: rgba(9, 9, 11, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 100;
-            transition: all 0.3s ease;
+        .pip-vol-slider::-webkit-slider-thumb{
+            -webkit-appearance:none;width:14px;height:14px;
+            border-radius:50%;background:#fff;cursor:pointer;
+            box-shadow:0 0 6px rgba(0,0,0,.8);
         }
-
-        .nav-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .pip-time{
+            font-size:.78rem;font-weight:700;
+            color:#ffffff;
+            text-shadow:0 1px 6px rgba(0,0,0,1),0 0 12px rgba(0,0,0,1);
+            white-space:nowrap;padding:0 6px;
+            background:rgba(0,0,0,.4);
+            border-radius:6px;
         }
-
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .pip-speed-btn{
+            background:rgba(255,255,255,0.12);
+            border:1.5px solid rgba(255,255,255,0.25);
+            color:#fff;cursor:pointer;
+            height:40px;padding:0 10px;
+            display:flex;align-items:center;justify-content:center;
+            border-radius:10px;transition:all .2s;flex-shrink:0;
+            font-size:.78rem;font-weight:800;letter-spacing:.5px;
+            font-family:var(--font-main);
+            box-shadow:0 2px 8px rgba(0,0,0,.5);
+            min-width:44px;
         }
+        .pip-speed-btn:hover{background:rgba(255,255,255,.28);border-color:rgba(255,255,255,.6);}
+        .pip-speed-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
 
-        .logo-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-glow);
+        .pip-btn.loop-active{background:rgba(59,130,246,.35);border-color:var(--accent);color:var(--accent);}
+
+        /* Speed menu */
+        .speed-menu{
+            position:absolute;bottom:90px;left:50%;transform:translateX(-50%);
+            background:rgba(15,15,15,.97);border:1px solid rgba(255,255,255,.15);
+            border-radius:14px;padding:.5rem;
+            display:none;flex-direction:column;gap:3px;
+            z-index:20;backdrop-filter:blur(12px);
+            box-shadow:0 8px 32px rgba(0,0,0,.8);
+            min-width:120px;
         }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
+        .speed-menu.open{display:flex;}
+        .speed-opt{
+            padding:.5rem 1rem;border-radius:8px;cursor:pointer;
+            font-size:.85rem;font-weight:600;color:var(--text-muted);
+            transition:all .15s;text-align:center;
         }
+        .speed-opt:hover{background:rgba(255,255,255,.08);color:#fff;}
+        .speed-opt.selected{color:var(--accent);background:rgba(59,130,246,.12);}
 
-        .nav-links a {
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            transition: color 0.2s ease;
+        /* Keyboard shortcuts hint */
+        .shortcuts-hint{
+            position:absolute;top:70px;left:50%;transform:translateX(-50%);
+            background:rgba(0,0,0,.85);border:1px solid rgba(255,255,255,.12);
+            border-radius:12px;padding:.75rem 1.25rem;
+            display:none;z-index:20;backdrop-filter:blur(10px);
+            white-space:nowrap;
         }
+        .shortcuts-hint.show{display:block;}
+        .shortcuts-hint p{font-size:.75rem;color:rgba(255,255,255,.7);line-height:1.8;text-align:center;}
+        .shortcuts-hint kbd{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:4px;padding:.1rem .35rem;font-size:.7rem;color:#fff;font-family:monospace;}
 
-        .nav-links a:hover { color: var(--text-main); }
+        .slide-footer{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.0);padding:.5rem 1.5rem;text-align:center;pointer-events:none;}
 
-        .btn-primary {
-            background-color: var(--text-main);
-            color: var(--bg-dark);
-            padding: 0.75rem 1.5rem;
-            border-radius: 100px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            border: 2px solid var(--text-main);
-            cursor: pointer;
-            display: inline-block;
+        /* ── SCROLL ANIMATIONS ── */
+        .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease;}
+        .fade-up.visible{opacity:1;transform:translateY(0);}
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:768px){
+            .hero h1{font-size:2.2rem;}
+            .stats{flex-direction:column;gap:2rem;}
+            .nav-links{display:none;}
+            .hamburger{display:flex;}
+            .section-header{flex-direction:column;align-items:flex-start;gap:1rem;}
+            .process-section{border-radius:20px;}
+            .slide-title-pill{display:none;}
         }
-
-        .btn-primary:hover {
-            background-color: transparent;
-            color: var(--text-main);
-            transform: translateY(-2px);
-        }
-
-        /* =========================================================
-           4. HERO SECTION (The Hook)
-           ========================================================= */
-        .hero {
-            padding: 12rem 0 6rem;
-            text-align: center;
-            position: relative;
-        }
-
-        /* Subtle background glow */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -10%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            z-index: -1;
-            opacity: 0.5;
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border-color);
-            padding: 0.5rem 1rem;
-            border-radius: 100px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            color: var(--text-muted);
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #10b981; /* Green for 'Available' */
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-            70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -1px;
-            margin-bottom: 1.5rem;
-            max-width: 900px;
-            margin-inline: auto;
-        }
-
-        .hero h1 span {
-            color: var(--accent);
-        }
-
-        .hero p {
-            font-size: 1.125rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 3rem;
-        }
-
-        /* =========================================================
-           5. STATS / SOCIAL PROOF
-           ========================================================= */
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 4rem;
-            flex-wrap: wrap;
-            padding: 3rem 0;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            background: var(--bg-dark);
-        }
-
-        .stat-item { text-align: center; }
-        .stat-num { font-size: 2.5rem; font-weight: 800; color: var(--text-main); }
-        .stat-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600;}
-
-        /* =========================================================
-           6. PORTFOLIO GRID (Vertical Videos)
-           ========================================================= */
-        .work-section { padding: 6rem 0; }
-        
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 3rem;
-        }
-
-        .section-header h2 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.5px; }
-        .section-header p { color: var(--text-muted); }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 2rem;
-        }
-
-        .video-card {
-            background: var(--bg-card);
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            aspect-ratio: 9 / 16; /* Forces vertical format */
-            group: hover;
-        }
-
-        .video-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-
-        .video-thumb {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease, filter 0.3s ease;
-            filter: brightness(0.8);
-        }
-
-        .video-card:hover .video-thumb {
-            transform: scale(1.05);
-            filter: brightness(0.5);
-        }
-
-        /* Hover Overlay UI */
-        .video-overlay {
-            position: absolute;
-            inset: 0;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            pointer-events: none;
-        }
-
-        .video-badge {
-            align-self: flex-start;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(4px);
-            padding: 0.4rem 0.8rem;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--accent);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .play-btn {
-            align-self: center;
-            width: 64px;
-            height: 64px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        .video-card:hover .play-btn {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .play-btn svg { width: 24px; height: 24px; fill: white; margin-left: 4px; }
-
-        .video-info h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; }
-        .video-info p { font-size: 0.9rem; color: #d4d4d8; }
-
-        /* =========================================================
-           7. PROCESS SECTION (Organization & Trust)
-           ========================================================= */
-        .process-section { padding: 6rem 0; background: var(--bg-card); border-radius: 40px; margin-bottom: 6rem; }
-        
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .process-card {
-            padding: 2rem;
-            background: var(--bg-dark);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-        }
-
-        .step-num {
-            width: 40px; height: 40px;
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--accent);
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 800; font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .process-card h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
-        .process-card p { color: var(--text-muted); font-size: 0.95rem; }
-
-        /* =========================================================
-           8. FOOTER / CONTACT CTA
-           ========================================================= */
-        footer {
-            padding: 6rem 0 3rem;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        footer::before {
-            content: ''; position: absolute; bottom: -50%; left: 50%;
-            transform: translateX(-50%); width: 800px; height: 800px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
-            z-index: -1; opacity: 0.3;
-        }
-
-        .footer-content h2 { font-size: 3rem; font-weight: 800; margin-bottom: 1rem; }
-        .footer-content p { color: var(--text-muted); margin-bottom: 2.5rem; font-size: 1.1rem;}
-
-        .social-links { margin-top: 4rem; display: flex; justify-content: center; gap: 2rem; }
-        .social-links a { color: var(--text-muted); font-weight: 600; transition: color 0.2s ease; }
-        .social-links a:hover { color: var(--text-main); }
-
-        .copyright { margin-top: 4rem; color: #52525b; font-size: 0.85rem; }
-
-        /* =========================================================
-           9. VIDEO MODAL POPUP
-           ========================================================= */
-        .modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(10px); z-index: 999;
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-        }
-
-        .modal.active { opacity: 1; pointer-events: auto; }
-
-        .modal-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.95);
-            width: 100%;
-            max-width: 450px; /* Perfect width for vertical video */
-            background: #18181b;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease;
-            border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            will-change: top, left, transform;
-        }
-
-        .modal.active .modal-container { transform: translate(-50%, -50%) scale(1); }
-        .modal.active .modal-container.is-dragging { transition: none; }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 16px;
-            background: var(--bg-card-hover);
-            cursor: grab;
-            user-select: none;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .modal-header:active { cursor: grabbing; }
-
-        .drag-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-
-        .drag-title svg { width: 18px; height: 18px; fill: currentColor; }
-
-        .modal-close {
-            background: none; border: none; color: white;
-            font-size: 1.8rem; cursor: pointer; opacity: 0.7;
-            transition: opacity 0.2s;
-            line-height: 1;
-        }
-        .modal-close:hover { opacity: 1; color: var(--accent); }
-
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 9 / 16;
-            background: #000;
-        }
-
-        .iframe-blocker {
-            position: absolute;
-            inset: 0;
-            z-index: 10;
-            display: none;
-        }
-
-        .modal-container.is-dragging .iframe-blocker {
-            display: block;
-        }
-
-        .modal iframe, .modal video { width: 100%; height: 100%; border: none; display: block; }
-
-        /* RESPONSIVE DESIGN */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .stats { flex-direction: column; gap: 2rem; }
-            .nav-links { display: none; } /* Hide links on small mobile, keep CTA */
-            .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+        @media(max-width:480px){
+            .hero{padding:9rem 0 4rem;}
+            .process-section{padding:3rem 1rem;}
+            .slide-video-wrap{max-width:100%;border-radius:0;}
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVIGATION -->
-    <nav>
+    <nav id="mainNav">
         <div class="container nav-wrapper">
-            <div class="logo">
-                <div class="logo-dot"></div>
-                Jaideep Markam
-            </div>
+            <div class="logo"><div class="logo-dot"></div>Jaideep Markam</div>
             <ul class="nav-links">
-                <li><a href="#work">Featured Work</a></li>
-                <li><a href="#process">My Process</a></li>
+                <li><a href="#work">Work</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-            <a href="#contact" class="btn-primary">Hire Me</a>
+            <div style="display:flex;align-items:center;gap:1rem;">
+                <a href="#contact" class="btn-primary">Hire Me</a>
+                <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+            </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#work" onclick="closeMobileMenu()">Featured Work</a>
+        <a href="#process" onclick="closeMobileMenu()">My Process</a>
+        <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    </div>
+
     <header class="hero">
         <div class="container">
-            <div class="status-badge">
-                <div class="status-dot"></div>
-                Available for Projects
-            </div>
+            <div class="status-badge"><div class="status-dot"></div>Available for Projects</div>
             <h1>Creative video editing that <span>hooks and holds attention.</span></h1>
-            <p>Passionate video editor specializing in TikTok, Reels, and Shorts. I use fast pacing, dynamic captions, typography, basic color corrections, and sound design to make your content stand out.</p>
-            <a href="#work" class="btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">View My Sample Edits</a>
+            <p>Short-form video editor specializing in TikTok, Reels, and Shorts. Fast pacing, dynamic captions, typography, color correction, and sound design — crafted to make your content stand out.</p>
+            <a href="#work" class="btn-primary" style="padding:1rem 2rem;font-size:1.1rem;">View My Sample Edits</a>
         </div>
     </header>
 
-    <!-- STATS / SOCIAL PROOF -->
     <section class="stats">
-        <div class="container" style="display: flex; justify-content: center; gap: 4vw; flex-wrap: wrap;">
-            <div class="stat-item">
-                <div class="stat-num">100%</div>
-                <div class="stat-label">Dedication to Quality</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num">Trendy</div>
-                <div class="stat-label">Editing Styles</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num">Fast</div>
-                <div class="stat-label">Turnaround Time</div>
+        <div class="stat-item fade-up"><div class="stat-num">100%</div><div class="stat-label">Dedication to Quality</div></div>
+        <div class="stat-item fade-up"><div class="stat-num">Trendy</div><div class="stat-label">Editing Styles</div></div>
+        <div class="stat-item fade-up"><div class="stat-num">Fast</div><div class="stat-label">Turnaround Time</div></div>
+        <div class="stat-item fade-up"><div class="stat-num">0</div><div class="stat-label">Headaches Guaranteed</div></div>
+    </section>
+
+    <section class="skills-section">
+        <div class="container">
+            <h2 class="section-title fade-up">What I Bring</h2>
+            <p class="section-sub fade-up">Every edit is built around keeping viewers watching.</p>
+            <div class="skills-grid">
+                <div class="skill-card fade-up"><div class="skill-icon">⚡</div><h3>Hook Engineering</h3><p>First 3 seconds designed to stop the scroll.</p></div>
+                <div class="skill-card fade-up"><div class="skill-icon">💬</div><h3>Dynamic Captions</h3><p>Animated word-by-word subtitles that boost watch time.</p></div>
+                <div class="skill-card fade-up"><div class="skill-icon">🎵</div><h3>Sound Design</h3><p>Trending audio, SFX layering, and beat-synced cuts.</p></div>
+                <div class="skill-card fade-up"><div class="skill-icon">🎨</div><h3>Color Grading</h3><p>Clean, platform-ready looks with LUT-based correction.</p></div>
+                <div class="skill-card fade-up"><div class="skill-icon">✂️</div><h3>Pacing & Rhythm</h3><p>Tight cuts that remove fluff and keep energy high.</p></div>
+                <div class="skill-card fade-up"><div class="skill-icon">📱</div><h3>Platform-Ready</h3><p>Optimized 9:16 exports for TikTok, Reels, and Shorts.</p></div>
             </div>
         </div>
     </section>
 
-    <!-- PORTFOLIO GRID -->
     <section id="work" class="work-section">
         <div class="container">
-            <div class="section-header">
-                <div>
-                    <h2>Sample Edits</h2>
-                    <p>Click any video to watch my creative concepts and editing style.</p>
-                </div>
+            <div class="section-header fade-up">
+                <div><h2>Sample Edits</h2><p>Click any video to watch my creative concepts.</p></div>
             </div>
-
             <div class="video-grid">
-                
-                <!-- VIDEO ITEM 1 (Empty Slot) -->
-                <!-- When ready, add your link inside openModal('YOUR_LINK_HERE') -->
-                <div class="video-card" onclick="openModal('')">
-                    <!-- When ready, replace this image src with your video thumbnail -->
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="Placeholder Thumbnail" class="video-thumb">
+                <div class="video-card clickable fade-up" tabindex="0"
+                    onclick="openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772958118/Ranveer_allhabadia_B_and_After_11_zamv2p.mp4','Sample Edit 1','Before &amp; After Edit — Ranveer Allahbadia')"
+                    onkeydown="if(event.key==='Enter')openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772958118/Ranveer_allhabadia_B_and_After_11_zamv2p.mp4','Sample Edit 1','Before &amp; After Edit — Ranveer Allahbadia')">
+                    <video class="video-thumb" muted loop preload="none"
+                        onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"
+                        src="https://res.cloudinary.com/dlupqyzif/video/upload/v1772958118/Ranveer_allhabadia_B_and_After_11_zamv2p.mp4"
+                        poster="https://res.cloudinary.com/dlupqyzif/video/upload/so_2,w_400,c_fill,q_auto,f_jpg/v1772958118/Ranveer_allhabadia_B_and_After_11_zamv2p.jpg"
+                        style="pointer-events:none;">
+                    </video>
                     <div class="video-overlay">
-                        <div class="video-badge">Coming Soon</div>
-                        <div class="play-btn">
-                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                        <div class="video-info">
-                            <h3>Project Title 1</h3>
-                            <p>Video details will appear here</p>
-                        </div>
+                        <div class="video-badge live">▶ Watch Edit</div>
+                        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                        <div class="video-info"><h3>Sample Edit 1</h3><p>Before &amp; After — Ranveer Allahbadia</p></div>
                     </div>
                 </div>
-
-                <!-- VIDEO ITEM 2 (Empty Slot) -->
-                <div class="video-card" onclick="openModal('')">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="Placeholder Thumbnail" class="video-thumb">
+                <div class="video-card clickable fade-up" tabindex="0"
+                    onclick="openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772958122/Scar_revised_lcybah.mp4','Sample Edit 2','Scar — Cinematic Short Edit')"
+                    onkeydown="if(event.key==='Enter')openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772958122/Scar_revised_lcybah.mp4','Sample Edit 2','Scar — Cinematic Short Edit')">
+                    <video class="video-thumb" muted loop preload="none"
+                        onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"
+                        src="https://res.cloudinary.com/dlupqyzif/video/upload/v1772958122/Scar_revised_lcybah.mp4"
+                        poster="https://res.cloudinary.com/dlupqyzif/video/upload/so_2,w_400,c_fill,q_auto,f_jpg/v1772958122/Scar_revised_lcybah.jpg"
+                        style="pointer-events:none;">
+                    </video>
                     <div class="video-overlay">
-                        <div class="video-badge">Coming Soon</div>
-                        <div class="play-btn">
-                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                        <div class="video-info">
-                            <h3>Project Title 2</h3>
-                            <p>Video details will appear here</p>
-                        </div>
+                        <div class="video-badge live">▶ Watch Edit</div>
+                        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                        <div class="video-info"><h3>Sample Edit 2</h3><p>Scar — Cinematic Short</p></div>
                     </div>
                 </div>
-
-                <!-- VIDEO ITEM 3 (Empty Slot) -->
-                <div class="video-card" onclick="openModal('')">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="Placeholder Thumbnail" class="video-thumb">
+                <div class="video-card clickable fade-up" tabindex="0"
+                    onclick="openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772958206/Technology_ikkj1h.mp4','Sample Edit 3','Technology — Motion Edit')"
+                    onkeydown="if(event.key==='Enter')openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772958206/Technology_ikkj1h.mp4','Sample Edit 3','Technology — Motion Edit')">
+                    <video class="video-thumb" muted loop preload="none"
+                        onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"
+                        src="https://res.cloudinary.com/dlupqyzif/video/upload/v1772958206/Technology_ikkj1h.mp4"
+                        poster="https://res.cloudinary.com/dlupqyzif/video/upload/so_2,w_400,c_fill,q_auto,f_jpg/v1772958206/Technology_ikkj1h.jpg"
+                        style="pointer-events:none;">
+                    </video>
                     <div class="video-overlay">
-                        <div class="video-badge">Coming Soon</div>
-                        <div class="play-btn">
-                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                        <div class="video-info">
-                            <h3>Project Title 3</h3>
-                            <p>Video details will appear here</p>
-                        </div>
+                        <div class="video-badge live">▶ Watch Edit</div>
+                        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                        <div class="video-info"><h3>Sample Edit 3</h3><p>Technology — Motion Edit</p></div>
                     </div>
                 </div>
-
-                <!-- VIDEO ITEM 4 (Empty Slot) -->
-                <div class="video-card" onclick="openModal('')">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="Placeholder Thumbnail" class="video-thumb">
+                <div class="video-card clickable fade-up" tabindex="0"
+                    onclick="openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772961785/Preset_Explainer_by_Ryna_k75xr2.mp4','Sample Edit 4','Preset Explainer — by Ryna')"
+                    onkeydown="if(event.key==='Enter')openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772961785/Preset_Explainer_by_Ryna_k75xr2.mp4','Sample Edit 4','Preset Explainer — by Ryna')">
+                    <video class="video-thumb" muted loop preload="none"
+                        onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"
+                        src="https://res.cloudinary.com/dlupqyzif/video/upload/v1772961785/Preset_Explainer_by_Ryna_k75xr2.mp4"
+                        poster="https://res.cloudinary.com/dlupqyzif/video/upload/so_2,w_400,c_fill,q_auto,f_jpg/v1772961785/Preset_Explainer_by_Ryna_k75xr2.jpg"
+                        style="pointer-events:none;">
+                    </video>
                     <div class="video-overlay">
-                        <div class="video-badge">Coming Soon</div>
-                        <div class="play-btn">
-                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                        <div class="video-info">
-                            <h3>Project Title 4</h3>
-                            <p>Video details will appear here</p>
-                        </div>
+                        <div class="video-badge live">▶ Watch Edit</div>
+                        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                        <div class="video-info"><h3>Sample Edit 4</h3><p>Preset Explainer — by Ryna</p></div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- PROCESS SECTION -->
     <section id="process" class="container">
-        <div class="process-section">
-            <div class="container" style="width: 90%;">
-                <div class="section-header" style="margin-bottom: 1rem;">
-                    <div>
-                        <h2>How It Works</h2>
-                        <p>A simple, zero-headache workflow designed for creators.</p>
-                    </div>
+        <div class="process-section fade-up">
+            <div class="container" style="width:90%">
+                <div class="section-header" style="margin-bottom:1rem">
+                    <div><h2>How It Works</h2><p>A simple, zero-headache workflow.</p></div>
                 </div>
-                
                 <div class="process-grid">
-                    <div class="process-card">
-                        <div class="step-num">1</div>
-                        <h3>Send Footage</h3>
-                        <p>Upload your raw clips or long-form videos to a shared Google Drive/Dropbox folder.</p>
-                    </div>
-                    <div class="process-card">
-                        <div class="step-num">2</div>
-                        <h3>I Edit & Enhance</h3>
-                        <p>I find the best hooks, cut the fluff, add engaging captions, b-roll, and sound effects.</p>
-                    </div>
-                    <div class="process-card">
-                        <div class="step-num">3</div>
-                        <h3>Review & Post</h3>
-                        <p>You review the draft via Frame.io. After a quick revision, it's ready to go viral.</p>
-                    </div>
+                    <div class="process-card fade-up"><div class="step-num">1</div><h3>Send Footage</h3><p>Upload raw clips to a shared Google Drive or Dropbox folder.</p></div>
+                    <div class="process-card fade-up"><div class="step-num">2</div><h3>I Edit & Enhance</h3><p>Best hooks, clean cuts, captions, b-roll, and sound effects.</p></div>
+                    <div class="process-card fade-up"><div class="step-num">3</div><h3>Review & Revise</h3><p>Review the draft. I revise until you're fully satisfied — free.</p></div>
+                    <div class="process-card fade-up"><div class="step-num">4</div><h3>Post-Ready Delivery</h3><p>9:16 export ready to upload to TikTok, Reels, or Shorts.</p></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER / CONTACT -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title fade-up">What People Say</h2>
+            <p class="section-sub fade-up">Testimonials coming soon — this spot is for real client feedback.</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-up"><div class="stars">★★★★★</div><p>"Your first client review will appear here."</p><div class="testimonial-author"><div class="author-avatar">JD</div><div><div class="author-name">Your First Client</div><div class="author-handle">@handle</div></div></div></div>
+                <div class="testimonial-card fade-up"><div class="stars">★★★★★</div><p>"Another satisfied creator will leave their review right here."</p><div class="testimonial-author"><div class="author-avatar">CR</div><div><div class="author-name">Your Next Client</div><div class="author-handle">@handle</div></div></div></div>
+                <div class="testimonial-card fade-up"><div class="stars">★★★★★</div><p>"Space reserved for a real review. Let's collaborate!"</p><div class="testimonial-author"><div class="author-avatar">YC</div><div><div class="author-name">Future Collaborator</div><div class="author-handle">@handle</div></div></div></div>
+            </div>
+        </div>
+    </section>
+
     <footer id="contact">
-        <div class="container footer-content">
+        <div class="container footer-content fade-up">
             <h2>Let's create something awesome.</h2>
-            <p>Ready to give my editing style a try? Send me a message and let's discuss your project.</p>
-            <!-- Change this email to yours -->
-            <a href="mailto:jaideep.markam@gmail.com" class="btn-primary" style="padding: 1.2rem 2.5rem; font-size: 1.1rem;">
-                Email: jaideep.markam@gmail.com
-            </a>
-            
+            <p>Ready to give my editing style a try? Send me a message.</p>
+            <a href="mailto:jaideep.markam@gmail.com" class="btn-primary" style="padding:1.2rem 2.5rem;font-size:1.1rem;">✉️ jaideep.markam@gmail.com</a>
             <div class="social-links">
                 <a href="https://instagram.com/editoralchemy" target="_blank" rel="noopener noreferrer">Instagram</a>
             </div>
-
-            <div class="copyright">
-                &copy; 2026 Jaideep Markam. All rights reserved.
-            </div>
+            <div class="copyright">&copy; 2026 Jaideep Markam. All rights reserved.</div>
         </div>
     </footer>
 
-    <!-- INTERACTIVE VIDEO MODAL -->
-    <div class="modal" id="videoModal">
-        <div class="modal-container" id="modalContainer">
-            <div class="modal-header" id="modalHeader">
-                <div class="drag-title">
-                    <svg viewBox="0 0 24 24"><path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"/></svg>
-                    Drag to move
+    <!-- VIDEO SLIDE -->
+    <div class="video-slide" id="videoSlide">
+        <div class="slide-header">
+            <button class="slide-back-btn" onclick="closeVideo()">← Back</button>
+            <span class="slide-title-pill" id="slideTitle">Sample Edit</span>
+            <button class="slide-close-btn" onclick="closeVideo()" aria-label="Close video">✕</button>
+        </div>
+        <div class="slide-video-area">
+            <div class="slide-video-wrap" id="videoWrap">
+                <video id="mainVid" autoplay playsinline style="width:100%;height:100%;background:#000;display:block;">
+                    <source id="mainSrc" src="" type="video/mp4">
+                </video>
+                <!-- Center overlay -->
+                <div class="center-overlay" id="centerOverlay">
+                    <div class="center-btn" id="centerBtn">
+                        <svg id="cPlayIcon" viewBox="0 0 24 24" class="play-i" style="display:none;"><path d="M8 5v14l11-7z"/></svg>
+                        <svg id="cPauseIcon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    </div>
                 </div>
-                <button class="modal-close" onclick="closeModal()">&times;</button>
-            </div>
-            <div class="video-wrapper">
-                <div class="iframe-blocker" id="iframeBlocker"></div>
-                <!-- Robust iframe settings for YouTube compatibility -->
-                <iframe id="videoPlayer" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="Video Player"></iframe>
+                <!-- Bottom controls bar -->
+                <div class="pip-bar" id="pipBar">
+                    <div class="pip-progress" id="pipProgress">
+                        <div class="pip-track"><div class="pip-fill" id="pipFill"></div></div>
+                    </div>
+                    <!-- Speed menu popup -->
+                    <div class="speed-menu" id="speedMenu">
+                        <div class="speed-opt" onclick="setSpeed(0.5)">0.5×</div>
+                        <div class="speed-opt" onclick="setSpeed(0.75)">0.75×</div>
+                        <div class="speed-opt selected" onclick="setSpeed(1)" id="speed1x">1× (Normal)</div>
+                        <div class="speed-opt" onclick="setSpeed(1.25)">1.25×</div>
+                        <div class="speed-opt" onclick="setSpeed(1.5)">1.5×</div>
+                        <div class="speed-opt" onclick="setSpeed(2)">2×</div>
+                    </div>
+                    <!-- Keyboard shortcuts hint -->
+                    <div class="shortcuts-hint" id="shortcutsHint">
+                        <p>
+                            <kbd>Space</kbd> Play/Pause &nbsp;
+                            <kbd>←</kbd><kbd>→</kbd> ±10s &nbsp;
+                            <kbd>M</kbd> Mute &nbsp;
+                            <kbd>F</kbd> Fullscreen &nbsp;
+                            <kbd>Esc</kbd> Close
+                        </p>
+                    </div>
+                    <div class="pip-row">
+                        <div class="pip-left">
+                            <button class="pip-btn" onclick="vidSkip(-10)" title="Rewind 10s">
+                                <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+                            </button>
+                            <button class="pip-btn" id="pipPlayBtn" onclick="vidTogglePlay()" title="Play / Pause">
+                                <svg id="pipPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                <svg id="pipPauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                            </button>
+                            <button class="pip-btn" onclick="vidSkip(10)" title="Forward 10s">
+                                <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/></svg>
+                            </button>
+                            <div class="pip-vol-wrap">
+                                <button class="pip-btn" onclick="vidToggleMute()" title="Mute / Unmute">
+                                    <svg id="pipVolIcon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                                    <svg id="pipMuteIcon" viewBox="0 0 24 24" style="display:none"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                                </button>
+                                <input type="range" class="pip-vol-slider" min="0" max="1" step="0.05" value="1" oninput="vidSetVolume(this.value)">
+                            </div>
+                            <span class="pip-time" id="pipTime">0:00 / 0:00</span>
+                        </div>
+                        <div class="pip-right">
+                            <!-- Loop -->
+                            <button class="pip-btn" id="loopBtn" onclick="vidToggleLoop()" title="Loop">
+                                <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><path d="M7 17l-5-5 5-5v3c3.31 0 6-2.69 6-6 0-.34-.03-.67-.08-1h2.02c.05.33.08.66.08 1 0 4.42-3.58 8-8 8v3z"/></svg>
+                            </button>
+                            <!-- Speed -->
+                            <button class="pip-speed-btn" id="speedBtn" onclick="toggleSpeedMenu()" title="Playback Speed">1×</button>
+                            <!-- Keyboard shortcuts -->
+                            <button class="pip-btn" id="kbBtn" onclick="toggleShortcuts()" title="Keyboard Shortcuts">
+                                <svg viewBox="0 0 24 24"><path d="M20 5H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-9 3h2v2h-2V8zm0 3h2v2h-2v-2zM8 8h2v2H8V8zm0 3h2v2H8v-2zm-1 5H5v-2h2v2zm10 0H9v-2h8v2zm0-3h-2v-2h2v2zm0-3h-2V8h2v2zm3 6h-2v-2h2v2z"/></svg>
+                            </button>
+                            <!-- PiP -->
+                            <button class="pip-btn" onclick="vidPiP()" title="Picture in Picture" id="pipModeBtn">
+                                <svg viewBox="0 0 24 24"><path d="M19 7h-8v6h8V7zm2-4H3c-1.1 0-2 .9-2 2v14c0 1.1.9 1.98 2 1.98h18c1.1 0 2-.88 2-1.98V5c0-1.1-.9-2-2-2zm0 16.01H3V4.98h18v14.03z"/></svg>
+                            </button>
+                            <!-- Fullscreen -->
+                            <button class="pip-btn" onclick="vidFullscreen()" title="Fullscreen">
+                                <svg id="fsIcon" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="slide-footer"><p id="slideDesc" style="color:rgba(255,255,255,.5);font-size:.82rem;"></p></div>
     </div>
 
-    <!-- JAVASCRIPT FOR INTERACTIVITY -->
     <script>
-        const modal = document.getElementById('videoModal');
-        const modalContainer = document.getElementById('modalContainer');
-        const modalHeader = document.getElementById('modalHeader');
-        const videoPlayer = document.getElementById('videoPlayer');
+        // ── HAMBURGER ──
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+        function closeMobileMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); }
 
-        // --- Dragging Logic ---
-        let isDragging = false;
-        let startX, startY, initialLeft, initialTop;
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMobileMenu();
+        });
 
-        modalHeader.addEventListener('mousedown', dragStart);
-        document.addEventListener('mousemove', drag);
-        document.addEventListener('mouseup', dragEnd);
+        // ── NAV SCROLL EFFECT ──
+        window.addEventListener('scroll', () => {
+            document.getElementById('mainNav').style.boxShadow = window.scrollY > 20 ? '0 4px 30px rgba(0,0,0,.5)' : 'none';
+        });
 
-        // Touch support for mobile dragging
-        modalHeader.addEventListener('touchstart', dragStart, {passive: false});
-        document.addEventListener('touchmove', drag, {passive: false});
-        document.addEventListener('touchend', dragEnd);
+        // ── SCROLL ANIMATIONS ──
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-        function dragStart(e) {
-            isDragging = true;
-            modalContainer.classList.add('is-dragging');
-            
-            if (e.type === 'touchstart') {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-            } else {
-                startX = e.clientX;
-                startY = e.clientY;
+        // ── VIDEO PLAYER ──
+        const slide = document.getElementById('videoSlide');
+        const vid = document.getElementById('mainVid');
+        const mainSrc = document.getElementById('mainSrc');
+        const videoWrap = document.getElementById('videoWrap');
+        let hideTimer;
+
+        function openVideo(url, title, desc) {
+            document.getElementById('slideTitle').textContent = title || 'Sample Edit';
+            document.getElementById('slideDesc').textContent = desc || '';
+            mainSrc.src = url;
+            vid.load();
+            vid.play().catch(() => {});
+            slide.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            showCtrl();
+
+            // Media Session API — sets title & controls in PiP window and lock screen
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: title || 'Sample Edit',
+                    artist: 'Jaideep Markam',
+                    album: 'Portfolio',
+                    artwork: [{ src: 'https://img.youtube.com/vi/HrfrMG_s-Vs/hqdefault.jpg', sizes: '480x360', type: 'image/jpeg' }]
+                });
+                navigator.mediaSession.setActionHandler('play', () => { vid.play(); });
+                navigator.mediaSession.setActionHandler('pause', () => { vid.pause(); });
+                navigator.mediaSession.setActionHandler('seekbackward', () => vidSkip(-10));
+                navigator.mediaSession.setActionHandler('seekforward', () => vidSkip(10));
             }
-
-            // Lock position to explicit pixels to start dragging from current center
-            const rect = modalContainer.getBoundingClientRect();
-            modalContainer.style.left = rect.left + 'px';
-            modalContainer.style.top = rect.top + 'px';
-            modalContainer.style.transform = 'none'; // Clear the translate(-50%, -50%)
-
-            initialLeft = rect.left;
-            initialTop = rect.top;
         }
 
-        function drag(e) {
-            if (!isDragging) return;
-            e.preventDefault(); // Prevent scrolling while dragging
+        function closeVideo() {
+            slide.classList.remove('active');
+            vid.pause();
+            mainSrc.src = '';
+            vid.load();
+            document.body.style.overflow = '';
+            clearTimeout(hideTimer);
+        }
 
-            let currentX, currentY;
-            if (e.type === 'touchmove') {
-                currentX = e.touches[0].clientX;
-                currentY = e.touches[0].clientY;
-            } else {
-                currentX = e.clientX;
-                currentY = e.clientY;
+        // ── CONTROLS VISIBILITY ──
+        function showCtrl() {
+            videoWrap.classList.remove('hide-ctrl');
+            videoWrap.classList.add('show-ctrl');
+            clearTimeout(hideTimer);
+            if (!vid.paused) {
+                hideTimer = setTimeout(() => {
+                    videoWrap.classList.remove('show-ctrl');
+                    videoWrap.classList.add('hide-ctrl');
+                }, 3000);
             }
-
-            const dx = currentX - startX;
-            const dy = currentY - startY;
-
-            modalContainer.style.left = (initialLeft + dx) + 'px';
-            modalContainer.style.top = (initialTop + dy) + 'px';
         }
 
-        function dragEnd() {
-            isDragging = false;
-            modalContainer.classList.remove('is-dragging');
-        }
-
-        // Function to Open Modal and Auto-Play Video
-        function openModal(videoUrl) {
-            // Reset position to center each time it opens
-            modalContainer.style.left = '';
-            modalContainer.style.top = '';
-            modalContainer.style.transform = '';
-
-            let finalUrl = videoUrl;
-
-            // Smart YouTube URL Converter (Accepts ANY YouTube link)
-            if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
-                let videoId = '';
-                
-                // Extract ID from shorts: youtube.com/shorts/ID
-                if (videoUrl.includes('/shorts/')) {
-                    videoId = videoUrl.split('/shorts/')[1].split('?')[0];
-                } 
-                // Extract ID from standard: youtube.com/watch?v=ID
-                else if (videoUrl.includes('watch?v=')) {
-                    videoId = videoUrl.split('watch?v=')[1].split('&')[0];
-                }
-                // Extract ID from youtu.be/ID
-                else if (videoUrl.includes('youtu.be/')) {
-                    videoId = videoUrl.split('youtu.be/')[1].split('?')[0];
-                }
-                // Already an embed format
-                else if (videoUrl.includes('/embed/')) {
-                    videoId = videoUrl.split('/embed/')[1].split('?')[0];
-                }
-
-                // If we found a valid YouTube ID, format it perfectly for websites
-                if (videoId) {
-                    finalUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&controls=1&playsinline=1`;
-                }
+        videoWrap.addEventListener('mousemove', showCtrl);
+        videoWrap.addEventListener('touchstart', (e) => {
+            if (e.target === vid || e.target === videoWrap || e.target.closest('.center-overlay')) {
+                if (videoWrap.classList.contains('hide-ctrl')) { showCtrl(); return; }
             }
-            
-            videoPlayer.src = finalUrl;
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            showCtrl();
+        }, { passive: true });
+
+        vid.addEventListener('pause', () => {
+            clearTimeout(hideTimer);
+            videoWrap.classList.remove('hide-ctrl');
+            videoWrap.classList.add('show-ctrl');
+            document.getElementById('pipPlayIcon').style.display = 'inline';
+            document.getElementById('pipPauseIcon').style.display = 'none';
+            document.getElementById('cPlayIcon').style.display = 'inline';
+            document.getElementById('cPauseIcon').style.display = 'none';
+        });
+        vid.addEventListener('play', () => {
+            document.getElementById('pipPlayIcon').style.display = 'none';
+            document.getElementById('pipPauseIcon').style.display = 'inline';
+            document.getElementById('cPlayIcon').style.display = 'none';
+            document.getElementById('cPauseIcon').style.display = 'inline';
+            showCtrl();
+        });
+
+        // ── PROGRESS ──
+        vid.addEventListener('timeupdate', () => {
+            if (!vid.duration) return;
+            document.getElementById('pipFill').style.width = (vid.currentTime / vid.duration * 100) + '%';
+            document.getElementById('pipTime').textContent = fmt(vid.currentTime) + ' / ' + fmt(vid.duration);
+        });
+        document.getElementById('pipProgress').addEventListener('click', (e) => {
+            const r = e.currentTarget.getBoundingClientRect();
+            vid.currentTime = ((e.clientX - r.left) / r.width) * vid.duration;
+        });
+
+        function fmt(s) { return Math.floor(s/60)+':'+Math.floor(s%60).toString().padStart(2,'0'); }
+
+        // ── CONTROLS ──
+        function vidTogglePlay() { vid.paused ? vid.play() : vid.pause(); }
+        function vidSkip(s) { vid.currentTime = Math.max(0, Math.min(vid.duration||0, vid.currentTime+s)); }
+        function vidToggleMute() {
+            vid.muted = !vid.muted;
+            document.getElementById('pipVolIcon').style.display = vid.muted ? 'none' : 'inline';
+            document.getElementById('pipMuteIcon').style.display = vid.muted ? 'inline' : 'none';
+        }
+        function vidSetVolume(v) {
+            vid.volume = v; vid.muted = v==0;
+            document.getElementById('pipVolIcon').style.display = v==0 ? 'none' : 'inline';
+            document.getElementById('pipMuteIcon').style.display = v==0 ? 'inline' : 'none';
+        }
+        // ── PICTURE IN PICTURE ──
+        async function vidPiP() {
+            try {
+                if (document.pictureInPictureElement) {
+                    await document.exitPictureInPicture();
+                } else if (document.pictureInPictureEnabled) {
+                    await vid.requestPictureInPicture();
+                } else {
+                    showToast('Picture-in-Picture is not supported by your browser.');
+                }
+            } catch(e) {
+                showToast('Could not enter Picture-in-Picture mode.');
+            }
         }
 
-        // Function to Close Modal and Stop Audio
-        function closeModal() {
-            modal.classList.remove('active');
-            videoPlayer.src = ""; // Clears the src, stopping the video/audio instantly
-            document.body.style.overflow = 'auto'; // Restore background scrolling
+        // Update PiP button icon when PiP state changes
+        vid.addEventListener('enterpictureinpicture', () => {
+            document.getElementById('pipModeBtn').style.color = 'var(--accent)';
+            document.getElementById('pipModeBtn').title = 'Exit Picture in Picture';
+        });
+        vid.addEventListener('leavepictureinpicture', () => {
+            document.getElementById('pipModeBtn').style.color = '';
+            document.getElementById('pipModeBtn').title = 'Picture in Picture';
+        });
+
+        // ── TOAST NOTIFICATION ──
+        function showToast(msg) {
+            let t = document.getElementById('toastMsg');
+            if (!t) {
+                t = document.createElement('div');
+                t.id = 'toastMsg';
+                t.style.cssText = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.85);color:#fff;padding:.6rem 1.4rem;border-radius:100px;font-size:.85rem;font-weight:600;z-index:9999;border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(8px);transition:opacity .3s;white-space:nowrap;';
+                document.body.appendChild(t);
+            }
+            t.textContent = msg;
+            t.style.opacity = '1';
+            clearTimeout(t._timer);
+            t._timer = setTimeout(() => { t.style.opacity = '0'; }, 3000);
         }
 
-        // Close modal when clicking outside the video container
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                closeModal();
+        function vidFullscreen() {
+            const el = vid;
+            if (el.requestFullscreen) el.requestFullscreen();
+            else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+            else if (el.webkitEnterFullscreen) el.webkitEnterFullscreen();
+            else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+        }
+        document.addEventListener('fullscreenchange', () => {
+            const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            document.getElementById('fsIcon').innerHTML = isFs
+                ? '<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>'
+                : '<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>';
+        });
+
+        // ── CENTER BUTTON ──
+        document.getElementById('centerOverlay').addEventListener('click', (e) => {
+            if (e.target.closest('.pip-bar')) return;
+            vidTogglePlay();
+            const btn = document.getElementById('centerBtn');
+            btn.classList.remove('flash');
+            void btn.offsetWidth;
+            btn.classList.add('flash');
+            setTimeout(() => btn.classList.remove('flash'), 300);
+            showCtrl();
+        });
+
+        // ── KEYBOARD SHORTCUTS ──
+        document.addEventListener('keydown', (e) => {
+            if (!slide.classList.contains('active')) return;
+            switch(e.key) {
+                case 'Escape': closeVideo(); break;
+                case ' ': e.preventDefault(); document.getElementById('centerOverlay').click(); break;
+                case 'ArrowRight': vidSkip(10); showCtrl(); break;
+                case 'ArrowLeft': vidSkip(-10); showCtrl(); break;
+                case 'm': case 'M': vidToggleMute(); break;
+                case 'f': case 'F': vidFullscreen(); break;
             }
         });
 
-        // Close modal on 'Escape' key press
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                closeModal();
+        // ── CLOSE ON BACKDROP ──
+        slide.addEventListener('click', (e) => {
+            if (e.target === slide) closeVideo();
+        });
+
+        // Close speed menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#speedMenu') && !e.target.closest('#speedBtn')) {
+                document.getElementById('speedMenu').classList.remove('open');
             }
+            if (!e.target.closest('#shortcutsHint') && !e.target.closest('#kbBtn')) {
+                document.getElementById('shortcutsHint').classList.remove('show');
+            }
+        });
+
+        // ── PLAYBACK SPEED ──
+        let currentSpeed = 1;
+        function toggleSpeedMenu() {
+            document.getElementById('speedMenu').classList.toggle('open');
+            document.getElementById('shortcutsHint').classList.remove('show');
+        }
+        function setSpeed(s) {
+            currentSpeed = s;
+            vid.playbackRate = s;
+            document.getElementById('speedBtn').textContent = s + '×';
+            document.getElementById('speedBtn').classList.toggle('active', s !== 1);
+            document.querySelectorAll('.speed-opt').forEach(o => {
+                o.classList.toggle('selected', parseFloat(o.textContent) === s);
+            });
+            document.getElementById('speedMenu').classList.remove('open');
+            showToast('Speed: ' + s + '×');
+        }
+
+        // ── LOOP ──
+        let loopOn = false;
+        function vidToggleLoop() {
+            loopOn = !loopOn;
+            vid.loop = loopOn;
+            document.getElementById('loopBtn').classList.toggle('loop-active', loopOn);
+            showToast(loopOn ? '🔁 Loop ON' : '🔁 Loop OFF');
+        }
+
+        // ── KEYBOARD SHORTCUTS HINT ──
+        function toggleShortcuts() {
+            document.getElementById('shortcutsHint').classList.toggle('show');
+            document.getElementById('speedMenu').classList.remove('open');
+        }
+
+        // ── KEYBOARD: add speed shortcuts ──
+        document.addEventListener('keydown', (e) => {
+            if (!slide.classList.contains('active')) return;
+            if (e.key === '>' || e.key === '.') { setSpeed(Math.min(2, currentSpeed + 0.25)); }
+            if (e.key === '<' || e.key === ',') { setSpeed(Math.max(0.25, currentSpeed - 0.25)); }
+            if (e.key === 'l' || e.key === 'L') vidToggleLoop();
         });
     </script>
 </body>
