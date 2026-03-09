@@ -44,6 +44,11 @@
         .mobile-menu a:hover{color:var(--text-main);}
         .btn-primary{background:var(--text-main);color:var(--bg-dark);padding:.75rem 1.5rem;border-radius:100px;font-weight:700;font-size:.95rem;transition:all .3s;border:2px solid var(--text-main);cursor:pointer;display:inline-block;}
         .btn-primary:hover{background:transparent;color:var(--text-main);transform:translateY(-2px);}
+        /* Touch tap active states */
+        .video-card.clickable:active{transform:scale(.97);transition:transform .1s;}
+        .pip-btn:active{transform:scale(.9);}
+        .slide-back-btn:active{transform:scale(.95);}
+        .slide-close-btn:active{transform:scale(.9);}
 
         /* ── HERO ── */
         .hero{padding:11rem 0 6rem;text-align:center;position:relative;}
@@ -84,7 +89,8 @@
         .video-card.locked{cursor:default;opacity:.6;}
         .video-card.clickable:hover{transform:translateY(-8px);border-color:var(--accent);box-shadow:0 20px 40px rgba(0,0,0,.5);}
         .video-card.clickable:focus{outline:2px solid var(--accent);outline-offset:3px;}
-        .video-thumb{width:100%;height:100%;object-fit:cover;transition:transform .5s ease,filter .3s ease;filter:brightness(.8);}
+        .video-thumb{width:100%;height:100%;object-fit:cover;transition:transform .5s ease,filter .3s ease,opacity .4s;filter:brightness(.85);background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);position:absolute;inset:0;}
+        .video-card.clickable:hover .thumb-img{transform:scale(1.05);}
         .video-card.clickable:hover .video-thumb{transform:scale(1.05);filter:brightness(.45);}
         .video-overlay{position:absolute;inset:0;padding:1.5rem;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none;}
         .video-badge{align-self:flex-start;background:rgba(0,0,0,.65);backdrop-filter:blur(4px);padding:.4rem .8rem;border-radius:8px;font-size:.8rem;font-weight:700;border:1px solid rgba(255,255,255,.1);}
@@ -203,6 +209,36 @@
             border-radius:50%;background:#fff;cursor:pointer;
             box-shadow:0 0 6px rgba(0,0,0,.8);
         }
+        /* Volume control */
+        .vol-wrap{position:relative;display:flex;align-items:center;gap:4px;}
+        .vol-slider-wrap{
+            width:0;overflow:hidden;
+            transition:width .25s ease, opacity .25s ease;
+            opacity:0;display:flex;align-items:center;
+        }
+        .vol-wrap:hover .vol-slider-wrap,
+        .vol-wrap.open .vol-slider-wrap{
+            width:70px;opacity:1;
+        }
+        .vol-range{
+            -webkit-appearance:none;appearance:none;
+            width:65px;height:4px;
+            background:rgba(255,255,255,.3);
+            border-radius:4px;outline:none;cursor:pointer;
+            background-image:linear-gradient(var(--accent),var(--accent));
+            background-size:100% 100%;
+            background-repeat:no-repeat;
+        }
+        .vol-range::-webkit-slider-thumb{
+            -webkit-appearance:none;width:14px;height:14px;
+            border-radius:50%;background:#fff;cursor:pointer;
+            box-shadow:0 0 4px rgba(0,0,0,.8);
+        }
+        .vol-range::-moz-range-thumb{
+            width:14px;height:14px;border-radius:50%;
+            background:#fff;cursor:pointer;border:none;
+        }
+
         .pip-time{
             font-size:.78rem;font-weight:700;
             color:#ffffff;
@@ -211,53 +247,15 @@
             background:rgba(0,0,0,.4);
             border-radius:6px;
         }
-        .pip-speed-btn{
-            background:rgba(255,255,255,0.12);
-            border:1.5px solid rgba(255,255,255,0.25);
-            color:#fff;cursor:pointer;
-            height:40px;padding:0 10px;
-            display:flex;align-items:center;justify-content:center;
-            border-radius:10px;transition:all .2s;flex-shrink:0;
-            font-size:.78rem;font-weight:800;letter-spacing:.5px;
-            font-family:var(--font-main);
-            box-shadow:0 2px 8px rgba(0,0,0,.5);
-            min-width:44px;
-        }
-        .pip-speed-btn:hover{background:rgba(255,255,255,.28);border-color:rgba(255,255,255,.6);}
-        .pip-speed-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+        
 
-        .pip-btn.loop-active{background:rgba(59,130,246,.35);border-color:var(--accent);color:var(--accent);}
+        
 
         /* Speed menu */
-        .speed-menu{
-            position:absolute;bottom:90px;left:50%;transform:translateX(-50%);
-            background:rgba(15,15,15,.97);border:1px solid rgba(255,255,255,.15);
-            border-radius:14px;padding:.5rem;
-            display:none;flex-direction:column;gap:3px;
-            z-index:20;backdrop-filter:blur(12px);
-            box-shadow:0 8px 32px rgba(0,0,0,.8);
-            min-width:120px;
-        }
-        .speed-menu.open{display:flex;}
-        .speed-opt{
-            padding:.5rem 1rem;border-radius:8px;cursor:pointer;
-            font-size:.85rem;font-weight:600;color:var(--text-muted);
-            transition:all .15s;text-align:center;
-        }
-        .speed-opt:hover{background:rgba(255,255,255,.08);color:#fff;}
-        .speed-opt.selected{color:var(--accent);background:rgba(59,130,246,.12);}
+        
 
         /* Keyboard shortcuts hint */
-        .shortcuts-hint{
-            position:absolute;top:70px;left:50%;transform:translateX(-50%);
-            background:rgba(0,0,0,.85);border:1px solid rgba(255,255,255,.12);
-            border-radius:12px;padding:.75rem 1.25rem;
-            display:none;z-index:20;backdrop-filter:blur(10px);
-            white-space:nowrap;
-        }
-        .shortcuts-hint.show{display:block;}
-        .shortcuts-hint p{font-size:.75rem;color:rgba(255,255,255,.7);line-height:1.8;text-align:center;}
-        .shortcuts-hint kbd{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:4px;padding:.1rem .35rem;font-size:.7rem;color:#fff;font-family:monospace;}
+        
 
         .slide-footer{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.0);padding:.5rem 1.5rem;text-align:center;pointer-events:none;}
 
@@ -267,20 +265,158 @@
 
         /* ── RESPONSIVE ── */
         @media(max-width:768px){
-            .hero h1{font-size:2.2rem;}
-            .stats{flex-direction:column;gap:2rem;}
+            .hero{padding:9rem 0 4rem;}
+            .hero h1{font-size:2rem;}
+            .hero p{font-size:1rem;}
+            .stats{flex-direction:column;gap:1.5rem;padding:2rem 1rem;}
+            .stat-num{font-size:2rem;}
             .nav-links{display:none;}
             .hamburger{display:flex;}
-            .section-header{flex-direction:column;align-items:flex-start;gap:1rem;}
-            .process-section{border-radius:20px;}
+            .section-header{flex-direction:column;align-items:flex-start;gap:.5rem;}
+            .section-header h2{font-size:1.8rem;}
+            .process-section{border-radius:20px;margin-bottom:3rem;}
             .slide-title-pill{display:none;}
+            .skills-section{padding:3rem 0;}
+            .work-section{padding:3rem 0;}
+            .testimonials-section{padding:3rem 0;}
+            /* Video grid: 2 columns on tablet */
+            .video-grid{grid-template-columns:repeat(2,1fr);gap:1rem;}
+            /* PiP controls: smaller on mobile */
+            .pip-btn{width:34px;height:34px;}
+            .pip-btn svg{width:17px;height:17px;}
+            .pip-speed-btn{height:34px;min-width:38px;font-size:.72rem;padding:0 7px;}
+            .pip-vol-slider{width:45px;}
+            /* Volume control */
+        .vol-wrap{position:relative;display:flex;align-items:center;gap:4px;}
+        .vol-slider-wrap{
+            width:0;overflow:hidden;
+            transition:width .25s ease, opacity .25s ease;
+            opacity:0;display:flex;align-items:center;
+        }
+        .vol-wrap:hover .vol-slider-wrap,
+        .vol-wrap.open .vol-slider-wrap{
+            width:70px;opacity:1;
+        }
+        .vol-range{
+            -webkit-appearance:none;appearance:none;
+            width:65px;height:4px;
+            background:rgba(255,255,255,.3);
+            border-radius:4px;outline:none;cursor:pointer;
+            background-image:linear-gradient(var(--accent),var(--accent));
+            background-size:100% 100%;
+            background-repeat:no-repeat;
+        }
+        .vol-range::-webkit-slider-thumb{
+            -webkit-appearance:none;width:14px;height:14px;
+            border-radius:50%;background:#fff;cursor:pointer;
+            box-shadow:0 0 4px rgba(0,0,0,.8);
+        }
+        .vol-range::-moz-range-thumb{
+            width:14px;height:14px;border-radius:50%;
+            background:#fff;cursor:pointer;border:none;
+        }
+
+        .pip-time{font-size:.7rem;}
+            /* Slide header */
+            .slide-back-btn{padding:.45rem .8rem;font-size:.82rem;}
+            .slide-close-btn{width:36px;height:36px;font-size:1rem;}
         }
         @media(max-width:480px){
-            .hero{padding:9rem 0 4rem;}
-            .process-section{padding:3rem 1rem;}
+            .hero{padding:8rem 0 3rem;}
+            .hero h1{font-size:1.75rem;letter-spacing:-.5px;}
+            .container{width:94%;}
+            /* Video grid: 1 column on small phones */
+            .video-grid{grid-template-columns:1fr;gap:1rem;}
+            .process-section{padding:2rem 1rem;}
+            .process-grid{grid-template-columns:1fr;gap:1rem;}
+            .skills-grid{grid-template-columns:repeat(2,1fr);gap:.75rem;}
+            .skill-card{padding:1.1rem;}
+            .testimonials-grid{grid-template-columns:1fr;}
+            /* Full width video on small phones */
             .slide-video-wrap{max-width:100%;border-radius:0;}
+            /* Simpler controls on tiny screens */
+            .pip-vol-wrap{display:none;}
+            .shortcuts-hint{display:none!important;}
+            footer{padding:3rem 0 2rem;}
+            .social-links{gap:1.25rem;}
         }
-    </style>
+        /* Touch device: show controls on tap, remove hover-only behaviors */
+        @media(hover:none){
+            .video-card.clickable:hover .video-thumb{transform:none;filter:brightness(.85);}
+            .video-card.clickable:hover .play-btn{opacity:0;}
+            .center-btn{opacity:1!important;transform:scale(1)!important;}
+        }
+        /* Landscape phone */
+        @media(max-height:500px) and (orientation:landscape){
+            .slide-video-wrap{max-width:none;width:auto;height:100vh;border-radius:0;aspect-ratio:unset;}
+            .pip-bar{padding:1.5rem .75rem .6rem;}
+            .center-btn{width:56px;height:56px;}
+        }
+    
+        /* ── CUSTOM FLOATING MINI PLAYER ── */
+        .mini-player{
+            position:fixed;
+            bottom:24px;right:24px;
+            width:260px;
+            background:#000;
+            border-radius:16px;
+            box-shadow:0 8px 40px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.1);
+            z-index:9999;
+            display:none;
+            flex-direction:column;
+            overflow:hidden;
+            transition:box-shadow .3s;
+            user-select:none;
+            touch-action:none;
+        }
+        .mini-player.visible{display:flex;}
+        .mini-player:hover{box-shadow:0 12px 50px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.2);}
+        .mini-player-video{
+            width:100%;
+            aspect-ratio:9/16;
+            object-fit:cover;
+            display:block;
+            cursor:pointer;
+        }
+        .mini-player-bar{
+            display:flex;align-items:center;justify-content:space-between;
+            padding:.5rem .65rem;
+            background:rgba(15,15,15,.95);
+            gap:6px;
+        }
+        .mini-player-title{
+            font-size:.72rem;font-weight:700;
+            color:rgba(255,255,255,.8);
+            white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+            flex:1;
+        }
+        .mini-btn{
+            background:rgba(255,255,255,.1);
+            border:1px solid rgba(255,255,255,.15);
+            color:#fff;cursor:pointer;
+            width:30px;height:30px;
+            border-radius:8px;
+            display:flex;align-items:center;justify-content:center;
+            flex-shrink:0;transition:all .2s;padding:0;
+        }
+        .mini-btn svg{width:15px;height:15px;fill:currentColor;}
+        .mini-btn:hover{background:rgba(255,255,255,.22);}
+        .mini-btn.close-btn:hover{background:rgba(239,68,68,.8);}
+        .mini-btn:active{transform:scale(.9);}
+        .mini-drag-handle{
+            position:absolute;top:0;left:0;right:0;height:28px;
+            cursor:grab;z-index:2;
+        }
+        .mini-drag-handle:active{cursor:grabbing;}
+        .mini-player-progress{
+            height:3px;background:rgba(255,255,255,.15);cursor:pointer;
+        }
+        .mini-player-fill{
+            height:100%;background:var(--accent);
+            width:0%;transition:width .1s linear;
+        }
+
+        </style>
 </head>
 <body>
 
@@ -343,13 +479,15 @@
             </div>
             <div class="video-grid">
                 <div class="video-card clickable fade-up" tabindex="0"
-                    onclick="openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772958118/Ranveer_allhabadia_B_and_After_11_zamv2p.mp4','Sample Edit 1','Before &amp; After Edit — Ranveer Allahbadia')"
-                    onkeydown="if(event.key==='Enter')openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772958118/Ranveer_allhabadia_B_and_After_11_zamv2p.mp4','Sample Edit 1','Before &amp; After Edit — Ranveer Allahbadia')">
-                    <video class="video-thumb" muted loop preload="none"
-                        onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"
+                    onclick="openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772958118/Ranveer_allhabadia_B_and_After_11_zamv2p.mp4','Sample Edit 1','Before &amp; After — Ranveer Allahbadia')"
+                    onkeydown="if(event.key==='Enter')openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772958118/Ranveer_allhabadia_B_and_After_11_zamv2p.mp4','Sample Edit 1','Before &amp; After — Ranveer Allahbadia')">
+                    <!-- Static thumbnail — always visible -->
+                    <img class="video-thumb thumb-img" src="https://res.cloudinary.com/dlupqyzif/video/upload/w_400,h_711,c_fill,so_2,q_auto/v1772958118/Ranveer_allhabadia_B_and_After_11_zamv2p.jpg" alt="Sample Edit 1" loading="lazy"
+                        onerror="this.style.display='none'">
+                    <!-- Video preview — desktop hover only -->
+                    <video class="video-thumb thumb-vid" muted loop preload="none"
                         src="https://res.cloudinary.com/dlupqyzif/video/upload/v1772958118/Ranveer_allhabadia_B_and_After_11_zamv2p.mp4"
-                        poster="https://res.cloudinary.com/dlupqyzif/video/upload/so_2,w_400,c_fill,q_auto,f_jpg/v1772958118/Ranveer_allhabadia_B_and_After_11_zamv2p.jpg"
-                        style="pointer-events:none;">
+                        style="position:absolute;inset:0;opacity:0;transition:opacity .4s;pointer-events:none;">
                     </video>
                     <div class="video-overlay">
                         <div class="video-badge live">▶ Watch Edit</div>
@@ -360,11 +498,13 @@
                 <div class="video-card clickable fade-up" tabindex="0"
                     onclick="openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772958122/Scar_revised_lcybah.mp4','Sample Edit 2','Scar — Cinematic Short Edit')"
                     onkeydown="if(event.key==='Enter')openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772958122/Scar_revised_lcybah.mp4','Sample Edit 2','Scar — Cinematic Short Edit')">
-                    <video class="video-thumb" muted loop preload="none"
-                        onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"
+                    <!-- Static thumbnail — always visible -->
+                    <img class="video-thumb thumb-img" src="https://res.cloudinary.com/dlupqyzif/video/upload/w_400,h_711,c_fill,so_2,q_auto/v1772958122/Scar_revised_lcybah.jpg" alt="Sample Edit 2" loading="lazy"
+                        onerror="this.style.display='none'">
+                    <!-- Video preview — desktop hover only -->
+                    <video class="video-thumb thumb-vid" muted loop preload="none"
                         src="https://res.cloudinary.com/dlupqyzif/video/upload/v1772958122/Scar_revised_lcybah.mp4"
-                        poster="https://res.cloudinary.com/dlupqyzif/video/upload/so_2,w_400,c_fill,q_auto,f_jpg/v1772958122/Scar_revised_lcybah.jpg"
-                        style="pointer-events:none;">
+                        style="position:absolute;inset:0;opacity:0;transition:opacity .4s;pointer-events:none;">
                     </video>
                     <div class="video-overlay">
                         <div class="video-badge live">▶ Watch Edit</div>
@@ -375,11 +515,13 @@
                 <div class="video-card clickable fade-up" tabindex="0"
                     onclick="openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772958206/Technology_ikkj1h.mp4','Sample Edit 3','Technology — Motion Edit')"
                     onkeydown="if(event.key==='Enter')openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772958206/Technology_ikkj1h.mp4','Sample Edit 3','Technology — Motion Edit')">
-                    <video class="video-thumb" muted loop preload="none"
-                        onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"
+                    <!-- Static thumbnail — always visible -->
+                    <img class="video-thumb thumb-img" src="https://res.cloudinary.com/dlupqyzif/video/upload/w_400,h_711,c_fill,so_2,q_auto/v1772958206/Technology_ikkj1h.jpg" alt="Sample Edit 3" loading="lazy"
+                        onerror="this.style.display='none'">
+                    <!-- Video preview — desktop hover only -->
+                    <video class="video-thumb thumb-vid" muted loop preload="none"
                         src="https://res.cloudinary.com/dlupqyzif/video/upload/v1772958206/Technology_ikkj1h.mp4"
-                        poster="https://res.cloudinary.com/dlupqyzif/video/upload/so_2,w_400,c_fill,q_auto,f_jpg/v1772958206/Technology_ikkj1h.jpg"
-                        style="pointer-events:none;">
+                        style="position:absolute;inset:0;opacity:0;transition:opacity .4s;pointer-events:none;">
                     </video>
                     <div class="video-overlay">
                         <div class="video-badge live">▶ Watch Edit</div>
@@ -390,11 +532,13 @@
                 <div class="video-card clickable fade-up" tabindex="0"
                     onclick="openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772961785/Preset_Explainer_by_Ryna_k75xr2.mp4','Sample Edit 4','Preset Explainer — by Ryna')"
                     onkeydown="if(event.key==='Enter')openVideo('https://res.cloudinary.com/dlupqyzif/video/upload/v1772961785/Preset_Explainer_by_Ryna_k75xr2.mp4','Sample Edit 4','Preset Explainer — by Ryna')">
-                    <video class="video-thumb" muted loop preload="none"
-                        onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"
+                    <!-- Static thumbnail — always visible -->
+                    <img class="video-thumb thumb-img" src="https://res.cloudinary.com/dlupqyzif/video/upload/w_400,h_711,c_fill,so_2,q_auto/v1772961785/Preset_Explainer_by_Ryna_k75xr2.jpg" alt="Sample Edit 4" loading="lazy"
+                        onerror="this.style.display='none'">
+                    <!-- Video preview — desktop hover only -->
+                    <video class="video-thumb thumb-vid" muted loop preload="none"
                         src="https://res.cloudinary.com/dlupqyzif/video/upload/v1772961785/Preset_Explainer_by_Ryna_k75xr2.mp4"
-                        poster="https://res.cloudinary.com/dlupqyzif/video/upload/so_2,w_400,c_fill,q_auto,f_jpg/v1772961785/Preset_Explainer_by_Ryna_k75xr2.jpg"
-                        style="pointer-events:none;">
+                        style="position:absolute;inset:0;opacity:0;transition:opacity .4s;pointer-events:none;">
                     </video>
                     <div class="video-overlay">
                         <div class="video-badge live">▶ Watch Edit</div>
@@ -422,25 +566,21 @@
         </div>
     </section>
 
-    <section class="testimonials-section">
-        <div class="container">
-            <h2 class="section-title fade-up">What People Say</h2>
-            <p class="section-sub fade-up">Testimonials coming soon — this spot is for real client feedback.</p>
-            <div class="testimonials-grid">
-                <div class="testimonial-card fade-up"><div class="stars">★★★★★</div><p>"Your first client review will appear here."</p><div class="testimonial-author"><div class="author-avatar">JD</div><div><div class="author-name">Your First Client</div><div class="author-handle">@handle</div></div></div></div>
-                <div class="testimonial-card fade-up"><div class="stars">★★★★★</div><p>"Another satisfied creator will leave their review right here."</p><div class="testimonial-author"><div class="author-avatar">CR</div><div><div class="author-name">Your Next Client</div><div class="author-handle">@handle</div></div></div></div>
-                <div class="testimonial-card fade-up"><div class="stars">★★★★★</div><p>"Space reserved for a real review. Let's collaborate!"</p><div class="testimonial-author"><div class="author-avatar">YC</div><div><div class="author-name">Future Collaborator</div><div class="author-handle">@handle</div></div></div></div>
-            </div>
-        </div>
-    </section>
+    
 
     <footer id="contact">
         <div class="container footer-content fade-up">
             <h2>Let's create something awesome.</h2>
             <p>Ready to give my editing style a try? Send me a message.</p>
-            <a href="mailto:jaideep.markam@gmail.com" class="btn-primary" style="padding:1.2rem 2.5rem;font-size:1.1rem;">✉️ jaideep.markam@gmail.com</a>
+            <a href="mailto:jaideep.markam@gmail.com" class="btn-primary" style="padding:1.2rem 2.5rem;font-size:1.1rem;display:inline-flex;align-items:center;gap:10px;justify-content:center;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                jaideep.markam@gmail.com
+            </a>
             <div class="social-links">
-                <a href="https://instagram.com/editoralchemy" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://instagram.com/editoralchemy" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:8px;font-size:1.1rem;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    Instagram
+                </a>
             </div>
             <div class="copyright">&copy; 2026 Jaideep Markam. All rights reserved.</div>
         </div>
@@ -470,64 +610,41 @@
                     <div class="pip-progress" id="pipProgress">
                         <div class="pip-track"><div class="pip-fill" id="pipFill"></div></div>
                     </div>
-                    <!-- Speed menu popup -->
-                    <div class="speed-menu" id="speedMenu">
-                        <div class="speed-opt" onclick="setSpeed(0.5)">0.5×</div>
-                        <div class="speed-opt" onclick="setSpeed(0.75)">0.75×</div>
-                        <div class="speed-opt selected" onclick="setSpeed(1)" id="speed1x">1× (Normal)</div>
-                        <div class="speed-opt" onclick="setSpeed(1.25)">1.25×</div>
-                        <div class="speed-opt" onclick="setSpeed(1.5)">1.5×</div>
-                        <div class="speed-opt" onclick="setSpeed(2)">2×</div>
-                    </div>
-                    <!-- Keyboard shortcuts hint -->
-                    <div class="shortcuts-hint" id="shortcutsHint">
-                        <p>
-                            <kbd>Space</kbd> Play/Pause &nbsp;
-                            <kbd>←</kbd><kbd>→</kbd> ±10s &nbsp;
-                            <kbd>M</kbd> Mute &nbsp;
-                            <kbd>F</kbd> Fullscreen &nbsp;
-                            <kbd>Esc</kbd> Close
-                        </p>
-                    </div>
                     <div class="pip-row">
                         <div class="pip-left">
+                            <!-- Rewind 10s -->
                             <button class="pip-btn" onclick="vidSkip(-10)" title="Rewind 10s">
                                 <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
                             </button>
-                            <button class="pip-btn" id="pipPlayBtn" onclick="vidTogglePlay()" title="Play / Pause">
+                            <!-- Play / Pause -->
+                            <button class="pip-btn" id="pipPlayBtn" onclick="vidTogglePlay(); this.blur();" title="Play / Pause">
                                 <svg id="pipPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                 <svg id="pipPauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                             </button>
+                            <!-- Forward 10s -->
                             <button class="pip-btn" onclick="vidSkip(10)" title="Forward 10s">
                                 <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/></svg>
                             </button>
-                            <div class="pip-vol-wrap">
-                                <button class="pip-btn" onclick="vidToggleMute()" title="Mute / Unmute">
+                            <!-- Volume -->
+                            <div class="vol-wrap" id="volWrap">
+                                <button class="pip-btn" onclick="vidToggleMute()" title="Volume">
                                     <svg id="pipVolIcon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                                    <svg id="pipVolMidIcon" viewBox="0 0 24 24" style="display:none"><path d="M18.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM5 9v6h4l5 5V4L9 9H5z"/></svg>
                                     <svg id="pipMuteIcon" viewBox="0 0 24 24" style="display:none"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
                                 </button>
-                                <input type="range" class="pip-vol-slider" min="0" max="1" step="0.05" value="1" oninput="vidSetVolume(this.value)">
+                                <div class="vol-slider-wrap" id="volSliderWrap">
+                                    <input type="range" id="volSlider" min="0" max="100" step="1" value="100"
+                                        oninput="vidSetVolume(this.value/100)"
+                                        class="vol-range">
+                                </div>
                             </div>
+                            <!-- Time -->
                             <span class="pip-time" id="pipTime">0:00 / 0:00</span>
                         </div>
+                        <!-- PiP Button -->
                         <div class="pip-right">
-                            <!-- Loop -->
-                            <button class="pip-btn" id="loopBtn" onclick="vidToggleLoop()" title="Loop">
-                                <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><path d="M7 17l-5-5 5-5v3c3.31 0 6-2.69 6-6 0-.34-.03-.67-.08-1h2.02c.05.33.08.66.08 1 0 4.42-3.58 8-8 8v3z"/></svg>
-                            </button>
-                            <!-- Speed -->
-                            <button class="pip-speed-btn" id="speedBtn" onclick="toggleSpeedMenu()" title="Playback Speed">1×</button>
-                            <!-- Keyboard shortcuts -->
-                            <button class="pip-btn" id="kbBtn" onclick="toggleShortcuts()" title="Keyboard Shortcuts">
-                                <svg viewBox="0 0 24 24"><path d="M20 5H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-9 3h2v2h-2V8zm0 3h2v2h-2v-2zM8 8h2v2H8V8zm0 3h2v2H8v-2zm-1 5H5v-2h2v2zm10 0H9v-2h8v2zm0-3h-2v-2h2v2zm0-3h-2V8h2v2zm3 6h-2v-2h2v2z"/></svg>
-                            </button>
-                            <!-- PiP -->
-                            <button class="pip-btn" onclick="vidPiP()" title="Picture in Picture" id="pipModeBtn">
+                            <button class="pip-btn" id="pipModeBtn" onclick="vidPiP(); this.blur();" title="Picture in Picture">
                                 <svg viewBox="0 0 24 24"><path d="M19 7h-8v6h8V7zm2-4H3c-1.1 0-2 .9-2 2v14c0 1.1.9 1.98 2 1.98h18c1.1 0 2-.88 2-1.98V5c0-1.1-.9-2-2-2zm0 16.01H3V4.98h18v14.03z"/></svg>
-                            </button>
-                            <!-- Fullscreen -->
-                            <button class="pip-btn" onclick="vidFullscreen()" title="Fullscreen">
-                                <svg id="fsIcon" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
                             </button>
                         </div>
                     </div>
@@ -537,6 +654,27 @@
         <div class="slide-footer"><p id="slideDesc" style="color:rgba(255,255,255,.5);font-size:.82rem;"></p></div>
     </div>
 
+    <!-- CUSTOM FLOATING MINI PLAYER -->
+    <div class="mini-player" id="miniPlayer">
+        <div class="mini-drag-handle" id="miniDragHandle"></div>
+        <video id="miniVid" class="mini-player-video" playsinline muted></video>
+        <div class="mini-player-progress" id="miniProgress">
+            <div class="mini-player-fill" id="miniFill"></div>
+        </div>
+        <div class="mini-player-bar">
+            <span class="mini-player-title" id="miniTitle">Sample Edit</span>
+            <button class="mini-btn" id="miniPlayBtn" onclick="miniTogglePlay()" title="Play/Pause">
+                <svg id="miniPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <svg id="miniPauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <button class="mini-btn" onclick="expandMini()" title="Expand">
+                <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+            </button>
+            <button class="mini-btn close-btn" onclick="closeMini()" title="Close">
+                <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </button>
+        </div>
+    </div>
     <script>
         // ── HAMBURGER ──
         const hamburger = document.getElementById('hamburger');
@@ -567,7 +705,9 @@
         const videoWrap = document.getElementById('videoWrap');
         let hideTimer;
 
+        let currentVideoUrl = '';
         function openVideo(url, title, desc) {
+            currentVideoUrl = url;
             document.getElementById('slideTitle').textContent = title || 'Sample Edit';
             document.getElementById('slideDesc').textContent = desc || '';
             mainSrc.src = url;
@@ -653,42 +793,207 @@
         function fmt(s) { return Math.floor(s/60)+':'+Math.floor(s%60).toString().padStart(2,'0'); }
 
         // ── CONTROLS ──
-        function vidTogglePlay() { vid.paused ? vid.play() : vid.pause(); }
+        function vidTogglePlay() { if (vid.paused) { vid.play().catch(()=>{}); } else { vid.pause(); } showCtrl(); }
         function vidSkip(s) { vid.currentTime = Math.max(0, Math.min(vid.duration||0, vid.currentTime+s)); }
-        function vidToggleMute() {
-            vid.muted = !vid.muted;
-            document.getElementById('pipVolIcon').style.display = vid.muted ? 'none' : 'inline';
-            document.getElementById('pipMuteIcon').style.display = vid.muted ? 'inline' : 'none';
-        }
-        function vidSetVolume(v) {
-            vid.volume = v; vid.muted = v==0;
-            document.getElementById('pipVolIcon').style.display = v==0 ? 'none' : 'inline';
-            document.getElementById('pipMuteIcon').style.display = v==0 ? 'inline' : 'none';
-        }
-        // ── PICTURE IN PICTURE ──
-        async function vidPiP() {
-            try {
-                if (document.pictureInPictureElement) {
-                    await document.exitPictureInPicture();
-                } else if (document.pictureInPictureEnabled) {
-                    await vid.requestPictureInPicture();
-                } else {
-                    showToast('Picture-in-Picture is not supported by your browser.');
-                }
-            } catch(e) {
-                showToast('Could not enter Picture-in-Picture mode.');
+        function updateVolIcons(vol, muted) {
+            const isMuted = muted || vol === 0;
+            const isMid = !isMuted && vol < 0.5;
+            document.getElementById('pipVolIcon').style.display = (!isMuted && !isMid) ? 'inline' : 'none';
+            document.getElementById('pipVolMidIcon').style.display = isMid ? 'inline' : 'none';
+            document.getElementById('pipMuteIcon').style.display = isMuted ? 'inline' : 'none';
+            // Sync slider fill
+            const slider = document.getElementById('volSlider');
+            if (slider) {
+                const val = isMuted ? 0 : Math.round(vol * 100);
+                slider.value = val;
+                slider.style.backgroundSize = val + '% 100%';
             }
         }
 
-        // Update PiP button icon when PiP state changes
-        vid.addEventListener('enterpictureinpicture', () => {
-            document.getElementById('pipModeBtn').style.color = 'var(--accent)';
-            document.getElementById('pipModeBtn').title = 'Exit Picture in Picture';
+        function vidToggleMute() {
+            vid.muted = !vid.muted;
+            updateVolIcons(vid.volume, vid.muted);
+        }
+
+        function vidSetVolume(v) {
+            vid.volume = v;
+            vid.muted = v === 0;
+            updateVolIcons(v, v === 0);
+        }
+
+        // Sync slider fill on input
+        document.addEventListener('input', (e) => {
+            if (e.target.id === 'volSlider') {
+                e.target.style.backgroundSize = e.target.value + '% 100%';
+            }
         });
-        vid.addEventListener('leavepictureinpicture', () => {
-            document.getElementById('pipModeBtn').style.color = '';
-            document.getElementById('pipModeBtn').title = 'Picture in Picture';
+
+        // Toggle slider open on touch devices
+        document.getElementById('volWrap')?.addEventListener('touchstart', (e) => {
+            e.stopPropagation();
+            document.getElementById('volWrap').classList.toggle('open');
+        }, {passive:true});
+        // ── CUSTOM MINI PLAYER ──
+        const miniPlayer = document.getElementById('miniPlayer');
+        const miniVid = document.getElementById('miniVid');
+        const miniTitle = document.getElementById('miniTitle');
+        const miniFill = document.getElementById('miniFill');
+        let miniOpen = false;
+        let currentSrc = '';
+        let currentTitle = '';
+
+        function vidPiP() {
+            if (miniOpen) {
+                closeMini();
+                return;
+            }
+            if (!currentVideoUrl) { showToast('Open a video first!'); return; }
+            const savedTime = vid.currentTime || 0;
+            miniTitle.textContent = document.getElementById('slideTitle').textContent || 'Sample Edit';
+
+            // Show player UI instantly
+            miniPlayer.classList.add('visible');
+            miniOpen = true;
+            setPipActive(true);
+
+            // Stop main player
+            vid.pause();
+
+            // Setup mini player
+            miniVid.src = currentVideoUrl;
+            miniVid.volume = vid.muted ? 1 : (vid.volume || 1);
+            miniVid.muted = false;
+
+            // Force load and play synchronously to respect the user's click intent
+            miniVid.load();
+
+            const startMini = () => {
+                miniVid.currentTime = savedTime;
+                miniVid.play().then(() => {
+                    document.getElementById('miniPlayIcon').style.display = 'none';
+                    document.getElementById('miniPauseIcon').style.display = 'inline';
+                }).catch(() => { 
+                    showToast('Tap video to play'); 
+                    document.getElementById('miniPlayIcon').style.display = 'inline';
+                    document.getElementById('miniPauseIcon').style.display = 'none';
+                });
+            };
+
+            // Safari/iOS needs to wait for loadedmetadata before setting currentTime
+            miniVid.addEventListener('loadedmetadata', startMini, { once: true });
+
+            // Fallback if event doesn't fire fast enough
+            setTimeout(() => { if (miniVid.paused) startMini(); }, 300);
+        }
+
+        function closeMini() {
+            miniVid.pause();
+            miniVid.onloadedmetadata = null;
+            miniVid.oncanplay = null;
+            miniVid.src = '';
+            miniPlayer.classList.remove('visible');
+            miniOpen = false;
+            setPipActive(false);
+        }
+
+        function expandMini() {
+            const t = miniVid.currentTime;
+            miniVid.pause();
+            miniPlayer.classList.remove('visible');
+            miniOpen = false;
+            setPipActive(false);
+            miniVid.src = '';
+            // If slide is open, resume
+            if (slide.classList.contains('active')) {
+                vid.currentTime = t;
+                vid.play().catch(()=>{});
+            } else {
+                // Reopen slide at saved time
+                openVideo(currentVideoUrl, document.getElementById('slideTitle').textContent, '');
+                vid.addEventListener('canplay', function once() {
+                    vid.removeEventListener('canplay', once);
+                    vid.currentTime = t;
+                    vid.play().catch(()=>{});
+                });
+            }
+        }
+
+        function miniTogglePlay() {
+            if (miniVid.paused || miniVid.ended) {
+                miniVid.play().then(() => {
+                    document.getElementById('miniPlayIcon').style.display = 'none';
+                    document.getElementById('miniPauseIcon').style.display = 'inline';
+                }).catch(()=>{});
+            } else {
+                miniVid.pause();
+                document.getElementById('miniPlayIcon').style.display = 'inline';
+                document.getElementById('miniPauseIcon').style.display = 'none';
+            }
+        }
+        miniVid.addEventListener('pause', () => {
+            document.getElementById('miniPlayIcon').style.display = 'inline';
+            document.getElementById('miniPauseIcon').style.display = 'none';
         });
+        miniVid.addEventListener('play', () => {
+            document.getElementById('miniPlayIcon').style.display = 'none';
+            document.getElementById('miniPauseIcon').style.display = 'inline';
+        });
+
+        // Tap video area to play/pause
+        document.getElementById('miniVid').addEventListener('click', miniTogglePlay);
+
+        // Progress sync
+        miniVid.addEventListener('timeupdate', () => {
+            if (!miniVid.duration) return;
+            miniFill.style.width = (miniVid.currentTime / miniVid.duration * 100) + '%';
+        });
+
+        // Click progress bar to seek
+        document.getElementById('miniProgress').addEventListener('click', (e) => {
+            const r = e.currentTarget.getBoundingClientRect();
+            miniVid.currentTime = ((e.clientX - r.left) / r.width) * miniVid.duration;
+        });
+
+        // ── DRAG TO MOVE (desktop + mobile) ──
+        const handle = document.getElementById('miniDragHandle');
+        let dragging = false, startX, startY, origX, origY;
+
+        function dragStart(x, y) {
+            dragging = true;
+            startX = x; startY = y;
+            const rect = miniPlayer.getBoundingClientRect();
+            origX = rect.left; origY = rect.top;
+            miniPlayer.style.right = 'auto';
+            miniPlayer.style.bottom = 'auto';
+            miniPlayer.style.left = origX + 'px';
+            miniPlayer.style.top = origY + 'px';
+        }
+        function dragMove(x, y) {
+            if (!dragging) return;
+            const dx = x - startX, dy = y - startY;
+            const newX = Math.max(0, Math.min(window.innerWidth - miniPlayer.offsetWidth, origX + dx));
+            const newY = Math.max(0, Math.min(window.innerHeight - miniPlayer.offsetHeight, origY + dy));
+            miniPlayer.style.left = newX + 'px';
+            miniPlayer.style.top = newY + 'px';
+        }
+        function dragEnd() { dragging = false; }
+
+        handle.addEventListener('mousedown', e => { dragStart(e.clientX, e.clientY); e.preventDefault(); });
+        document.addEventListener('mousemove', e => dragMove(e.clientX, e.clientY));
+        document.addEventListener('mouseup', dragEnd);
+
+        handle.addEventListener('touchstart', e => { dragStart(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
+        document.addEventListener('touchmove', e => { if(dragging) dragMove(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
+        document.addEventListener('touchend', dragEnd);
+
+        // PiP button active state
+        function setPipActive(active) {
+            const btn = document.getElementById('pipModeBtn');
+            if (!btn) return;
+            btn.style.background = active ? 'rgba(59,130,246,0.35)' : '';
+            btn.style.borderColor = active ? 'var(--accent)' : '';
+            btn.title = active ? 'Close Mini Player' : 'Picture in Picture';
+        }
 
         // ── TOAST NOTIFICATION ──
         function showToast(msg) {
@@ -706,11 +1011,24 @@
         }
 
         function vidFullscreen() {
-            const el = vid;
-            if (el.requestFullscreen) el.requestFullscreen();
-            else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-            else if (el.webkitEnterFullscreen) el.webkitEnterFullscreen();
-            else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+            const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement);
+            if (isFs) {
+                // EXIT fullscreen
+                if (document.exitFullscreen) document.exitFullscreen();
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+            } else {
+                // ENTER fullscreen — try video first (iOS), then wrap
+                if (vid.webkitEnterFullscreen) {
+                    vid.webkitEnterFullscreen(); // iOS Safari
+                } else {
+                    const el = document.getElementById('videoWrap');
+                    if (el.requestFullscreen) el.requestFullscreen();
+                    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+                    else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+                    else if (vid.requestFullscreen) vid.requestFullscreen();
+                }
+            }
         }
         document.addEventListener('fullscreenchange', () => {
             const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
@@ -733,14 +1051,27 @@
 
         // ── KEYBOARD SHORTCUTS ──
         document.addEventListener('keydown', (e) => {
+            if (e.target && ['INPUT','TEXTAREA'].includes(e.target.tagName)) return;
+            // Prevent spacebar from clicking focused buttons (double-trigger bug)
+            if (e.key === ' ' && document.activeElement && document.activeElement.tagName === 'BUTTON') {
+                document.activeElement.blur();
+            }
+            if (miniOpen) {
+                switch(e.key) {
+                    case 'Escape': closeMini(); break;
+                    case ' ': e.preventDefault(); miniTogglePlay(); break;
+                    case 'ArrowRight': miniVid.currentTime = Math.min(miniVid.duration || 0, miniVid.currentTime + 10); break;
+                    case 'ArrowLeft': miniVid.currentTime = Math.max(0, miniVid.currentTime - 10); break;
+                }
+                return;
+            }
             if (!slide.classList.contains('active')) return;
             switch(e.key) {
                 case 'Escape': closeVideo(); break;
-                case ' ': e.preventDefault(); document.getElementById('centerOverlay').click(); break;
+                case ' ': e.preventDefault(); vidTogglePlay(); break;
                 case 'ArrowRight': vidSkip(10); showCtrl(); break;
                 case 'ArrowLeft': vidSkip(-10); showCtrl(); break;
                 case 'm': case 'M': vidToggleMute(); break;
-                case 'f': case 'F': vidFullscreen(); break;
             }
         });
 
@@ -748,6 +1079,24 @@
         slide.addEventListener('click', (e) => {
             if (e.target === slide) closeVideo();
         });
+
+        // ── DESKTOP HOVER VIDEO PREVIEW (not mobile) ──
+        const isTouch = window.matchMedia('(hover: none)').matches;
+        if (!isTouch) {
+            document.querySelectorAll('.video-card.clickable').forEach(card => {
+                const vid = card.querySelector('.thumb-vid');
+                const img = card.querySelector('.thumb-img');
+                if (!vid) return;
+                card.addEventListener('mouseenter', () => {
+                    vid.play().then(() => { vid.style.opacity = '1'; if(img) img.style.opacity='0'; }).catch(()=>{});
+                });
+                card.addEventListener('mouseleave', () => {
+                    vid.pause(); vid.currentTime = 0;
+                    vid.style.opacity = '0';
+                    if(img) img.style.opacity = '1';
+                });
+            });
+        }
 
         // Close speed menu when clicking outside
         document.addEventListener('click', (e) => {
@@ -761,36 +1110,14 @@
 
         // ── PLAYBACK SPEED ──
         let currentSpeed = 1;
-        function toggleSpeedMenu() {
-            document.getElementById('speedMenu').classList.toggle('open');
-            document.getElementById('shortcutsHint').classList.remove('show');
-        }
-        function setSpeed(s) {
-            currentSpeed = s;
-            vid.playbackRate = s;
-            document.getElementById('speedBtn').textContent = s + '×';
-            document.getElementById('speedBtn').classList.toggle('active', s !== 1);
-            document.querySelectorAll('.speed-opt').forEach(o => {
-                o.classList.toggle('selected', parseFloat(o.textContent) === s);
-            });
-            document.getElementById('speedMenu').classList.remove('open');
-            showToast('Speed: ' + s + '×');
-        }
+        
 
         // ── LOOP ──
         let loopOn = false;
-        function vidToggleLoop() {
-            loopOn = !loopOn;
-            vid.loop = loopOn;
-            document.getElementById('loopBtn').classList.toggle('loop-active', loopOn);
-            showToast(loopOn ? '🔁 Loop ON' : '🔁 Loop OFF');
-        }
+        
 
         // ── KEYBOARD SHORTCUTS HINT ──
-        function toggleShortcuts() {
-            document.getElementById('shortcutsHint').classList.toggle('show');
-            document.getElementById('speedMenu').classList.remove('open');
-        }
+        
 
         // ── KEYBOARD: add speed shortcuts ──
         document.addEventListener('keydown', (e) => {
@@ -801,4 +1128,3 @@
         });
     </script>
 </body>
-</html>
