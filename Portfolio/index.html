@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Fix #3 — Content-Security-Policy: locks down every allowed resource origin.
+     script-src 'self'         → only script.js can run; eval() and inline scripts are blocked.
+     style-src 'self' fonts.googleapis.com → external stylesheet + Google Fonts CSS allowed.
+     font-src fonts.gstatic.com            → only Google's font CDN can serve font files.
+     img-src 'self' data: res.cloudinary.com → project thumbnails from Cloudinary only.
+     media-src res.cloudinary.com          → project videos from Cloudinary only.
+     connect-src 'none'                    → no fetch/XHR/WebSocket calls allowed, blocking exfiltration.
+     object-src 'none'                     → blocks all Flash/plugin vectors.
+     base-uri 'self'                       → prevents base-tag hijacking attacks. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://res.cloudinary.com; media-src https://res.cloudinary.com; connect-src 'none'; object-src 'none'; base-uri 'self';">
+<meta name="description" content="Jaideep Markam — Premium short-form video editor for ambitious creators and brands. Cinematic color grades, dynamic captions, and retention-focused cuts.">
+<meta property="og:title" content="Jaideep Markam | Short-Form Video Editor">
+<meta property="og:description" content="Visuals that command attention. Premium editing for creators who want results.">
+<meta property="og:type" content="website">
+<title>Jaideep Markam | Short-Form Video Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- ══════════════ NAVBAR ══════════════ -->
+<header id="navbar">
+  <div class="nav-container">
+    <a href="#" class="logo" data-nav="home" id="logoBtn">
+      <div class="logo-dot"></div>
+      <span>JAIDEEP <em>MARKAM</em></span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <button class="nav-link active" data-nav="home" id="navHome">Home</button>
+      <button class="nav-link" data-nav="work" id="navWork">Work</button>
+      <button class="nav-link" data-nav="process" id="navProcess">Process</button>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <button class="btn btn-hire" data-nav="process" id="hireBtn">Hire Me</button>
+      <button class="ham-btn" id="hamBtn" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Overlay -->
+<div class="mob-overlay" id="mobOverlay">
+  <button class="mob-link" data-nav="home">Home</button>
+  <button class="mob-link" data-nav="work">Work</button>
+  <button class="mob-link" data-nav="process">Process</button>
+  <button class="mob-link btn-hire-mob" data-nav="process">Hire Me</button>
+</div>
+
+<!-- ══════════════ MAIN CONTENT ══════════════ -->
+<main id="mainContent">
+
+  <!-- ════════════ HOME VIEW ════════════ -->
+  <div class="view active" id="viewHome">
+
+    <!-- Hero -->
+    <section class="hero-section">
+      <div class="hero-glow-a"></div>
+      <div class="hero-glow-b"></div>
+      <div class="hero-grid-bg"></div>
+
+      <div class="hero-inner">
+        <div class="hero-pill">
+          <span class="pill-dot"></span>
+          Available for Projects
+        </div>
+        <h1 class="hero-h1">
+          Visuals that<br>
+          <em>command attention.</em>
+        </h1>
+        <p class="hero-sub">
+          Premium short-form video editing for ambitious creators and brands. Fast pacing, cinematic grading, and dynamic typography crafted to dominate the feed.
+        </p>
+        <div class="hero-cta">
+          <button class="btn btn-primary" data-nav="work" id="heroCta">
+            View Portfolio
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats / Marquee Banner -->
+    <div class="stats-band">
+      <div class="stats-inner">
+        <div class="stat-item">
+          <span class="stat-val">Trendy</span>
+          <span class="stat-lbl">Editing Styles</span>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat-item">
+          <span class="stat-val">100%</span>
+          <span class="stat-lbl">Dedication</span>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat-item">
+          <span class="stat-val">Fast</span>
+          <span class="stat-lbl">Turnaround</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Work -->
+    <section class="featured-section">
+      <div class="section-header">
+        <div class="section-heading-wrap">
+          <h2 class="section-h2">Selected <em>Work</em></h2>
+          <p class="section-p">A curated selection of my latest edits.</p>
+        </div>
+        <button class="view-all-btn" data-nav="work" id="viewAllBtn">
+          View all
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+
+      <div class="featured-grid" id="featuredGrid">
+        <!-- Injected by JS -->
+      </div>
+    </section>
+
+  </div><!-- /viewHome -->
+
+  <!-- ════════════ WORK VIEW ════════════ -->
+  <div class="view" id="viewWork">
+    <div class="page-inner">
+      <div class="page-head">
+        <h1 class="page-h1">Portfolio</h1>
+        <p class="page-p">Click any project to view the full video edit.</p>
+      </div>
+
+      <!-- Filter Pills -->
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-pill active" data-filter="All">All</button>
+        <button class="filter-pill" data-filter="Talking Head">Talking Head</button>
+        <button class="filter-pill" data-filter="Cinematic">Cinematic</button>
+        <button class="filter-pill" data-filter="Motion">Motion</button>
+        <button class="filter-pill" data-filter="Explainer">Explainer</button>
+      </div>
+
+      <div class="portfolio-grid" id="portfolioGrid">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </div><!-- /viewWork -->
+
+  <!-- ════════════ PROJECT DETAIL VIEW ════════════ -->
+  <div class="view" id="viewProject">
+    <div class="page-inner">
+      <button class="back-btn" id="backBtn" data-nav="work">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to Portfolio
+      </button>
+
+      <div class="project-layout">
+        <!-- Video Side -->
+        <div class="project-video-side" id="projectVideoSide">
+          <div class="video-phone">
+            <video id="projectVideo" controls controlsList="nodownload" playsinline preload="metadata">
+              Your browser doesn't support HTML5 video.
+            </video>
+          </div>
+        </div>
+
+        <!-- Info Side -->
+        <div class="project-info-side" id="projectInfoSide">
+          <div class="project-cat-badge" id="projectCat"></div>
+          <h1 class="project-title" id="projectTitle"></h1>
+          <p class="project-desc" id="projectDesc"></p>
+
+          <div class="project-meta-grid">
+            <div class="meta-card">
+              <span class="meta-label">Client Type</span>
+              <span class="meta-val" id="projectClient"></span>
+            </div>
+            <div class="meta-card">
+              <span class="meta-label">Format</span>
+              <span class="meta-val" id="projectFormat"></span>
+            </div>
+          </div>
+
+          <div class="tools-section">
+            <h3 class="tools-label">Tools Used</h3>
+            <div class="tools-list" id="toolsList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /viewProject -->
+
+  <!-- ════════════ PROCESS VIEW ════════════ -->
+  <div class="view" id="viewProcess">
+    <div class="page-inner">
+      <div class="process-layout">
+
+        <!-- Workflow Steps -->
+        <div class="workflow-col">
+          <h1 class="page-h1">The Workflow</h1>
+          <p class="page-p">Seamless collaboration from footage delivery to final export.</p>
+
+          <div class="steps-list">
+            <div class="workflow-step">
+              <div class="step-number">01</div>
+              <div class="step-body">
+                <h3 class="step-title">Raw Footage Delivery</h3>
+                <p class="step-desc">Upload your content to a shared secure drive. I review and select the best takes to formulate a strong hook.</p>
+              </div>
+            </div>
+            <div class="workflow-step">
+              <div class="step-number">02</div>
+              <div class="step-body">
+                <h3 class="step-title">The Assembly &amp; Polish</h3>
+                <p class="step-desc">Cutting the fluff, adding dynamic captions, applying color grades, and layering essential sound design.</p>
+              </div>
+            </div>
+            <div class="workflow-step">
+              <div class="step-number">03</div>
+              <div class="step-body">
+                <h3 class="step-title">Review &amp; Refine</h3>
+                <p class="step-desc">You receive the first draft. We collaborate closely on revisions until the edit aligns perfectly with your vision.</p>
+              </div>
+            </div>
+            <div class="workflow-step">
+              <div class="step-number">04</div>
+              <div class="step-body">
+                <h3 class="step-title">Final Delivery</h3>
+                <p class="step-desc">Rendered in ultra-high quality, optimized specifically for TikTok, Reels, or YouTube Shorts algorithms.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Card -->
+        <div class="contact-card">
+          <div class="contact-card-head">
+            <h2 class="contact-h2">Ready to elevate your content?</h2>
+            <p class="contact-p">Let's create videos that your audience can't stop watching.</p>
+          </div>
+
+          <div class="contact-links">
+            <a href="mailto:jaideep.markam@gmail.com" class="contact-link primary" id="emailLink">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              jaideep.markam@gmail.com
+            </a>
+            <a href="https://instagram.com/editoralchemy" target="_blank" rel="noopener noreferrer" class="contact-link secondary" id="igLink">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              @editoralchemy
+            </a>
+          </div>
+
+          <div class="contact-footer">
+            <div class="avail-row">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Currently accepting new clients</span>
+            </div>
+            <p class="contact-note">Usually responds within 24 hours. Include your channel link and typical video length for a faster quote.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- /viewProcess -->
+
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer id="siteFooter">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="logo-dot sm"></div>
+      <span>JAIDEEP <em>MARKAM</em></span>
+    </div>
+    <div class="footer-links">
+      <a href="https://instagram.com/editoralchemy" target="_blank" rel="noopener noreferrer" class="footer-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Instagram
+      </a>
+      <a href="mailto:jaideep.markam@gmail.com" class="footer-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email
+      </a>
+    </div>
+    <div class="footer-copy">&copy; <span id="footerYear"></span> Jaideep Markam. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
