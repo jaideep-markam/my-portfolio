@@ -52,6 +52,17 @@ const PROJECTS = [
     videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1772961785/Preset_Explainer_by_Ryna_k75xr2.mp4',
     thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1772961785/Preset_Explainer_by_Ryna_k75xr2.jpg',
     duration: 'Short Form'
+  },
+  {
+    id: 'p5',
+    title: 'Social Media B&A',
+    category: 'Talking Head',
+    client: 'Social Media Creator',
+    description: 'A full Before & After transformation showcasing tight jump cuts, animated captions, and color grading that turns raw footage into scroll-stopping social media content.',
+    tools: ['DaVinci Resolve'],
+    videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1775992332/social_media_before_and_after_final_svwfho.mp4',
+    thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1775992332/social_media_before_and_after_final_svwfho.jpg',
+    duration: 'Short Form'
   }
 ];
 
