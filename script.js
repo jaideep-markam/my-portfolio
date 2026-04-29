@@ -248,7 +248,14 @@ document.addEventListener('keydown', e => {
    SPA NAV (Instant)
 ──────────────────────────────────────────── */
 function navTo(view) {
-  if (view === currentView || !VALID_VIEWS.has(view)) return;
+  if (!VALID_VIEWS.has(view)) return;
+
+  if (view === currentView) {
+    closeMenu();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+
   currentView = view;
 
   qsa('.view').forEach(v => {
