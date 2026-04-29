@@ -64,6 +64,26 @@ function runLoader() {
 }
 
 /* ────────────────────────────────────────────
+   MOBILE HERO VIDEO AUTOPLAY FIX
+──────────────────────────────────────────── */
+const heroVideo = qs('#hero-video');
+if (heroVideo) {
+  heroVideo.muted = true;
+  heroVideo.play().catch(() => {
+    // If browser strictly blocks autoplay, wait for first interaction
+    window.addEventListener('touchstart', () => {
+      heroVideo.muted = true;
+      heroVideo.play().catch(() => {});
+    }, { once: true });
+    
+    window.addEventListener('scroll', () => {
+      heroVideo.muted = true;
+      heroVideo.play().catch(() => {});
+    }, { once: true });
+  });
+}
+
+/* ────────────────────────────────────────────
    THEME TOGGLE
 ──────────────────────────────────────────── */
 const themeToggle = qs('#theme-toggle');
