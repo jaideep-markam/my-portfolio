@@ -1,470 +1,353 @@
 'use strict';
 
 /* ═══════════════════════════════════════════════════════
-   JAIDEEP MARKAM — PORTFOLIO  v4.0
-   Full SPA Engine · Dark/Light Theme · Real Projects
+   ULTRA-PREMIUM FAST JS
 ═══════════════════════════════════════════════════════ */
 
 /* ────────────────────────────────────────────
-   PROJECT DATA
+   SECURITY: FRAME-BUSTING (ANTI-CLICKJACKING)
+──────────────────────────────────────────── */
+try {
+  if (window.top !== window.self) {
+    window.top.location = window.self.location;
+  }
+} catch (e) { /* cross-origin frame, ignore */ }
+
+/* ────────────────────────────────────────────
+   DATA
 ──────────────────────────────────────────── */
 const PROJECTS = [
-  {
-    id: 'p1',
-    title: 'Ranveer Allahbadia',
-    category: 'Talking Head',
-    client: 'Creator / Podcast',
-    description: 'Before & After Polish showing dynamic captions, color grading, and retention-focused cuts for high-engagement platforms.',
-    tools: ['DaVinci Resolve'],
-    videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1772958118/Ranveer_allhabadia_B_and_After_11_zamv2p.mp4',
-    thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1772958118/Ranveer_allhabadia_B_and_After_11_zamv2p.jpg',
-    duration: 'Short Form'
-  },
-  {
-    id: 'p2',
-    title: 'Scar Edit',
-    category: 'Cinematic',
-    client: 'Narrative Short',
-    description: 'Focusing entirely on mood and color grading to create a highly cinematic and visceral short-form experience.',
-    tools: ['DaVinci Resolve'],
-    videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1772958122/Scar_revised_lcybah.mp4',
-    thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1772958122/Scar_revised_lcybah.jpg',
-    duration: 'Short Form'
-  },
-  {
-    id: 'p3',
-    title: 'Tech Review',
-    category: 'Motion',
-    client: 'Tech Creator',
-    description: 'Dynamic pacing and energetic transitions to keep tech reviews engaging, snappy, and algorithm-friendly.',
-    tools: ['DaVinci Resolve'],
-    videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1772958206/Technology_ikkj1h.mp4',
-    thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1772958206/Technology_ikkj1h.jpg',
-    duration: 'Short Form'
-  },
-  {
-    id: 'p4',
-    title: 'Ryna Presets',
-    category: 'Explainer',
-    client: 'Brand / Commercial',
-    description: 'Clean typography and smooth animations demonstrating preset functionalities for a digital product launch.',
-    tools: ['DaVinci Resolve'],
-    videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1772961785/Preset_Explainer_by_Ryna_k75xr2.mp4',
-    thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1772961785/Preset_Explainer_by_Ryna_k75xr2.jpg',
-    duration: 'Short Form'
-  },
-  {
-    id: 'p5',
-    title: 'Social Media B&A',
-    category: 'Talking Head',
-    client: 'Social Media Creator',
-    description: 'A full Before & After transformation showcasing tight jump cuts, animated captions, and color grading that turns raw footage into scroll-stopping social media content.',
-    tools: ['DaVinci Resolve'],
-    videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1775992332/social_media_before_and_after_final_svwfho.mp4',
-    thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1775992332/social_media_before_and_after_final_svwfho.jpg',
-    duration: 'Short Form'
-  }
+  { id: 'p1', title: 'Ranveer Allahbadia', category: 'Talking Head', client: 'Creator / Podcast', description: 'Before & After Polish showing dynamic captions, color grading, and retention-focused cuts.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/Ranveer_allhabadia_B_and_After_11_zamv2p.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/Ranveer_allhabadia_B_and_After_11_zamv2p.jpg', duration: 'Short Form' },
+  { id: 'p2', title: 'Scar Edit', category: 'Cinematic', client: 'Narrative Short', description: 'Focusing entirely on mood and color grading to create a highly cinematic and visceral experience.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/Scar_revised_lcybah.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/Scar_revised_lcybah.jpg', duration: 'Short Form' },
+  { id: 'p3', title: 'Tech Review', category: 'Motion', client: 'Tech Creator', description: 'Dynamic pacing and energetic transitions to keep tech reviews engaging and snappy.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/Technology_ikkj1h.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/Technology_ikkj1h.jpg', duration: 'Short Form' },
+  { id: 'p4', title: 'Ryna Presets', category: 'Explainer', client: 'Brand / Commercial', description: 'Clean typography and smooth animations demonstrating preset functionalities.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/Preset_Explainer_by_Ryna_k75xr2.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/Preset_Explainer_by_Ryna_k75xr2.jpg', duration: 'Short Form' },
+  { id: 'p5', title: 'Social Media B&A', category: 'Talking Head', client: 'Social Media Creator', description: 'A full Before & After transformation showcasing tight jump cuts and color grading.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/social_media_before_and_after_final_svwfho.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/social_media_before_and_after_final_svwfho.jpg', duration: 'Short Form' }
 ];
 
 /* ────────────────────────────────────────────
-   STATE
+   STATE & UTILS
 ──────────────────────────────────────────── */
 let currentView = 'home';
-let currentProjectId = null;
 let activeFilter = 'All';
+let currentLbIdx = 0;
 
-// Fix #4 — Allowlist of valid navigation destinations.
-// Rejects any data-nav value not on this list, blocking navigation hijacking.
-const VALID_VIEWS = new Set(['home', 'work', 'project', 'process']);
+const VALID_VIEWS = new Set(['home', 'work', 'process', 'contact']);
 
-// Fix #5 — Allowlist of valid theme values.
-// Prevents DOM attribute injection if localStorage is tampered with.
-const VALID_THEMES = new Set(['dark', 'light']);
-
-/* ────────────────────────────────────────────
-   UTILS
-──────────────────────────────────────────── */
-function qs(sel, scope = document) { return scope.querySelector(sel); }
-function qsa(sel, scope = document) { return [...scope.querySelectorAll(sel)]; }
-
-function playIcon() {
-  return `<div class="play-ring">
-    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
-      <polygon points="5 3 19 12 5 21 5 3"/>
-    </svg>
-  </div>`;
-}
-
-function toolIcon() {
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`;
-}
+function qs(s, c = document) { return c.querySelector(s); }
+function qsa(s, c = document) { return [...c.querySelectorAll(s)]; }
+function safeText(str) { return document.createTextNode(str); }
 
 /* ────────────────────────────────────────────
-   CARD BUILDER
+   FAST LOADER
 ──────────────────────────────────────────── */
-function buildCard(project, isFeatured = false) {
-  const div = document.createElement('div');
-  div.className = 'video-card';
-  div.dataset.projectId = project.id;
-  div.dataset.category = project.category;
-  div.setAttribute('role', 'button');
-  // Fix #1 — aria-label uses setAttribute, which auto-encodes special characters.
-  div.setAttribute('aria-label', 'View project: ' + project.title);
-  div.tabIndex = 0;
+const loader = qs('#loader');
+const lProg = qs('#loader-progress');
 
-  const shortDesc = isFeatured
-    ? project.description.split(' ').slice(0, 8).join(' ') + '\u2026'
-    : project.description;
+function runLoader() {
+  let p = 0;
+  const int = setInterval(() => {
+    p += Math.floor(Math.random() * 25) + 15;
+    if (p > 100) p = 100;
+    if (lProg) lProg.style.width = `${p}%`;
 
-  // Fix #1 — Build card entirely via DOM API. No dynamic data is ever passed to
-  // innerHTML, eliminating the XSS injection surface on project title, thumb URL,
-  // category, and description fields.
-  const img = document.createElement('img');
-  img.src = project.thumbUrl;          // Safe: browser treats src as a URL, not HTML
-  img.alt = project.title;             // Safe: alt is a plain-text attribute
-  img.loading = 'lazy';
-
-  const badge = document.createElement('span');
-  badge.className = 'card-cat-badge';
-  badge.textContent = project.category; // textContent never interprets HTML tags
-
-  // playIcon() is a static, hardcoded SVG string — not derived from any data field.
-  const playBtn = document.createElement('div');
-  playBtn.className = 'card-play-btn';
-  playBtn.innerHTML = playIcon();
-
-  const cardInfo = document.createElement('div');
-  cardInfo.className = 'card-info';
-
-  const cardTitle = document.createElement('div');
-  cardTitle.className = 'card-info-title';
-  cardTitle.textContent = project.title; // textContent prevents script injection
-
-  const cardDesc = document.createElement('div');
-  cardDesc.className = 'card-info-desc';
-  cardDesc.textContent = shortDesc;      // textContent prevents script injection
-
-  cardInfo.appendChild(cardTitle);
-  cardInfo.appendChild(cardDesc);
-  div.appendChild(img);
-  div.appendChild(badge);
-  div.appendChild(playBtn);
-  div.appendChild(cardInfo);
-
-  div.addEventListener('click', () => navigateTo('project', project.id));
-  div.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') navigateTo('project', project.id); });
-
-  // Cursor effect
-  div.addEventListener('mouseenter', () => { qs('#cursor')?.classList.add('big'); qs('#cursorFollower')?.classList.add('big'); });
-  div.addEventListener('mouseleave', () => { qs('#cursor')?.classList.remove('big'); qs('#cursorFollower')?.classList.remove('big'); });
-
-  return div;
-}
-
-/* ────────────────────────────────────────────
-   RENDER VIEWS
-──────────────────────────────────────────── */
-function renderFeaturedGrid() {
-  const grid = qs('#featuredGrid');
-  if (!grid) return;
-  grid.innerHTML = '';
-  PROJECTS.slice(0, 3).forEach(p => grid.appendChild(buildCard(p, true)));
-}
-
-function renderPortfolioGrid(filter = 'All') {
-  const grid = qs('#portfolioGrid');
-  if (!grid) return;
-
-  const filtered = filter === 'All' ? PROJECTS : PROJECTS.filter(p => p.category === filter);
-  grid.innerHTML = '';
-  filtered.forEach((p, i) => {
-    const card = buildCard(p);
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(18px)';
-    grid.appendChild(card);
-    requestAnimationFrame(() => {
+    if (p === 100) {
+      clearInterval(int);
       setTimeout(() => {
-        card.style.transition = 'opacity .45s ease, transform .45s ease, box-shadow .5s, border-color .35s, transform .5s';
-        card.style.opacity = '1';
-        card.style.transform = '';
-      }, i * 70);
-    });
-  });
-}
-
-function renderProjectDetail(id) {
-  // Fix #6 — Reject null/non-string IDs before the lookup to prevent state corruption.
-  // A null id would leave the panel blank without resetting currentProjectId cleanly.
-  if (!id || typeof id !== 'string') return;
-  const project = PROJECTS.find(p => p.id === id);
-  if (!project) return;
-
-  qs('#projectCat').textContent = project.category;
-  qs('#projectTitle').textContent = project.title;
-  qs('#projectDesc').textContent = project.description;
-  qs('#projectClient').textContent = project.client;
-  qs('#projectFormat').textContent = project.duration;
-
-  const video = qs('#projectVideo');
-  video.src = project.videoUrl;
-  video.poster = project.thumbUrl;
-  video.load();
-
-  // Fix #2 — Build tool chips via DOM API. Tool names are written with textContent
-  // so a value like '<script>alert(1)</script>' is rendered as literal text, not executed.
-  const toolsList = qs('#toolsList');
-  toolsList.innerHTML = '';
-  project.tools.forEach(t => {
-    const chip = document.createElement('span');
-    chip.className = 'tool-chip';
-    const iconEl = document.createElement('span');
-    iconEl.innerHTML = toolIcon(); // Safe: toolIcon() is a static, hardcoded SVG string
-    const nameEl = document.createElement('span');
-    nameEl.textContent = t;        // textContent prevents HTML injection in tool names
-    chip.appendChild(iconEl);
-    chip.appendChild(nameEl);
-    toolsList.appendChild(chip);
-  });
-}
-
-/* ────────────────────────────────────────────
-   SPA NAVIGATION
-──────────────────────────────────────────── */
-function navigateTo(view, projectId = null) {
-  if (view === currentView && view !== 'project') return;
-
-  // Pause any playing video
-  const prevVideo = qs('#projectVideo');
-  if (prevVideo) prevVideo.pause();
-
-  currentView = view;
-  // Fix #6 — Only update currentProjectId when a valid, non-null string is provided.
-  // Prevents a crafted data-nav='project' element from nulling out the current project.
-  if (projectId !== null && typeof projectId === 'string') currentProjectId = projectId;
-  // Guard: if we somehow reach the project view with no loaded ID, fall back to work.
-  if (view === 'project' && !currentProjectId) { navigateTo('work'); return; }
-
-  // Show / hide views
-  qsa('.view').forEach(v => v.classList.remove('active'));
-  const targetView = qs(`#view${capitalise(view)}`);
-  if (targetView) {
-    targetView.classList.add('active');
-    targetView.style.animation = 'none';
-    requestAnimationFrame(() => {
-      targetView.style.animation = '';
-    });
-  }
-
-  // Update nav
-  updateNavActive(view);
-
-  // Render content
-  if (view === 'work') renderPortfolioGrid(activeFilter);
-  if (view === 'project') renderProjectDetail(currentProjectId);
-
-  // Close mobile menu
-  closeMobileMenu();
-
-  // Scroll to top
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  // Re-observe reveals
-  setTimeout(initReveal, 100);
-}
-
-function capitalise(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-function updateNavActive(view) {
-  qsa('.nav-link').forEach(l => {
-    l.classList.toggle('active', l.dataset.nav === view);
-  });
-}
-
-/* ────────────────────────────────────────────
-   BIND NAVIGATION BUTTONS
-──────────────────────────────────────────── */
-function bindNavButtons() {
-  document.addEventListener('click', e => {
-    const el = e.target.closest('[data-nav]');
-    if (!el) return;
-    e.preventDefault();
-    const dest = el.dataset.nav;
-    // Fix #4 — Validate destination against the allowlist before navigating.
-    // An injected element with data-nav='arbitrary-value' will be silently ignored.
-    if (dest && VALID_VIEWS.has(dest)) navigateTo(dest);
-  });
-}
-
-/* ────────────────────────────────────────────
-   SCROLL → NAVBAR STYLE
-──────────────────────────────────────────── */
-(function () {
-  const nav = qs('#navbar');
-  function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 60); }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-})();
-
-/* ────────────────────────────────────────────
-   MOBILE MENU
-──────────────────────────────────────────── */
-function closeMobileMenu() {
-  qs('#hamBtn')?.classList.remove('open');
-  qs('#mobOverlay')?.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-(function () {
-  const btn = qs('#hamBtn');
-  const overlay = qs('#mobOverlay');
-  if (!btn || !overlay) return;
-
-  btn.addEventListener('click', () => {
-    const isOpen = overlay.classList.contains('open');
-    if (isOpen) {
-      closeMobileMenu();
-    } else {
-      btn.classList.add('open');
-      overlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
+        if(loader) {
+          loader.style.opacity = '0';
+          loader.style.visibility = 'hidden';
+          setTimeout(() => loader.remove(), 600);
+        }
+      }, 300);
     }
-  });
-})();
+  }, 80); // Faster tick rate
+}
 
 /* ────────────────────────────────────────────
    THEME TOGGLE
 ──────────────────────────────────────────── */
-(function () {
-  const btn = qs('#themeToggle');
-  const root = document.documentElement;
+const themeToggle = qs('#theme-toggle');
+const htmlEl = document.documentElement;
+let isLight = localStorage.getItem('theme') === 'light';
 
-  // Fix #5 — Validate the stored theme against an allowlist before writing it to the
-  // DOM. A tampered localStorage value like '" onmouseover="evil()' is rejected,
-  // and the theme safely defaults to 'dark'.
-  const stored = localStorage.getItem('jm-theme');
-  const saved = VALID_THEMES.has(stored) ? stored : 'dark';
-  root.setAttribute('data-theme', saved);
+function setTheme(light) {
+  isLight = light;
+  if (light) {
+    htmlEl.setAttribute('data-theme', 'light');
+    localStorage.setItem('theme', 'light');
+  } else {
+    htmlEl.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'dark');
+  }
+}
+setTheme(isLight);
 
-  btn?.addEventListener('click', () => {
-    const current = root.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    localStorage.setItem('jm-theme', next);
-  });
-})();
-
-/* ────────────────────────────────────────────
-   FILTER PILLS (WORK VIEW)
-──────────────────────────────────────────── */
-(function () {
-  qs('#filterBar')?.addEventListener('click', e => {
-    const pill = e.target.closest('.filter-pill');
-    if (!pill) return;
-    qsa('.filter-pill').forEach(p => p.classList.remove('active'));
-    pill.classList.add('active');
-    activeFilter = pill.dataset.filter;
-    renderPortfolioGrid(activeFilter);
-  });
-})();
+themeToggle?.addEventListener('click', () => {
+  setTheme(!isLight);
+});
 
 /* ────────────────────────────────────────────
-   CUSTOM CURSOR
+   MAGNETIC BUTTONS (Zero Lag)
 ──────────────────────────────────────────── */
-(function () {
-  const dot  = qs('#cursor');
-  const ring = qs('#cursorFollower');
-  if (!dot || !ring) return;
-
-  let mx = 0, my = 0, rx = 0, ry = 0;
-
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = mx + 'px';
-    dot.style.top  = my + 'px';
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+if (!isTouchDevice) {
+  qsa('.magnetic').forEach(btn => {
+    let ticking = false;
+    btn.addEventListener('mousemove', e => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = `translate(0px, 0px)`;
+    });
   });
-
-  // Fix #7 — Gate the RAF loop on page visibility. The loop was running 60fps
-  // continuously even when the tab was in the background, wasting CPU and battery.
-  let pageVisible = !document.hidden;
-  document.addEventListener('visibilitychange', () => {
-    pageVisible = !document.hidden;
-  });
-
-  (function tick() {
-    if (pageVisible) {
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      ring.style.left = rx + 'px';
-      ring.style.top  = ry + 'px';
-    }
-    requestAnimationFrame(tick);
-  })();
-
-  const interactables = 'a, button, .nav-link, .filter-pill, .view-all-btn, .back-btn, .workflow-step, .contact-link, .theme-btn';
-  document.addEventListener('mouseover', e => {
-    if (e.target.closest(interactables)) {
-      dot.classList.add('big');
-      ring.classList.add('big');
-    }
-  });
-  document.addEventListener('mouseout', e => {
-    if (e.target.closest(interactables)) {
-      dot.classList.remove('big');
-      ring.classList.remove('big');
-    }
-  });
-})();
+}
 
 /* ────────────────────────────────────────────
-   HERO GLOW PARALLAX
+   BUILD CARDS (SKELETON & CINEMATIC)
 ──────────────────────────────────────────── */
-(function () {
-  const ga = qs('.hero-glow-a');
-  const gb = qs('.hero-glow-b');
-  if (!ga) return;
+function buildCard(proj, i) {
+  const c = document.createElement('div');
+  // Start with skeleton class for immediate load state
+  c.className = 'work-card skeleton reveal delay-' + (i % 3);
+  c.tabIndex = 0;
+  
+  const img = document.createElement('img');
+  img.className = 'wc-img skeleton-media';
+  img.alt = proj.title + ' – ' + proj.category;
+  img.loading = 'lazy';
+  
+  // Skeleton logic: remove skeleton once image loads
+  img.onload = () => {
+    c.classList.remove('skeleton');
+    img.classList.add('loaded');
+  };
+  // Start fetch
+  img.src = proj.thumbUrl;
 
-  document.addEventListener('mousemove', e => {
-    const x = (e.clientX / window.innerWidth - .5) * 30;
-    const y = (e.clientY / window.innerHeight - .5) * 20;
-    ga.style.transform = `translateX(calc(-50% + ${x}px)) translateY(${y}px)`;
-    if (gb) gb.style.transform = `translate(${-x * .45}px, ${-y * .45}px)`;
-  }, { passive: true });
-})();
+  const overlay = document.createElement('div');
+  overlay.className = 'wc-overlay';
+
+  const cat = document.createElement('div');
+  cat.className = 'wc-cat';
+  cat.appendChild(safeText(proj.category));
+
+  const t = document.createElement('div');
+  t.className = 'wc-title';
+  t.appendChild(safeText(proj.title));
+
+  overlay.appendChild(cat);
+  overlay.appendChild(t);
+
+  const play = document.createElement('div');
+  play.className = 'wc-play';
+  play.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256"><path d="M232.4,114.5l-136-88A15.9,15.9,0,0,0,72,40V216a15.9,15.9,0,0,0,24.4,13.5l136-88A15.9,15.9,0,0,0,232.4,114.5ZM88,202.5V53.5l115.1,74.5Z"></path></svg>`;
+
+  c.appendChild(img);
+  c.appendChild(overlay);
+  c.appendChild(play);
+
+  // Lightbox Trigger
+  const fullIdx = PROJECTS.findIndex(p => p.id === proj.id);
+  c.addEventListener('click', () => openLb(fullIdx));
+  c.addEventListener('keydown', e => { if (e.key === 'Enter') openLb(fullIdx); });
+
+  return c;
+}
+
+function renderGrids() {
+  const homeGrid = qs('#home-showcase');
+  if (homeGrid) {
+    homeGrid.innerHTML = '';
+    PROJECTS.slice(0, 3).forEach((p, i) => homeGrid.appendChild(buildCard(p, i)));
+  }
+  renderWorkGrid('All');
+}
+
+function renderWorkGrid(filter) {
+  const g = qs('#portfolio-grid');
+  if (!g) return;
+  g.innerHTML = '';
+  const filtered = filter === 'All' ? PROJECTS : PROJECTS.filter(p => p.category === filter);
+  
+  filtered.forEach((p, i) => {
+    g.appendChild(buildCard(p, i));
+  });
+  
+  setTimeout(initReveal, 50);
+}
 
 /* ────────────────────────────────────────────
-   SCROLL REVEAL
+   LIGHTBOX
 ──────────────────────────────────────────── */
+const lb = qs('#lightbox');
+const lbVid = qs('#lb-video');
+const lbVidWrap = qs('.lb-video-container');
+
+function openLb(idx) {
+  if (idx < 0 || idx >= PROJECTS.length) return;
+  currentLbIdx = idx;
+  const p = PROJECTS[idx];
+
+  qs('#lb-cat').textContent = p.category;
+  qs('#lb-title').textContent = p.title;
+  qs('#lb-desc').textContent = p.description;
+  qs('#lb-client').textContent = p.client;
+  qs('#lb-tools').textContent = p.tools;
+  qs('#lb-count').textContent = `${idx + 1} / ${PROJECTS.length}`;
+
+  if (lbVid) {
+    // Skeleton state for video
+    lbVid.classList.remove('loaded');
+    lbVidWrap?.classList.add('skeleton');
+    
+    lbVid.src = p.videoUrl;
+    lbVid.poster = p.thumbUrl;
+    lbVid.load();
+    lbVid.onloadeddata = () => {
+      lbVid.classList.add('loaded');
+      lbVidWrap?.classList.remove('skeleton');
+      lbVid.play().catch(() => {});
+    };
+  }
+
+  lb?.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLb() {
+  lb?.classList.remove('active');
+  document.body.style.overflow = '';
+  if (lbVid) {
+    lbVid.pause();
+    lbVid.src = '';
+  }
+}
+
+qs('#lb-close')?.addEventListener('click', closeLb);
+qs('#lb-backdrop')?.addEventListener('click', closeLb);
+qs('#lb-prev')?.addEventListener('click', () => openLb((currentLbIdx - 1 + PROJECTS.length) % PROJECTS.length));
+qs('#lb-next')?.addEventListener('click', () => openLb((currentLbIdx + 1) % PROJECTS.length));
+
+document.addEventListener('keydown', e => {
+  if (!lb?.classList.contains('active')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') qs('#lb-prev')?.click();
+  if (e.key === 'ArrowRight') qs('#lb-next')?.click();
+});
+
+/* ────────────────────────────────────────────
+   SPA NAV (Instant)
+──────────────────────────────────────────── */
+function navTo(view) {
+  if (view === currentView || !VALID_VIEWS.has(view)) return;
+  currentView = view;
+
+  qsa('.view').forEach(v => {
+    v.classList.remove('active');
+    qsa('.reveal', v).forEach(r => r.classList.remove('in'));
+  });
+  
+  const tView = qs(`#view-${view}`);
+  if (tView) tView.classList.add('active');
+
+  qsa('.nav-link, .mob-link').forEach(l => {
+    l.classList.toggle('active', l.dataset.nav === view);
+  });
+
+  if (view === 'work') renderWorkGrid(activeFilter);
+
+  closeMenu();
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  setTimeout(initReveal, 30);
+}
+
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-nav]');
+  if (!el) return;
+  e.preventDefault();
+  const dest = el.dataset.nav;
+  if (dest) navTo(dest);
+});
+
+/* ────────────────────────────────────────────
+   MOBILE MENU
+──────────────────────────────────────────── */
+const mMenu = qs('#mob-menu');
+qs('#menu-btn')?.addEventListener('click', () => {
+  mMenu.classList.add('active');
+  document.body.style.overflow = 'hidden';
+});
+qs('#mob-close')?.addEventListener('click', closeMenu);
+
+function closeMenu() {
+  mMenu?.classList.remove('active');
+  if (!lb?.classList.contains('active')) document.body.style.overflow = '';
+}
+
+/* ────────────────────────────────────────────
+   SCROLL / REVEAL (Hardware Accelerated)
+──────────────────────────────────────────── */
+const navbar = qs('#navbar');
+let lastScroll = 0;
+let ticking = false;
+
+window.addEventListener('scroll', () => {
+  lastScroll = window.scrollY;
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      navbar?.classList.toggle('scrolled', lastScroll > 50);
+      ticking = false;
+    });
+    ticking = true;
+  }
+}, { passive: true });
+
 function initReveal() {
-  const els = qsa('.reveal-up, .reveal-fade');
-  if (!els.length) return;
-
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
+  const els = qsa('.reveal:not(.in)');
+  const io = new IntersectionObserver(ents => {
+    ents.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('in');
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  els.forEach(el => { el.classList.remove('in'); io.observe(el); });
+  }, { threshold: 0.1 });
+  els.forEach(e => io.observe(e));
 }
 
 /* ────────────────────────────────────────────
-   FOOTER YEAR
+   FILTERS
 ──────────────────────────────────────────── */
-const yearEl = qs('#footerYear');
-if (yearEl) yearEl.textContent = new Date().getFullYear();
+qs('#filter-track')?.addEventListener('click', e => {
+  const p = e.target.closest('.filter-btn');
+  if (!p) return;
+  qsa('.filter-btn').forEach(el => el.classList.remove('active'));
+  p.classList.add('active');
+  activeFilter = p.dataset.filter;
+  renderWorkGrid(activeFilter);
+});
 
 /* ────────────────────────────────────────────
    INIT
 ──────────────────────────────────────────── */
-(function init() {
-  bindNavButtons();
-  renderFeaturedGrid();
-  renderPortfolioGrid();
-  initReveal();
-  navigateTo('home');
-})();
+document.addEventListener('DOMContentLoaded', () => {
+  runLoader();
+  renderGrids();
+  
+  // Also handle video poster skeleton on home page
+  const hVideo = qs('.video-mockup video');
+  if (hVideo) {
+    hVideo.onloadeddata = () => hVideo.classList.add('loaded');
+  }
+
+  setTimeout(initReveal, 250); 
+});
