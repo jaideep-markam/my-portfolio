@@ -1,32 +1,26 @@
 'use strict';
 
 /* ═══════════════════════════════════════════════════════
-   ULTRA-PREMIUM FAST JS
+   MASTERPIECE PORTFOLIO JS
 ═══════════════════════════════════════════════════════ */
 
-/* ────────────────────────────────────────────
-   SECURITY: FRAME-BUSTING (ANTI-CLICKJACKING)
-──────────────────────────────────────────── */
+/* ── SECURITY: FRAME-BUSTING ── */
 try {
   if (window.top !== window.self) {
     window.top.location = window.self.location;
   }
-} catch (e) { /* cross-origin frame, ignore */ }
+} catch (e) { /* cross-origin frame */ }
 
-/* ────────────────────────────────────────────
-   DATA
-──────────────────────────────────────────── */
+/* ── DATA ── */
 const PROJECTS = [
-  { id: 'p1', title: 'Ranveer Allahbadia', category: 'Talking Head', client: 'Creator / Podcast', description: 'Before & After Polish showing dynamic captions, color grading, and retention-focused cuts.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1778588738/Before_and_After_ranveer_alhabadia_jjxveb.mov', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1778588738/Before_and_After_ranveer_alhabadia_jjxveb.jpg', duration: 'Short Form' },
-  { id: 'p2', title: 'Scar Edit', category: 'Cinematic', client: 'Narrative Short', description: 'Focusing entirely on mood and color grading to create a highly cinematic and visceral experience.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/Scar_revised_lcybah.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/Scar_revised_lcybah.jpg', duration: 'Short Form' },
-  { id: 'p3', title: 'Tech Review', category: 'Motion', client: 'Tech Creator', description: 'Dynamic pacing and energetic transitions to keep tech reviews engaging and snappy.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/Technology_ikkj1h.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/Technology_ikkj1h.jpg', duration: 'Short Form' },
-  { id: 'p4', title: 'Ryna Presets', category: 'Explainer', client: 'Brand / Commercial', description: 'Clean typography and smooth animations demonstrating preset functionalities.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/Preset_Explainer_by_Ryna_k75xr2.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/Preset_Explainer_by_Ryna_k75xr2.jpg', duration: 'Short Form' },
-  { id: 'p5', title: 'Social Media B&A', category: 'Talking Head', client: 'Social Media Creator', description: 'A full Before & After transformation showcasing tight jump cuts and color grading.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/social_media_before_and_after_final_svwfho.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/social_media_before_and_after_final_svwfho.jpg', duration: 'Short Form' }
+  { id: 'p1', title: 'Talking Head 01', category: 'Talking Head', client: 'Content Creator', description: 'Dynamic captions, color grading, and retention-focused cuts.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1781975459/Talking_head_01_zjyryy.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975459/Talking_head_01_zjyryy.jpg', duration: 'Short Form' },
+  { id: 'p2', title: 'Ryan Talking Head', category: 'Talking Head', client: 'Podcast', description: 'Engaging podcast clip with optimized pacing, smooth zooms, and dynamic visuals.', tools: 'Premiere Pro', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1781975444/Ryan_talking_head_rkgte9.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975444/Ryan_talking_head_rkgte9.jpg', duration: 'Short Form' },
+  { id: 'p3', title: 'Scar New Podcast Clip', category: 'Podcast', client: 'Narrative Short', description: 'Focusing entirely on mood and color grading to create a highly cinematic and visceral experience.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1781975468/Scar_new_podcast_clip_gsygmq.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975468/Scar_new_podcast_clip_gsygmq.jpg', duration: 'Short Form' },
+  { id: 'p4', title: 'Education Podcast Clip', category: 'Podcast', client: 'EdTech Brand', description: 'Clean typography and smooth motion graphics to explain complex concepts.', tools: 'After Effects', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1781975464/Education_podcast_clip_jjur6i.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975464/Education_podcast_clip_jjur6i.jpg', duration: 'Short Form' },
+  { id: 'p5', title: 'Real Estate 01', category: 'Real Estate', client: 'Real Estate Agency', description: 'A premium property tour showcasing seamless transitions and high-end color grading.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1781975409/Real_estate_01_ynt3up.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975409/Real_estate_01_ynt3up.jpg', duration: 'Short Form' }
 ];
 
-/* ────────────────────────────────────────────
-   STATE & UTILS
-──────────────────────────────────────────── */
+/* ── STATE & UTILS ── */
 let currentView = 'home';
 let activeFilter = 'All';
 let currentLbIdx = 0;
@@ -37,9 +31,7 @@ function qs(s, c = document) { return c.querySelector(s); }
 function qsa(s, c = document) { return [...c.querySelectorAll(s)]; }
 function safeText(str) { return document.createTextNode(str); }
 
-/* ────────────────────────────────────────────
-   FAST LOADER
-──────────────────────────────────────────── */
+/* ── LOADER ── */
 const loader = qs('#loader');
 const lProg = qs('#loader-progress');
 
@@ -53,29 +45,26 @@ function runLoader() {
     if (p === 100) {
       clearInterval(int);
       setTimeout(() => {
-        if(loader) {
+        if (loader) {
           loader.style.opacity = '0';
           loader.style.visibility = 'hidden';
           setTimeout(() => loader.remove(), 600);
         }
       }, 300);
     }
-  }, 80); // Faster tick rate
+  }, 80);
 }
 
-/* ────────────────────────────────────────────
-   MOBILE HERO VIDEO AUTOPLAY FIX
-──────────────────────────────────────────── */
+/* ── HERO VIDEO AUTOPLAY ── */
 const heroVideo = qs('#hero-video');
 if (heroVideo) {
   heroVideo.muted = true;
   heroVideo.play().catch(() => {
-    // If browser strictly blocks autoplay, wait for first interaction
     window.addEventListener('touchstart', () => {
       heroVideo.muted = true;
       heroVideo.play().catch(() => {});
     }, { once: true });
-    
+
     window.addEventListener('scroll', () => {
       heroVideo.muted = true;
       heroVideo.play().catch(() => {});
@@ -83,9 +72,7 @@ if (heroVideo) {
   });
 }
 
-/* ────────────────────────────────────────────
-   THEME TOGGLE
-──────────────────────────────────────────── */
+/* ── THEME ── */
 const themeToggle = qs('#theme-toggle');
 const htmlEl = document.documentElement;
 let isLight = localStorage.getItem('theme') === 'light';
@@ -106,9 +93,7 @@ themeToggle?.addEventListener('click', () => {
   setTheme(!isLight);
 });
 
-/* ────────────────────────────────────────────
-   MAGNETIC BUTTONS (Zero Lag)
-──────────────────────────────────────────── */
+/* ── MAGNETIC BUTTONS ── */
 const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 if (!isTouchDevice) {
   qsa('.magnetic').forEach(btn => {
@@ -119,7 +104,7 @@ if (!isTouchDevice) {
           const rect = btn.getBoundingClientRect();
           const x = e.clientX - rect.left - rect.width / 2;
           const y = e.clientY - rect.top - rect.height / 2;
-          btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+          btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
           ticking = false;
         });
         ticking = true;
@@ -131,30 +116,28 @@ if (!isTouchDevice) {
   });
 }
 
-/* ────────────────────────────────────────────
-   BUILD CARDS (SKELETON & CINEMATIC)
-──────────────────────────────────────────── */
+/* ── BUILD CARDS ── */
 function buildCard(proj, i) {
   const c = document.createElement('div');
-  // Start with skeleton class for immediate load state
   c.className = 'work-card skeleton reveal delay-' + (i % 3);
   c.tabIndex = 0;
-  
+
   const img = document.createElement('img');
   img.className = 'wc-img skeleton-media';
-  img.alt = proj.title + ' – ' + proj.category;
+  img.alt = proj.title + ' — ' + proj.category;
   img.loading = 'lazy';
-  
-  // Skeleton logic: remove skeleton once image loads
+
   img.onload = () => {
     c.classList.remove('skeleton');
     img.classList.add('loaded');
   };
-  // Start fetch
   img.src = proj.thumbUrl;
 
   const overlay = document.createElement('div');
   overlay.className = 'wc-overlay';
+
+  const content = document.createElement('div');
+  content.className = 'wc-content';
 
   const cat = document.createElement('div');
   cat.className = 'wc-cat';
@@ -164,8 +147,24 @@ function buildCard(proj, i) {
   t.className = 'wc-title';
   t.appendChild(safeText(proj.title));
 
-  overlay.appendChild(cat);
-  overlay.appendChild(t);
+  const details = document.createElement('div');
+  details.className = 'wc-details';
+
+  const clientSpan = document.createElement('span');
+  clientSpan.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d="M230.9,212a120.7,120.7,0,0,0-67.1-54.2,72,72,0,1,0-71.6,0A120.7,120.7,0,0,0,25.1,212a8,8,0,0,0,13.8,8,104.1,104.1,0,0,1,178.2,0,8,8,0,1,0,13.8-8ZM72,96a56,56,0,1,1,56,56A56,56,0,0,1,72,96Z"></path></svg>`;
+  clientSpan.appendChild(safeText(' ' + proj.client));
+
+  const toolSpan = document.createElement('span');
+  toolSpan.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d="M226.8,69.2a8,8,0,0,0-6.3-3.2H199.4l-16.2-28a8.1,8.1,0,0,0-6.9-4H79.7a8.1,8.1,0,0,0-6.9,4L56.6,66H37.5a8,8,0,0,0-6.9,12l96.5,166.7a8,8,0,0,0,13.8,0L237.4,78A8,8,0,0,0,226.8,69.2Z"></path></svg>`;
+  toolSpan.appendChild(safeText(' ' + proj.tools));
+
+  details.appendChild(clientSpan);
+  details.appendChild(toolSpan);
+
+  content.appendChild(cat);
+  content.appendChild(t);
+  content.appendChild(details);
+  overlay.appendChild(content);
 
   const play = document.createElement('div');
   play.className = 'wc-play';
@@ -175,7 +174,6 @@ function buildCard(proj, i) {
   c.appendChild(overlay);
   c.appendChild(play);
 
-  // Lightbox Trigger
   const fullIdx = PROJECTS.findIndex(p => p.id === proj.id);
   c.addEventListener('click', () => openLb(fullIdx));
   c.addEventListener('keydown', e => { if (e.key === 'Enter') openLb(fullIdx); });
@@ -197,17 +195,15 @@ function renderWorkGrid(filter) {
   if (!g) return;
   g.innerHTML = '';
   const filtered = filter === 'All' ? PROJECTS : PROJECTS.filter(p => p.category === filter);
-  
+
   filtered.forEach((p, i) => {
     g.appendChild(buildCard(p, i));
   });
-  
+
   setTimeout(initReveal, 50);
 }
 
-/* ────────────────────────────────────────────
-   LIGHTBOX
-──────────────────────────────────────────── */
+/* ── LIGHTBOX ── */
 const lb = qs('#lightbox');
 const lbVid = qs('#lb-video');
 const lbVidWrap = qs('.lb-video-container');
@@ -225,10 +221,9 @@ function openLb(idx) {
   qs('#lb-count').textContent = `${idx + 1} / ${PROJECTS.length}`;
 
   if (lbVid) {
-    // Skeleton state for video
     lbVid.classList.remove('loaded');
     lbVidWrap?.classList.add('skeleton');
-    
+
     lbVid.src = p.videoUrl;
     lbVid.poster = p.thumbUrl;
     lbVid.load();
@@ -264,9 +259,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') qs('#lb-next')?.click();
 });
 
-/* ────────────────────────────────────────────
-   SPA NAV (Instant)
-──────────────────────────────────────────── */
+/* ── SPA NAV ── */
 function navTo(view) {
   if (!VALID_VIEWS.has(view)) return;
 
@@ -282,7 +275,7 @@ function navTo(view) {
     v.classList.remove('active');
     qsa('.reveal', v).forEach(r => r.classList.remove('in'));
   });
-  
+
   const tView = qs(`#view-${view}`);
   if (tView) tView.classList.add('active');
 
@@ -305,9 +298,7 @@ document.addEventListener('click', e => {
   if (dest) navTo(dest);
 });
 
-/* ────────────────────────────────────────────
-   MOBILE MENU
-──────────────────────────────────────────── */
+/* ── MOBILE MENU ── */
 const mMenu = qs('#mob-menu');
 qs('#menu-btn')?.addEventListener('click', () => {
   mMenu.classList.add('active');
@@ -320,9 +311,7 @@ function closeMenu() {
   if (!lb?.classList.contains('active')) document.body.style.overflow = '';
 }
 
-/* ────────────────────────────────────────────
-   SCROLL / REVEAL (Hardware Accelerated)
-──────────────────────────────────────────── */
+/* ── SCROLL / REVEAL ── */
 const navbar = qs('#navbar');
 let lastScroll = 0;
 let ticking = false;
@@ -351,9 +340,7 @@ function initReveal() {
   els.forEach(e => io.observe(e));
 }
 
-/* ────────────────────────────────────────────
-   FILTERS
-──────────────────────────────────────────── */
+/* ── FILTERS ── */
 qs('#filter-track')?.addEventListener('click', e => {
   const p = e.target.closest('.filter-btn');
   if (!p) return;
@@ -363,18 +350,16 @@ qs('#filter-track')?.addEventListener('click', e => {
   renderWorkGrid(activeFilter);
 });
 
-/* ────────────────────────────────────────────
-   INIT
-──────────────────────────────────────────── */
+/* ── INIT ── */
 document.addEventListener('DOMContentLoaded', () => {
   runLoader();
   renderGrids();
-  
+
   // Also handle video poster skeleton on home page
   const hVideo = qs('.video-mockup video');
   if (hVideo) {
     hVideo.onloadeddata = () => hVideo.classList.add('loaded');
   }
 
-  setTimeout(initReveal, 250); 
+  setTimeout(initReveal, 250);
 });
