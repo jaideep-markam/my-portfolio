@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Jaideep Markam — Cinematic Short-Form Video Editor.">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https://res.cloudinary.com data:; media-src https://res.cloudinary.com; connect-src 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https://res.cloudinary.com https://img.youtube.com data:; media-src https://res.cloudinary.com; connect-src 'self'; frame-src https://www.youtube.com;">
   
   <title>JAIDEEP MARKAM | Premium Editor</title>
 
@@ -185,6 +185,7 @@
         <button class="filter-btn" data-filter="Talking Head">Talking Head</button>
         <button class="filter-btn" data-filter="Podcast">Podcast</button>
         <button class="filter-btn" data-filter="Real Estate">Real Estate</button>
+        <button class="filter-btn" data-filter="AI Cinematic">AI Cinematic</button>
       </div>
     </section>
 
@@ -292,8 +293,9 @@
     <button class="lb-close" id="lb-close"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256"><path d="M205.7,194.3a8.1,8.1,0,0,1-11.4,11.4L128,139.3,61.7,205.7a8.1,8.1,0,0,1-11.4-11.4L116.7,128,50.3,61.7A8.1,8.1,0,0,1,61.7,50.3L128,116.7l66.3-66.4a8.1,8.1,0,0,1,11.4,11.4L139.3,128Z"></path></svg></button>
     
     <div class="lb-container">
-      <div class="lb-video-container skeleton">
+      <div class="lb-video-container skeleton" id="lb-video-container">
         <video id="lb-video" class="skeleton-media" controls controlsList="nodownload" oncontextmenu="return false;" playsinline></video>
+        <iframe id="lb-iframe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:none; width:100%; height:100%; position:absolute; top:0; left:0; border:none;"></iframe>
       </div>
       <div class="lb-sidebar glass-panel">
         <div class="lb-cat" id="lb-cat"></div>
