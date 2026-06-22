@@ -17,7 +17,11 @@ const PROJECTS = [
   { id: 'p2', title: 'Ryan Talking Head', category: 'Talking Head', client: 'Podcast', description: 'Engaging podcast clip with optimized pacing, smooth zooms, and dynamic visuals.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1781975444/Ryan_talking_head_rkgte9.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975444/Ryan_talking_head_rkgte9.jpg', duration: 'Short Form' },
   { id: 'p3', title: 'Scar New Podcast Clip', category: 'Podcast', client: 'Narrative Short', description: 'Focusing entirely on mood and color grading to create a highly cinematic and visceral experience.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1781975468/Scar_new_podcast_clip_gsygmq.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975468/Scar_new_podcast_clip_gsygmq.jpg', duration: 'Short Form' },
   { id: 'p4', title: 'Education Podcast Clip', category: 'Podcast', client: 'EdTech Brand', description: 'Clean typography and smooth motion graphics to explain complex concepts.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1781975464/Education_podcast_clip_jjur6i.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975464/Education_podcast_clip_jjur6i.jpg', duration: 'Short Form' },
-  { id: 'p5', title: 'Real Estate 01', category: 'Real Estate', client: 'Real Estate Agency', description: 'A premium property tour showcasing seamless transitions and high-end color grading.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1781975409/Real_estate_01_ynt3up.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975409/Real_estate_01_ynt3up.jpg', duration: 'Short Form' }
+  { id: 'p5', title: 'Real Estate 01', category: 'Real Estate', client: 'Real Estate Agency', description: 'A premium property tour showcasing seamless transitions and high-end color grading.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1781975409/Real_estate_01_ynt3up.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975409/Real_estate_01_ynt3up.jpg', duration: 'Short Form' },
+  { id: 'p6', title: 'AI Cinematic Story 01', category: 'AI Cinematic', client: 'AI Storytelling', description: 'Cinematic AI-driven short film blending generative visuals with powerful storytelling and motion.', tools: 'DaVinci Resolve', youtubeId: 'uudT2F2l-gU', thumbUrl: 'https://img.youtube.com/vi/uudT2F2l-gU/maxresdefault.jpg', duration: 'Short Form' },
+  { id: 'p7', title: 'AI Cinematic Story 02', category: 'AI Cinematic', client: 'AI Storytelling', description: 'A visually stunning AI-generated narrative with precise color control and dynamic pacing.', tools: 'DaVinci Resolve', youtubeId: 'T6zQ7lCraSk', thumbUrl: 'https://img.youtube.com/vi/T6zQ7lCraSk/maxresdefault.jpg', duration: 'Short Form' },
+  { id: 'p8', title: 'AI Cinematic Story 03', category: 'AI Cinematic', client: 'AI Storytelling', description: 'Emotionally charged AI visual story with immersive sound design and cinematic color grading.', tools: 'DaVinci Resolve', youtubeId: 'PPLybYzjh4c', thumbUrl: 'https://img.youtube.com/vi/PPLybYzjh4c/maxresdefault.jpg', duration: 'Short Form' },
+  { id: 'p9', title: 'AI Cinematic Story 04', category: 'AI Cinematic', client: 'AI Storytelling', description: 'High-impact AI cinematic edit with bold transitions, rich texture, and narrative depth.', tools: 'DaVinci Resolve', youtubeId: 'zp8lbroxpIM', thumbUrl: 'https://img.youtube.com/vi/zp8lbroxpIM/maxresdefault.jpg', duration: 'Short Form' }
 ];
 
 /* ── STATE & UTILS ── */
@@ -175,8 +179,21 @@ function buildCard(proj, i) {
   c.appendChild(play);
 
   const fullIdx = PROJECTS.findIndex(p => p.id === proj.id);
-  c.addEventListener('click', () => openLb(fullIdx));
-  c.addEventListener('keydown', e => { if (e.key === 'Enter') openLb(fullIdx); });
+
+  if (proj.youtubeId) {
+    // YouTube: open directly in new tab (embedding disabled on these videos)
+    const ytUrl = `https://youtube.com/shorts/${proj.youtubeId}`;
+    c.addEventListener('click', () => window.open(ytUrl, '_blank', 'noopener,noreferrer'));
+    c.addEventListener('keydown', e => { if (e.key === 'Enter') window.open(ytUrl, '_blank', 'noopener,noreferrer'); });
+    // Add a small YouTube badge to the card
+    const ytBadge = document.createElement('div');
+    ytBadge.className = 'wc-yt-badge';
+    ytBadge.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="#fff"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> Watch on YouTube`;
+    c.appendChild(ytBadge);
+  } else {
+    c.addEventListener('click', () => openLb(fullIdx));
+    c.addEventListener('keydown', e => { if (e.key === 'Enter') openLb(fullIdx); });
+  }
 
   return c;
 }
@@ -206,7 +223,8 @@ function renderWorkGrid(filter) {
 /* ── LIGHTBOX ── */
 const lb = qs('#lightbox');
 const lbVid = qs('#lb-video');
-const lbVidWrap = qs('.lb-video-container');
+const lbIframe = qs('#lb-iframe');
+const lbVidWrap = qs('#lb-video-container');
 
 function openLb(idx) {
   if (idx < 0 || idx >= PROJECTS.length) return;
@@ -220,18 +238,30 @@ function openLb(idx) {
   qs('#lb-tools').textContent = p.tools;
   qs('#lb-count').textContent = `${idx + 1} / ${PROJECTS.length}`;
 
-  if (lbVid) {
-    lbVid.classList.remove('loaded');
-    lbVidWrap?.classList.add('skeleton');
-
-    lbVid.src = p.videoUrl;
-    lbVid.poster = p.thumbUrl;
-    lbVid.load();
-    lbVid.onloadeddata = () => {
-      lbVid.classList.add('loaded');
-      lbVidWrap?.classList.remove('skeleton');
-      lbVid.play().catch(() => {});
-    };
+  if (p.youtubeId) {
+    // YouTube mode
+    if (lbVid) { lbVid.pause(); lbVid.src = ''; lbVid.style.display = 'none'; }
+    if (lbIframe) {
+      lbIframe.style.display = 'block';
+      lbIframe.src = `https://www.youtube.com/embed/${p.youtubeId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+    }
+    lbVidWrap?.classList.remove('skeleton');
+  } else {
+    // Native video mode
+    if (lbIframe) { lbIframe.src = ''; lbIframe.style.display = 'none'; }
+    if (lbVid) {
+      lbVid.style.display = 'block';
+      lbVid.classList.remove('loaded');
+      lbVidWrap?.classList.add('skeleton');
+      lbVid.src = p.videoUrl;
+      lbVid.poster = p.thumbUrl;
+      lbVid.load();
+      lbVid.onloadeddata = () => {
+        lbVid.classList.add('loaded');
+        lbVidWrap?.classList.remove('skeleton');
+        lbVid.play().catch(() => {});
+      };
+    }
   }
 
   lb?.classList.add('active');
@@ -241,10 +271,8 @@ function openLb(idx) {
 function closeLb() {
   lb?.classList.remove('active');
   document.body.style.overflow = '';
-  if (lbVid) {
-    lbVid.pause();
-    lbVid.src = '';
-  }
+  if (lbVid) { lbVid.pause(); lbVid.src = ''; lbVid.style.display = 'block'; }
+  if (lbIframe) { lbIframe.src = ''; lbIframe.style.display = 'none'; }
 }
 
 qs('#lb-close')?.addEventListener('click', closeLb);
