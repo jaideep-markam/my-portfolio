@@ -340,6 +340,28 @@ html[data-theme="light"] .theme-toggle .sun-icon { transform: translateY(0); opa
   transform: translate(-50%, -50%) scale(1);
 }
 
+/* YouTube badge — shown on AI Cinematic cards */
+.wc-yt-badge {
+  position: absolute; bottom: 16px; left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px;
+  background: rgba(255, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-family: var(--f-head);
+  letter-spacing: 0.5px;
+  color: #fff;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.35s var(--ease);
+  pointer-events: none;
+}
+.wc-yt-badge svg { font-size: 0.9rem; flex-shrink: 0; }
+.work-card:hover .wc-yt-badge { opacity: 1; transform: translateX(-50%) translateY(0); }
+
 /* Mobile grid */
 @media(max-width: 600px) {
   .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
