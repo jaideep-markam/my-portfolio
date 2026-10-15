@@ -1,7 +1,8 @@
 'use strict';
 
 /* ═══════════════════════════════════════════════════════
-   MASTERPIECE PORTFOLIO JS
+   JAIDEEP MARKAM — PREMIUM PORTFOLIO INTERACTION ENGINE
+   Awwwards-Caliber Video Editor & Motion Design Portfolio
 ═══════════════════════════════════════════════════════ */
 
 /* ── SECURITY: FRAME-BUSTING ── */
@@ -11,145 +12,286 @@ try {
   }
 } catch (e) { /* cross-origin frame */ }
 
-/* ── DATA ── */
+/* ── DATA: CURATED CLIENT PROJECTS ── */
 const PROJECTS = [
-  { id: 'p1', title: 'Talking Head 01', category: 'Talking Head', client: 'Content Creator', description: 'Dynamic captions, color grading, and retention-focused cuts.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1781975459/Talking_head_01_zjyryy.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975459/Talking_head_01_zjyryy.jpg', duration: 'Short Form' },
-  { id: 'p2', title: 'Ryan Talking Head', category: 'Talking Head', client: 'Podcast', description: 'Engaging podcast clip with optimized pacing, smooth zooms, and dynamic visuals.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1789962198/Ryan_PP01_fdkl2j.mov', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975444/Ryan_talking_head_rkgte9.jpg', duration: 'Short Form' },
-  { id: 'p3', title: 'Scar New Podcast Clip', category: 'Podcast', client: 'Narrative Short', description: 'Focusing entirely on mood and color grading to create a highly cinematic and visceral experience.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1781975468/Scar_new_podcast_clip_gsygmq.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975468/Scar_new_podcast_clip_gsygmq.jpg', duration: 'Short Form' },
-  { id: 'p4', title: 'Education Podcast Clip', category: 'Podcast', client: 'EdTech Brand', description: 'Clean typography and smooth motion graphics to explain complex concepts.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1781975464/Education_podcast_clip_jjur6i.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975464/Education_podcast_clip_jjur6i.jpg', duration: 'Short Form' },
-  { id: 'p5', title: 'Real Estate 01', category: 'Real Estate', client: 'Real Estate Agency', description: 'A premium property tour showcasing seamless transitions and high-end color grading.', tools: 'DaVinci Resolve', videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1781975409/Real_estate_01_ynt3up.mp4', thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975409/Real_estate_01_ynt3up.jpg', duration: 'Short Form' },
-  { id: 'p6', title: 'AI Cinematic Story 01', category: 'AI Cinematic', client: 'AI Storytelling', description: 'Cinematic AI-driven short film blending generative visuals with powerful storytelling and motion.', tools: 'DaVinci Resolve', youtubeId: 'uudT2F2l-gU', thumbUrl: 'https://img.youtube.com/vi/uudT2F2l-gU/maxresdefault.jpg', duration: 'Short Form' },
-  { id: 'p7', title: 'AI Cinematic Story 02', category: 'AI Cinematic', client: 'AI Storytelling', description: 'A visually stunning AI-generated narrative with precise color control and dynamic pacing.', tools: 'DaVinci Resolve', youtubeId: 'T6zQ7lCraSk', thumbUrl: 'https://img.youtube.com/vi/T6zQ7lCraSk/maxresdefault.jpg', duration: 'Short Form' },
-  { id: 'p8', title: 'AI Cinematic Story 03', category: 'AI Cinematic', client: 'AI Storytelling', description: 'Emotionally charged AI visual story with immersive sound design and cinematic color grading.', tools: 'DaVinci Resolve', youtubeId: 'PPLybYzjh4c', thumbUrl: 'https://img.youtube.com/vi/PPLybYzjh4c/maxresdefault.jpg', duration: 'Short Form' },
-  { id: 'p9', title: 'AI Cinematic Story 04', category: 'AI Cinematic', client: 'AI Storytelling', description: 'High-impact AI cinematic edit with bold transitions, rich texture, and narrative depth.', tools: 'DaVinci Resolve', youtubeId: 'zp8lbroxpIM', thumbUrl: 'https://img.youtube.com/vi/zp8lbroxpIM/maxresdefault.jpg', duration: 'Short Form' }
+  { 
+    id: 'p1', 
+    title: 'Ryan Herric — Before & After Cut', 
+    category: 'Talking Head', 
+    client: 'Ryan Herric / Creator', 
+    description: 'High-impact dialogue edit featuring hook-first pacing, dynamic animated captions, punch-in framing, and DaVinci Studio color grading.', 
+    tools: 'DaVinci Resolve Studio', 
+    videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1792056551/1._Ryan_Herric_B_A_m0iv9b.mov', 
+    thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1792056551/1._Ryan_Herric_B_A_m0iv9b.jpg', 
+    duration: 'Short Form' 
+  },
+  { 
+    id: 'p2', 
+    title: 'Scar — Podcast Dialogue Cut', 
+    category: 'Podcast', 
+    client: 'Narrative Storytelling Podcast', 
+    description: 'Engaging podcast cutdown with atmospheric audio ducking, tight conversational cadence, kinetic subtitle emphasis, and rich filmic contrast.', 
+    tools: 'DaVinci Resolve Studio', 
+    videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1792056607/2._Scar_B_A_idxrkn.mov', 
+    thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1792056607/2._Scar_B_A_idxrkn.jpg', 
+    duration: 'Short Form' 
+  },
+  { 
+    id: 'p3', 
+    title: 'Talking Head 01', 
+    category: 'Talking Head', 
+    client: 'Finance & Growth Creator', 
+    description: 'Hook-first pacing, dynamic animated typography, color grading, and retention-focused zoom cuts engineered to maximize 30-second completion rates.', 
+    tools: 'DaVinci Resolve Studio', 
+    videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1781975459/Talking_head_01_zjyryy.mp4', 
+    thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975459/Talking_head_01_zjyryy.jpg', 
+    duration: 'Short Form' 
+  },
+  { 
+    id: 'p4', 
+    title: 'Real Estate Luxury Showcase', 
+    category: 'Real Estate', 
+    client: 'Luxury Architectural Group', 
+    description: 'High-end architectural property walkthrough showcasing seamless whip transitions, dynamic speed ramping, and warm golden-hour color correction.', 
+    tools: 'DaVinci Resolve Studio', 
+    videoUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/v1781975409/Real_estate_01_ynt3up.mp4', 
+    thumbUrl: 'https://res.cloudinary.com/dlupqyzif/video/upload/w_600,h_1066,c_fill,so_2,q_auto/v1781975409/Real_estate_01_ynt3up.jpg', 
+    duration: 'Short Form' 
+  },
+  { 
+    id: 'p6', 
+    title: 'AI Cinematic Story 01', 
+    category: 'AI Cinematic', 
+    client: 'Generative Film Studio', 
+    description: 'Groundbreaking AI-generated sci-fi narrative blending generative visual synthesis with traditional cinematic camera movement and sound design.', 
+    tools: 'DaVinci Resolve + Midjourney', 
+    youtubeId: 'uudT2F2l-gU', 
+    thumbUrl: 'https://img.youtube.com/vi/uudT2F2l-gU/maxresdefault.jpg', 
+    duration: 'Short Form',
+    hidden: true
+  },
+  { 
+    id: 'p7', 
+    title: 'AI Cinematic Story 02', 
+    category: 'AI Cinematic', 
+    client: 'Sci-Fi Creative Producer', 
+    description: 'Dark fantasy visual sequence with customized film grain, chromatic aberration, and atmospheric Foley audio designed for repeat loops.', 
+    tools: 'DaVinci Resolve + AI Synthesis', 
+    youtubeId: 'T6zQ7lCraSk', 
+    thumbUrl: 'https://img.youtube.com/vi/T6zQ7lCraSk/maxresdefault.jpg', 
+    duration: 'Short Form',
+    hidden: true
+  },
+  { 
+    id: 'p8', 
+    title: 'AI Cinematic Story 03', 
+    category: 'AI Cinematic', 
+    client: 'AI Storytelling Lab', 
+    description: 'Emotional narrative arc built with generative character animation, deep cinematic depth-of-field, and orchestral soundtrack alignment.', 
+    tools: 'DaVinci Resolve + Runway', 
+    youtubeId: 'PPLybYzjh4c', 
+    thumbUrl: 'https://img.youtube.com/vi/PPLybYzjh4c/maxresdefault.jpg', 
+    duration: 'Short Form',
+    hidden: true
+  },
+  { 
+    id: 'p9', 
+    title: 'AI Cinematic Story 04', 
+    category: 'AI Cinematic', 
+    client: 'Digital Worldbuilders', 
+    description: 'High-impact futuristic concept reel with aggressive optical transitions, sound synthesis, and rich color contrast.', 
+    tools: 'DaVinci Resolve Studio', 
+    youtubeId: 'zp8lbroxpIM', 
+    thumbUrl: 'https://img.youtube.com/vi/zp8lbroxpIM/maxresdefault.jpg', 
+    duration: 'Short Form',
+    hidden: true
+  }
 ];
 
-/* ── STATE & UTILS ── */
-let currentView = 'home';
-let activeFilter = 'All';
-let currentLbIdx = 0;
+// Active visible projects (All native video files: Talking Head, Podcast, Real Estate — hiding external YouTube links)
+const VISIBLE_PROJECTS = PROJECTS.filter(p => !p.hidden);
 
-const VALID_VIEWS = new Set(['home', 'work', 'process', 'contact']);
-
+/* ── DOM UTILITIES ── */
 function qs(s, c = document) { return c.querySelector(s); }
 function qsa(s, c = document) { return [...c.querySelectorAll(s)]; }
 function safeText(str) { return document.createTextNode(str); }
 
-/* ── LOADER ── */
-const loader = qs('#loader');
-const lProg = qs('#loader-progress');
+/* ── STATE ── */
+let currentLbIdx = 0;
+let activeFilter = 'All';
 
-function runLoader() {
-  let p = 0;
-  const int = setInterval(() => {
-    p += Math.floor(Math.random() * 25) + 15;
-    if (p > 100) p = 100;
-    if (lProg) lProg.style.width = `${p}%`;
+/* ── 1. PRELOADER ── */
+function initLoader() {
+  const loader = qs('#loader');
+  const lProg = qs('#loader-progress');
+  if (!loader || !lProg) return;
 
-    if (p === 100) {
-      clearInterval(int);
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += Math.floor(Math.random() * 20) + 18;
+    if (progress > 100) progress = 100;
+    lProg.style.width = `${progress}%`;
+
+    if (progress === 100) {
+      clearInterval(interval);
       setTimeout(() => {
-        if (loader) {
-          loader.style.opacity = '0';
-          loader.style.visibility = 'hidden';
-          setTimeout(() => loader.remove(), 600);
-        }
-      }, 300);
+        loader.style.opacity = '0';
+        loader.style.visibility = 'hidden';
+        setTimeout(() => loader.remove(), 500);
+      }, 250);
     }
-  }, 80);
+  }, 60);
 }
 
-/* ── HERO VIDEO AUTOPLAY ── */
-const heroVideo = qs('#hero-video');
-if (heroVideo) {
-  heroVideo.muted = true;
-  heroVideo.play().catch(() => {
-    window.addEventListener('touchstart', () => {
-      heroVideo.muted = true;
-      heroVideo.play().catch(() => {});
-    }, { once: true });
+/* ── 2. THEME CONTROLLER ── */
+function initTheme() {
+  const themeToggle = qs('#theme-toggle');
+  const htmlEl = document.documentElement;
+  let isLight = localStorage.getItem('theme') === 'light';
 
-    window.addEventListener('scroll', () => {
-      heroVideo.muted = true;
-      heroVideo.play().catch(() => {});
-    }, { once: true });
+  function applyTheme(light) {
+    isLight = light;
+    if (light) {
+      htmlEl.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+    } else {
+      htmlEl.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+
+  applyTheme(isLight);
+
+  themeToggle?.addEventListener('click', () => {
+    applyTheme(!isLight);
   });
 }
 
-/* ── THEME ── */
-const themeToggle = qs('#theme-toggle');
-const htmlEl = document.documentElement;
-let isLight = localStorage.getItem('theme') === 'light';
+/* ── 3. HERO VIDEO & TIMECODE HUD ── */
+function initHeroVideo() {
+  const heroVideo = qs('#hero-video');
+  const timecodeEl = qs('#hero-timecode');
 
-function setTheme(light) {
-  isLight = light;
-  if (light) {
-    htmlEl.setAttribute('data-theme', 'light');
-    localStorage.setItem('theme', 'light');
-  } else {
-    htmlEl.removeAttribute('data-theme');
-    localStorage.setItem('theme', 'dark');
+  if (heroVideo) {
+    heroVideo.muted = true;
+    heroVideo.play().catch(() => {
+      window.addEventListener('touchstart', () => {
+        heroVideo.muted = true;
+        heroVideo.play().catch(() => {});
+      }, { once: true });
+    });
+
+    heroVideo.addEventListener('timeupdate', () => {
+      if (!timecodeEl) return;
+      const t = heroVideo.currentTime || 0;
+      const mins = String(Math.floor(t / 60)).padStart(2, '0');
+      const secs = String(Math.floor(t % 60)).padStart(2, '0');
+      const frames = String(Math.floor((t % 1) * 24)).padStart(2, '0');
+      timecodeEl.textContent = `00:${mins}:${secs}:${frames}`;
+    });
   }
 }
-setTheme(isLight);
 
-themeToggle?.addEventListener('click', () => {
-  setTheme(!isLight);
-});
+/* ── 4. INTERACTIVE BEFORE / AFTER SLIDER ── */
+function initBeforeAfterSlider() {
+  const slider = qs('#comparison-slider');
+  const afterLayer = qs('#comp-after-layer');
+  const handle = qs('#comp-handle');
 
-/* ── MAGNETIC BUTTONS ── */
-const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-if (!isTouchDevice) {
-  qsa('.magnetic').forEach(btn => {
-    let ticking = false;
-    btn.addEventListener('mousemove', e => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const rect = btn.getBoundingClientRect();
-          const x = e.clientX - rect.left - rect.width / 2;
-          const y = e.clientY - rect.top - rect.height / 2;
-          btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = `translate(0px, 0px)`;
-    });
+  if (!slider || !afterLayer || !handle) return;
+
+  let isDragging = false;
+
+  function updatePosition(clientX) {
+    const rect = slider.getBoundingClientRect();
+    let x = clientX - rect.left;
+    let percent = (x / rect.width) * 100;
+
+    // Clamp between 5% and 95%
+    if (percent < 5) percent = 5;
+    if (percent > 95) percent = 95;
+
+    afterLayer.style.width = `${percent}%`;
+    handle.style.left = `${percent}%`;
+    handle.setAttribute('aria-valuenow', Math.round(percent));
+  }
+
+  // Mouse Events
+  slider.addEventListener('mousedown', e => {
+    isDragging = true;
+    updatePosition(e.clientX);
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    updatePosition(e.clientX);
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+
+  // Touch Events for Mobile
+  slider.addEventListener('touchstart', e => {
+    isDragging = true;
+    if (e.touches[0]) updatePosition(e.touches[0].clientX);
+  }, { passive: true });
+
+  window.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    if (e.touches[0]) updatePosition(e.touches[0].clientX);
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => {
+    isDragging = false;
+  });
+
+  // Keyboard accessibility
+  handle.addEventListener('keydown', e => {
+    const current = parseFloat(handle.style.left) || 50;
+    if (e.key === 'ArrowLeft') {
+      const next = Math.max(5, current - 5);
+      afterLayer.style.width = `${next}%`;
+      handle.style.left = `${next}%`;
+    } else if (e.key === 'ArrowRight') {
+      const next = Math.min(95, current + 5);
+      afterLayer.style.width = `${next}%`;
+      handle.style.left = `${next}%`;
+    }
   });
 }
 
-/* ── BUILD CARDS ── */
-function buildCard(proj, i) {
-  const c = document.createElement('div');
-  c.className = 'work-card skeleton reveal delay-' + (i % 3);
-  c.tabIndex = 0;
+/* ── 5. PORTFOLIO CARDS & RENDERING ── */
+function buildCard(proj, index) {
+  const card = document.createElement('div');
+  card.className = 'work-card skeleton reveal delay-' + (index % 3);
+  card.tabIndex = 0;
+  card.setAttribute('role', 'button');
+  card.setAttribute('aria-label', `Play ${proj.title} edit`);
 
+  // Thumbnail Image
   const img = document.createElement('img');
   img.className = 'wc-img skeleton-media';
-  img.alt = proj.title + ' — ' + proj.category;
+  img.alt = `${proj.title} — ${proj.category}`;
   img.loading = 'lazy';
-
-  img.onload = () => {
-    c.classList.remove('skeleton');
-    img.classList.add('loaded');
-  };
   img.src = proj.thumbUrl;
 
+  img.onload = () => {
+    card.classList.remove('skeleton');
+    img.classList.add('loaded');
+  };
+
+  // Overlay & Content
   const overlay = document.createElement('div');
   overlay.className = 'wc-overlay';
-
-  const content = document.createElement('div');
-  content.className = 'wc-content';
 
   const cat = document.createElement('div');
   cat.className = 'wc-cat';
   cat.appendChild(safeText(proj.category));
 
-  const t = document.createElement('div');
-  t.className = 'wc-title';
-  t.appendChild(safeText(proj.title));
+  const title = document.createElement('h3');
+  title.className = 'wc-title';
+  title.appendChild(safeText(proj.title));
 
   const details = document.createElement('div');
   details.className = 'wc-details';
@@ -159,87 +301,110 @@ function buildCard(proj, i) {
   clientSpan.appendChild(safeText(' ' + proj.client));
 
   const toolSpan = document.createElement('span');
-  toolSpan.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d="M226.8,69.2a8,8,0,0,0-6.3-3.2H199.4l-16.2-28a8.1,8.1,0,0,0-6.9-4H79.7a8.1,8.1,0,0,0-6.9,4L56.6,66H37.5a8,8,0,0,0-6.9,12l96.5,166.7a8,8,0,0,0,13.8,0L237.4,78A8,8,0,0,0,226.8,69.2Z"></path></svg>`;
+  toolSpan.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d="M226.8,69.2a8,8,0,0,0-6.3-3.2H199.4l-16.2-28a8.1,8.1,0,0,0-6.9-4H79.7a8.1,8.1,0,0,0-6.9,4L56.6,66H37.5a8,8,0,0,0-6.9,12l96.5,166.7a8,8,0,0,0,13.8,0L237.4,78A8,8,0,0,0,226.8,69.2ZM128,216.7,48.1,78.5,86.6,50h82.8l38.5,28.5Z"></path></svg>`;
   toolSpan.appendChild(safeText(' ' + proj.tools));
 
   details.appendChild(clientSpan);
   details.appendChild(toolSpan);
 
-  content.appendChild(cat);
-  content.appendChild(t);
-  content.appendChild(details);
-  overlay.appendChild(content);
+  overlay.appendChild(cat);
+  overlay.appendChild(title);
+  overlay.appendChild(details);
 
+  // Play Button
   const play = document.createElement('div');
   play.className = 'wc-play';
   play.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256"><path d="M232.4,114.5l-136-88A15.9,15.9,0,0,0,72,40V216a15.9,15.9,0,0,0,24.4,13.5l136-88A15.9,15.9,0,0,0,232.4,114.5ZM88,202.5V53.5l115.1,74.5Z"></path></svg>`;
 
-  c.appendChild(img);
-  c.appendChild(overlay);
-  c.appendChild(play);
+  card.appendChild(img);
+  card.appendChild(overlay);
+  card.appendChild(play);
 
-  const fullIdx = PROJECTS.findIndex(p => p.id === proj.id);
-
+  // YouTube Badge for AI Storytelling
   if (proj.youtubeId) {
-    // YouTube: open directly in new tab (embedding disabled on these videos)
-    const ytUrl = `https://youtube.com/shorts/${proj.youtubeId}`;
-    c.addEventListener('click', () => window.open(ytUrl, '_blank', 'noopener,noreferrer'));
-    c.addEventListener('keydown', e => { if (e.key === 'Enter') window.open(ytUrl, '_blank', 'noopener,noreferrer'); });
-    // Add a small YouTube badge to the card
     const ytBadge = document.createElement('div');
     ytBadge.className = 'wc-yt-badge';
-    ytBadge.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="#fff"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> Watch on YouTube`;
-    c.appendChild(ytBadge);
-  } else {
-    c.addEventListener('click', () => openLb(fullIdx));
-    c.addEventListener('keydown', e => { if (e.key === 'Enter') openLb(fullIdx); });
+    ytBadge.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d="M234.3,74.5A24,24,0,0,0,217.5,57.7C196.9,52,128,52,128,52s-68.9,0-89.5,5.7A24,24,0,0,0,21.7,74.5C16,95.1,16,128,16,128s0,32.9,5.7,53.5a24,24,0,0,0,16.8,16.8C59.1,204,128,204,128,204s68.9,0,89.5-5.7a24,24,0,0,0,16.8-16.8C240,160.9,240,128,240,128S240,95.1,234.3,74.5ZM104,160V96l56,32Z"></path></svg> YouTube Shorts`;
+    card.appendChild(ytBadge);
   }
 
-  return c;
-}
-
-function renderGrids() {
-  const homeGrid = qs('#home-showcase');
-  if (homeGrid) {
-    homeGrid.innerHTML = '';
-    PROJECTS.slice(0, 3).forEach((p, i) => homeGrid.appendChild(buildCard(p, i)));
-  }
-  renderWorkGrid('All');
-}
-
-function renderWorkGrid(filter) {
-  const g = qs('#portfolio-grid');
-  if (!g) return;
-  g.innerHTML = '';
-  const filtered = filter === 'All' ? PROJECTS : PROJECTS.filter(p => p.category === filter);
-
-  filtered.forEach((p, i) => {
-    g.appendChild(buildCard(p, i));
+  // Click & Keyboard Actions
+  const fullIdx = VISIBLE_PROJECTS.findIndex(p => p.id === proj.id);
+  card.addEventListener('click', () => openLb(fullIdx));
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openLb(fullIdx);
+    }
   });
 
-  setTimeout(initReveal, 50);
+  return card;
 }
 
-/* ── LIGHTBOX ── */
+function renderPortfolioGrid(filter = 'All') {
+  const grid = qs('#portfolio-grid');
+  if (!grid) return;
+
+  grid.innerHTML = '';
+  const filtered = filter === 'All' ? VISIBLE_PROJECTS : VISIBLE_PROJECTS.filter(p => p.category === filter);
+
+  filtered.forEach((p, i) => {
+    grid.appendChild(buildCard(p, i));
+  });
+
+  setTimeout(initReveal, 40);
+}
+
+function initFilters() {
+  const track = qs('#filter-track');
+  if (!track) return;
+
+  const allBtn = qs('.filter-btn[data-filter="All"]', track);
+  if (allBtn) {
+    allBtn.textContent = `All Works (${VISIBLE_PROJECTS.length})`;
+  }
+
+  track.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+
+    qsa('.filter-btn', track).forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    activeFilter = btn.dataset.filter || 'All';
+    renderPortfolioGrid(activeFilter);
+  });
+}
+
+/* ── 6. CINEMATIC LIGHTBOX MODAL ── */
 const lb = qs('#lightbox');
 const lbVid = qs('#lb-video');
 const lbIframe = qs('#lb-iframe');
 const lbVidWrap = qs('#lb-video-container');
 
 function openLb(idx) {
-  if (idx < 0 || idx >= PROJECTS.length) return;
+  if (idx < 0 || idx >= VISIBLE_PROJECTS.length) return;
   currentLbIdx = idx;
-  const p = PROJECTS[idx];
+  const p = VISIBLE_PROJECTS[idx];
 
-  qs('#lb-cat').textContent = p.category;
-  qs('#lb-title').textContent = p.title;
-  qs('#lb-desc').textContent = p.description;
-  qs('#lb-client').textContent = p.client;
-  qs('#lb-tools').textContent = p.tools;
-  qs('#lb-count').textContent = `${idx + 1} / ${PROJECTS.length}`;
+  const catEl = qs('#lb-cat');
+  const titleEl = qs('#lb-title');
+  const descEl = qs('#lb-desc');
+  const clientEl = qs('#lb-client');
+  const toolsEl = qs('#lb-tools');
+  const formatEl = qs('#lb-format');
+  const countEl = qs('#lb-count');
+
+  if (catEl) catEl.textContent = p.category;
+  if (titleEl) titleEl.textContent = p.title;
+  if (descEl) descEl.textContent = p.description;
+  if (clientEl) clientEl.textContent = p.client;
+  if (toolsEl) toolsEl.textContent = p.tools;
+  if (formatEl) formatEl.textContent = p.duration;
+  if (countEl) countEl.textContent = `${idx + 1} / ${VISIBLE_PROJECTS.length}`;
 
   if (p.youtubeId) {
-    // YouTube mode
+    // YouTube Embed
     if (lbVid) { lbVid.pause(); lbVid.src = ''; lbVid.style.display = 'none'; }
     if (lbIframe) {
       lbIframe.style.display = 'block';
@@ -247,7 +412,7 @@ function openLb(idx) {
     }
     lbVidWrap?.classList.remove('skeleton');
   } else {
-    // Native video mode
+    // Cloudinary MP4 Player
     if (lbIframe) { lbIframe.src = ''; lbIframe.style.display = 'none'; }
     if (lbVid) {
       lbVid.style.display = 'block';
@@ -256,20 +421,24 @@ function openLb(idx) {
       lbVid.src = p.videoUrl;
       lbVid.poster = p.thumbUrl;
       lbVid.load();
-      lbVid.onloadeddata = () => {
+      const onReady = () => {
         lbVid.classList.add('loaded');
         lbVidWrap?.classList.remove('skeleton');
         lbVid.play().catch(() => {});
       };
+      lbVid.onloadeddata = onReady;
+      lbVid.oncanplay = onReady;
     }
   }
 
   lb?.classList.add('active');
+  lb?.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
 }
 
 function closeLb() {
   lb?.classList.remove('active');
+  lb?.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
   if (lbVid) { lbVid.pause(); lbVid.src = ''; lbVid.style.display = 'block'; }
   if (lbIframe) { lbIframe.src = ''; lbIframe.style.display = 'none'; }
@@ -277,8 +446,8 @@ function closeLb() {
 
 qs('#lb-close')?.addEventListener('click', closeLb);
 qs('#lb-backdrop')?.addEventListener('click', closeLb);
-qs('#lb-prev')?.addEventListener('click', () => openLb((currentLbIdx - 1 + PROJECTS.length) % PROJECTS.length));
-qs('#lb-next')?.addEventListener('click', () => openLb((currentLbIdx + 1) % PROJECTS.length));
+qs('#lb-prev')?.addEventListener('click', () => openLb((currentLbIdx - 1 + VISIBLE_PROJECTS.length) % VISIBLE_PROJECTS.length));
+qs('#lb-next')?.addEventListener('click', () => openLb((currentLbIdx + 1) % VISIBLE_PROJECTS.length));
 
 document.addEventListener('keydown', e => {
   if (!lb?.classList.contains('active')) return;
@@ -287,107 +456,170 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') qs('#lb-next')?.click();
 });
 
-/* ── SPA NAV ── */
-function navTo(view) {
-  if (!VALID_VIEWS.has(view)) return;
+/* ── 7. NAVBAR SCROLLSPY & STICKY STATE ── */
+function initScrollSpy() {
+  const navbar = qs('#navbar');
+  const navLinks = qsa('.nav-link');
+  const sections = qsa('section[id]');
 
-  if (view === currentView) {
-    closeMenu();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    return;
-  }
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
 
-  currentView = view;
+    // Sticky shadow & blur
+    navbar?.classList.toggle('scrolled', scrollY > 50);
 
-  qsa('.view').forEach(v => {
-    v.classList.remove('active');
-    qsa('.reveal', v).forEach(r => r.classList.remove('in'));
-  });
-
-  const tView = qs(`#view-${view}`);
-  if (tView) tView.classList.add('active');
-
-  qsa('.nav-link, .mob-link').forEach(l => {
-    l.classList.toggle('active', l.dataset.nav === view);
-  });
-
-  if (view === 'work') renderWorkGrid(activeFilter);
-
-  closeMenu();
-  window.scrollTo({ top: 0, behavior: 'instant' });
-  setTimeout(initReveal, 30);
-}
-
-document.addEventListener('click', e => {
-  const el = e.target.closest('[data-nav]');
-  if (!el) return;
-  e.preventDefault();
-  const dest = el.dataset.nav;
-  if (dest) navTo(dest);
-});
-
-/* ── MOBILE MENU ── */
-const mMenu = qs('#mob-menu');
-qs('#menu-btn')?.addEventListener('click', () => {
-  mMenu.classList.add('active');
-  document.body.style.overflow = 'hidden';
-});
-qs('#mob-close')?.addEventListener('click', closeMenu);
-
-function closeMenu() {
-  mMenu?.classList.remove('active');
-  if (!lb?.classList.contains('active')) document.body.style.overflow = '';
-}
-
-/* ── SCROLL / REVEAL ── */
-const navbar = qs('#navbar');
-let lastScroll = 0;
-let ticking = false;
-
-window.addEventListener('scroll', () => {
-  lastScroll = window.scrollY;
-  if (!ticking) {
-    requestAnimationFrame(() => {
-      navbar?.classList.toggle('scrolled', lastScroll > 50);
-      ticking = false;
-    });
-    ticking = true;
-  }
-}, { passive: true });
-
-function initReveal() {
-  const els = qsa('.reveal:not(.in)');
-  const io = new IntersectionObserver(ents => {
-    ents.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
+    // Active link highlighting
+    let currentId = '';
+    sections.forEach(sec => {
+      const top = sec.offsetTop - 180;
+      const height = sec.offsetHeight;
+      if (scrollY >= top && scrollY < top + height) {
+        currentId = sec.getAttribute('id');
       }
     });
-  }, { threshold: 0.1 });
-  els.forEach(e => io.observe(e));
+
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href') || '';
+      link.classList.toggle('active', href === `#${currentId}`);
+    });
+  }, { passive: true });
 }
 
-/* ── FILTERS ── */
-qs('#filter-track')?.addEventListener('click', e => {
-  const p = e.target.closest('.filter-btn');
-  if (!p) return;
-  qsa('.filter-btn').forEach(el => el.classList.remove('active'));
-  p.classList.add('active');
-  activeFilter = p.dataset.filter;
-  renderWorkGrid(activeFilter);
-});
+/* ── 8. MOBILE MENU ── */
+function initMobileMenu() {
+  const menuBtn = qs('#menu-btn');
+  const mobMenu = qs('#mob-menu');
+  const mobClose = qs('#mob-close');
+  const mobLinks = qsa('.mob-link');
 
-/* ── INIT ── */
-document.addEventListener('DOMContentLoaded', () => {
-  runLoader();
-  renderGrids();
-
-  // Also handle video poster skeleton on home page
-  const hVideo = qs('.video-mockup video');
-  if (hVideo) {
-    hVideo.onloadeddata = () => hVideo.classList.add('loaded');
+  function openMenu() {
+    mobMenu?.classList.add('active');
+    mobMenu?.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
   }
 
-  setTimeout(initReveal, 250);
+  function closeMenu() {
+    mobMenu?.classList.remove('active');
+    mobMenu?.setAttribute('aria-hidden', 'true');
+    if (!lb?.classList.contains('active')) {
+      document.body.style.overflow = '';
+    }
+  }
+
+  menuBtn?.addEventListener('click', openMenu);
+  mobClose?.addEventListener('click', closeMenu);
+  mobLinks.forEach(link => link.addEventListener('click', closeMenu));
+}
+
+/* ── 9. INTERACTIVE INQUIRY FORM ── */
+function initInquiryForm() {
+  const form = qs('#project-form');
+  const formatPills = qsa('#format-pill-group .form-pill');
+  const volumePills = qsa('#volume-pill-group .form-pill');
+  const successMsg = qs('#form-success');
+
+  // Pill Toggles
+  function setupPills(pills) {
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+      });
+    });
+  }
+
+  setupPills(formatPills);
+  setupPills(volumePills);
+
+  // Form Submit Handler
+  form?.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const name = qs('#form-name')?.value || '';
+    const email = qs('#form-email')?.value || '';
+    const link = qs('#form-link')?.value || 'Not provided';
+    const activeFormat = qs('#format-pill-group .form-pill.active')?.dataset.val || 'Short-Form';
+    const activeVolume = qs('#volume-pill-group .form-pill.active')?.dataset.val || '12-16 videos';
+    const notes = qs('#form-notes')?.value || '';
+
+    // Prepare mailto link
+    const subject = encodeURIComponent(`Custom Offer Request: ${name} (${activeFormat})`);
+    const body = encodeURIComponent(
+      `Hi Jaideep,\n\nI'm requesting a custom offer for video editing services.\n\n` +
+      `• Name / Brand: ${name}\n` +
+      `• Work Email: ${email}\n` +
+      `• Channel / Social: ${link}\n` +
+      `• Content Format: ${activeFormat}\n` +
+      `• Target Monthly Volume: ${activeVolume}\n` +
+      `• Project Goals & Scope:\n${notes}\n\n` +
+      `Looking forward to receiving your custom proposal!`
+    );
+
+    const mailtoUrl = `mailto:jaideep.markam@gmail.com?subject=${subject}&body=${body}`;
+
+    if (successMsg) {
+      successMsg.style.display = 'block';
+    }
+
+    // Launch mail client after a brief delay
+    setTimeout(() => {
+      window.location.href = mailtoUrl;
+    }, 600);
+  });
+}
+
+/* ── 10. MAGNETIC BUTTON INTERACTIONS ── */
+function initMagneticButtons() {
+  const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  if (isTouch) return;
+
+  qsa('.magnetic').forEach(btn => {
+    let ticking = false;
+    btn.addEventListener('mousemove', e => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = `translate(${x * 0.16}px, ${y * 0.16}px)`;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = `translate(0px, 0px)`;
+    });
+  });
+}
+
+/* ── 11. SCROLL REVEAL OBSERVER ── */
+function initReveal() {
+  const revealElements = qsa('.reveal:not(.in)');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealElements.forEach(el => observer.observe(el));
+}
+
+/* ── DOM READY INITIALIZATION ── */
+document.addEventListener('DOMContentLoaded', () => {
+  initLoader();
+  initTheme();
+  initHeroVideo();
+  initBeforeAfterSlider();
+  renderPortfolioGrid('All');
+  initFilters();
+  initScrollSpy();
+  initMobileMenu();
+  initInquiryForm();
+  initMagneticButtons();
+  setTimeout(initReveal, 200);
 });
