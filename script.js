@@ -5,12 +5,8 @@
    Awwwards-Caliber Video Editor & Motion Design Portfolio
 ═══════════════════════════════════════════════════════ */
 
-/* ── SECURITY: FRAME-BUSTING ── */
-try {
-  if (window.top !== window.self) {
-    window.top.location = window.self.location;
-  }
-} catch (e) { /* cross-origin frame */ }
+// Security Control: Framing defense (clickjacking protection) is enforced via HTTP headers
+// (Content-Security-Policy: frame-ancestors 'self' and X-Frame-Options: SAMEORIGIN).
 
 /* ── DATA: CURATED CLIENT PROJECTS ── */
 const PROJECTS = [
@@ -137,10 +133,20 @@ function initLoader() {
       setTimeout(() => {
         loader.style.opacity = '0';
         loader.style.visibility = 'hidden';
-        setTimeout(() => loader.remove(), 500);
-      }, 250);
+        setTimeout(() => loader.remove(), 400);
+      }, 200);
     }
-  }, 60);
+  }, 50);
+
+  // Mobile safety watchdog: ensure page is never stuck if throttled
+  setTimeout(() => {
+    if (document.contains(loader)) {
+      clearInterval(interval);
+      loader.style.opacity = '0';
+      loader.style.visibility = 'hidden';
+      setTimeout(() => loader.remove(), 300);
+    }
+  }, 1800);
 }
 
 /* ── 2. THEME CONTROLLER ── */
@@ -243,6 +249,10 @@ function initBeforeAfterSlider() {
   }, { passive: true });
 
   window.addEventListener('touchend', () => {
+    isDragging = false;
+  });
+
+  window.addEventListener('touchcancel', () => {
     isDragging = false;
   });
 
@@ -382,8 +392,13 @@ const lbVid = qs('#lb-video');
 const lbIframe = qs('#lb-iframe');
 const lbVidWrap = qs('#lb-video-container');
 
+let activeElementBeforeModal = null;
+
 function openLb(idx) {
   if (idx < 0 || idx >= VISIBLE_PROJECTS.length) return;
+  
+  // Accessibility Control: Save focus location before opening modal dialog
+  activeElementBeforeModal = document.activeElement;
   currentLbIdx = idx;
   const p = VISIBLE_PROJECTS[idx];
 
@@ -412,37 +427,74 @@ function openLb(idx) {
     }
     lbVidWrap?.classList.remove('skeleton');
   } else {
-    // Cloudinary MP4 Player
+    // Cloudinary Video Player (Universal MP4 & MOV compatibility)
     if (lbIframe) { lbIframe.src = ''; lbIframe.style.display = 'none'; }
     if (lbVid) {
       lbVid.style.display = 'block';
       lbVid.classList.remove('loaded');
       lbVidWrap?.classList.add('skeleton');
-      lbVid.src = p.videoUrl;
+
+      // Android/Chromium mobile support: ensure MP4 stream is used if MOV is unsupported
+      const isApple = /iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent);
+      let playUrl = p.videoUrl;
+      if (!isApple && playUrl.endsWith('.mov')) {
+        playUrl = playUrl.replace(/\.mov$/i, '.mp4');
+      }
+
+      lbVid.src = playUrl;
       lbVid.poster = p.thumbUrl;
       lbVid.load();
+
       const onReady = () => {
         lbVid.classList.add('loaded');
         lbVidWrap?.classList.remove('skeleton');
         lbVid.play().catch(() => {});
       };
+
       lbVid.onloadeddata = onReady;
       lbVid.oncanplay = onReady;
+
+      lbVid.onerror = () => {
+        // Fallback: If .mov failed, try universal .mp4
+        if (lbVid.src && lbVid.src.endsWith('.mov')) {
+          lbVid.src = lbVid.src.replace(/\.mov$/i, '.mp4');
+          lbVid.load();
+          lbVid.play().catch(() => {});
+        } else {
+          lbVidWrap?.classList.remove('skeleton');
+        }
+      };
     }
   }
 
   lb?.classList.add('active');
   lb?.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+
+  // Set initial focus to close button
+  setTimeout(() => qs('#lb-close')?.focus(), 60);
 }
 
 function closeLb() {
   lb?.classList.remove('active');
   lb?.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
-  if (lbVid) { lbVid.pause(); lbVid.src = ''; lbVid.style.display = 'block'; }
+  if (lbVid) {
+    lbVid.pause();
+    lbVid.removeAttribute('src');
+    lbVid.load();
+    lbVid.style.display = 'block';
+  }
   if (lbIframe) { lbIframe.src = ''; lbIframe.style.display = 'none'; }
+
+  // Accessibility Control: Restore focus to triggering element
+  if (activeElementBeforeModal && typeof activeElementBeforeModal.focus === 'function') {
+    activeElementBeforeModal.focus();
+  }
 }
+
+window.openLb = openLb;
+window.closeLb = closeLb;
 
 qs('#lb-close')?.addEventListener('click', closeLb);
 qs('#lb-backdrop')?.addEventListener('click', closeLb);
@@ -454,6 +506,22 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeLb();
   if (e.key === 'ArrowLeft') qs('#lb-prev')?.click();
   if (e.key === 'ArrowRight') qs('#lb-next')?.click();
+
+  // Accessibility Control: Focus trap inside modal dialog
+  if (e.key === 'Tab') {
+    const focusable = qsa('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', lb);
+    if (focusable.length > 0) {
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }
 });
 
 /* ── 7. NAVBAR SCROLLSPY & STICKY STATE ── */
@@ -535,36 +603,51 @@ function initInquiryForm() {
   form?.addEventListener('submit', e => {
     e.preventDefault();
 
-    const name = qs('#form-name')?.value || '';
-    const email = qs('#form-email')?.value || '';
-    const link = qs('#form-link')?.value || 'Not provided';
+    // Security Control: Validating and sanitizing inputs to prevent CRLF mail header injection
+    const rawName = qs('#form-name')?.value || '';
+    const cleanName = rawName.replace(/[\r\n]/g, ' ').trim().slice(0, 80);
+
+    const rawEmail = qs('#form-email')?.value || '';
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const cleanEmail = emailRegex.test(rawEmail.trim()) ? rawEmail.trim().slice(0, 100) : '';
+
+    const rawLink = qs('#form-link')?.value || '';
+    const cleanLink = rawLink.replace(/[\r\n]/g, ' ').trim().slice(0, 200) || 'Not provided';
+
     const activeFormat = qs('#format-pill-group .form-pill.active')?.dataset.val || 'Short-Form';
     const activeVolume = qs('#volume-pill-group .form-pill.active')?.dataset.val || '12-16 videos';
-    const notes = qs('#form-notes')?.value || '';
 
-    // Prepare mailto link
-    const subject = encodeURIComponent(`Custom Offer Request: ${name} (${activeFormat})`);
+    const rawNotes = qs('#form-notes')?.value || '';
+    const cleanNotes = rawNotes.slice(0, 1200);
+
+    if (!cleanEmail) {
+      alert('Please enter a valid work email address.');
+      return;
+    }
+
+    // Security Control: URL encode all components to prevent parameter injection
+    const subject = encodeURIComponent(`Custom Offer Request: ${cleanName || 'New Creator'} (${activeFormat})`);
     const body = encodeURIComponent(
       `Hi Jaideep,\n\nI'm requesting a custom offer for video editing services.\n\n` +
-      `• Name / Brand: ${name}\n` +
-      `• Work Email: ${email}\n` +
-      `• Channel / Social: ${link}\n` +
+      `• Name / Brand: ${cleanName || 'Not provided'}\n` +
+      `• Work Email: ${cleanEmail}\n` +
+      `• Channel / Social: ${cleanLink}\n` +
       `• Content Format: ${activeFormat}\n` +
       `• Target Monthly Volume: ${activeVolume}\n` +
-      `• Project Goals & Scope:\n${notes}\n\n` +
+      `• Project Goals & Scope:\n${cleanNotes}\n\n` +
       `Looking forward to receiving your custom proposal!`
     );
 
     const mailtoUrl = `mailto:jaideep.markam@gmail.com?subject=${subject}&body=${body}`;
 
     if (successMsg) {
+      // Mobile Support: Provide an explicit clickable fallback in case browser blocks mailto invocation
+      successMsg.innerHTML = '✓ Inquiry prepared! Opening your mail app... If it didn\'t open automatically, <a href="' + mailtoUrl + '" style="color:var(--accent-primary);text-decoration:underline;font-weight:600;">click here to launch mail</a>.';
       successMsg.style.display = 'block';
     }
 
-    // Launch mail client after a brief delay
-    setTimeout(() => {
-      window.location.href = mailtoUrl;
-    }, 600);
+    // Launch immediately inside user gesture to avoid mobile browser popup blockers
+    window.location.href = mailtoUrl;
   });
 }
 
@@ -609,6 +692,56 @@ function initReveal() {
   revealElements.forEach(el => observer.observe(el));
 }
 
+/* ── 12. SMOOTH SCROLL ENGINE FOR ALL BUTTONS & LINKS ── */
+function initSmoothScroll() {
+  // Explicitly bind Hero Showreel button
+  const showreelBtn = qs('#hero-showreel-btn');
+  showreelBtn?.addEventListener('click', () => {
+    openLb(0);
+  });
+
+  // Handle all internal anchor buttons and links
+  qsa('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const hash = link.getAttribute('href');
+      if (!hash || hash === '#') return;
+
+      const target = qs(hash);
+      if (target) {
+        e.preventDefault();
+
+        // If mobile drawer is open, close it first and restore scroll
+        const mobMenu = qs('#mob-menu');
+        if (mobMenu?.classList.contains('active')) {
+          mobMenu.classList.remove('active');
+          mobMenu.setAttribute('aria-hidden', 'true');
+          if (!lb?.classList.contains('active')) {
+            document.body.style.overflow = '';
+          }
+        }
+
+        // Calculate offset with fixed floating navbar (90px desktop, 75px mobile)
+        const navOffset = window.innerWidth <= 768 ? 75 : 90;
+        const targetPos = target.getBoundingClientRect().top + window.pageYOffset - navOffset;
+
+        window.scrollTo({
+          top: Math.max(0, targetPos),
+          behavior: 'smooth'
+        });
+
+        // Update active nav link highlighting
+        qsa('.nav-link').forEach(nl => {
+          nl.classList.toggle('active', nl.getAttribute('href') === hash);
+        });
+
+        if (history.pushState) {
+          history.pushState(null, null, hash);
+        }
+      }
+    });
+  });
+}
+
 /* ── DOM READY INITIALIZATION ── */
 document.addEventListener('DOMContentLoaded', () => {
   initLoader();
@@ -621,5 +754,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initInquiryForm();
   initMagneticButtons();
+  initSmoothScroll();
   setTimeout(initReveal, 200);
 });
