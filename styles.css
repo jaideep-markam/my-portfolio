@@ -61,9 +61,14 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 100px;
   font-size: 16px;
   background-color: var(--bg);
   color-scheme: dark;
+}
+
+section[id] {
+  scroll-margin-top: 100px;
 }
 
 body {
@@ -977,6 +982,11 @@ html[data-theme="light"] .theme-toggle .sun-icon { transform: translateY(0); opa
 .comparison-card {
   padding: 24px;
   overflow: hidden;
+}
+
+.comparison-slider,
+#comparison-slider {
+  touch-action: none;
 }
 
 .comparison-wrapper {
@@ -2294,6 +2304,25 @@ html[data-theme="light"] .form-pill.active {
   color: var(--accent-primary);
 }
 
+html[data-theme="light"] .mob-menu {
+  background: rgba(249, 249, 251, 0.98);
+}
+
+html[data-theme="light"] .mob-close {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #0b0b10;
+}
+
+html[data-theme="light"] .mob-link {
+  color: #52525e;
+}
+
+html[data-theme="light"] .mob-link:hover,
+html[data-theme="light"] .mob-link.active {
+  color: #0b0b10;
+}
+
 html[data-theme="light"] .lb-backdrop {
   background: rgba(249, 249, 251, 0.95);
 }
@@ -2410,16 +2439,63 @@ html[data-theme="light"] .footer-socials a:hover {
 
   .lb-container {
     flex-direction: column;
-    height: 90vh;
+    height: 94vh;
+    max-height: 94vh;
+    border-radius: var(--radius-lg);
+  }
+
+  .lb-close {
+    top: 12px;
+    right: 12px;
+    width: 42px;
+    height: 42px;
+    font-size: 1.25rem;
+    z-index: 100;
   }
 
   .lb-video-container {
-    height: 52vh;
+    flex: 0 0 52%;
+    height: 52%;
+    min-height: 220px;
   }
 
   .lb-sidebar {
-    height: 38vh;
-    padding: 24px;
+    flex: 1 1 48%;
+    height: auto;
+    max-height: 48%;
+    padding: 16px 20px;
+    overflow-y: auto;
+  }
+
+  .lb-title {
+    font-size: 1.35rem;
+    margin-bottom: 8px;
+  }
+
+  .lb-desc {
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .lb-details {
+    padding-top: 12px;
+    margin-bottom: 14px;
+    gap: 8px;
+  }
+
+  .detail-row {
+    font-size: 0.8rem;
+  }
+
+  .lb-controls {
+    padding-top: 10px;
+    margin-top: auto;
+  }
+
+  .lb-controls button {
+    width: 44px;
+    height: 44px;
   }
 
   .guarantee-banner {
@@ -2484,5 +2560,84 @@ html[data-theme="light"] .footer-socials a:hover {
 
   .comp-specs {
     font-size: 0.75rem;
+  }
+}
+
+/* Touch & Mobile Interactivity Enhancements */
+@media (hover: none), (max-width: 768px) {
+  .work-card .wc-play {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+    box-shadow: 0 0 24px rgba(255, 255, 255, 0.45);
+  }
+
+  .work-card .wc-details {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .work-card .wc-title {
+    transform: translateY(0) !important;
+  }
+}
+
+/* Button & Card Active Touch Feedback */
+.btn:active,
+.btn-nav-cta:active,
+.filter-btn:active,
+.theme-toggle:active,
+.menu-btn:active,
+.mob-close:active,
+.mob-link:active,
+.work-card:active {
+  transform: scale(0.97) !important;
+}
+
+@media (max-width: 576px) {
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-title {
+    font-size: clamp(2.3rem, 9.5vw, 3.4rem);
+  }
+
+  .filter-track {
+    width: 100%;
+    padding: 4px;
+    gap: 6px;
+  }
+
+  .filter-btn {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    flex: 1 1 45%;
+    text-align: center;
+  }
+
+  .contact-container {
+    gap: 20px;
+  }
+
+  .contact-info-panel,
+  .contact-form-panel {
+    padding: 22px 18px;
+  }
+
+  .pill-group {
+    gap: 6px;
+  }
+
+  .form-pill {
+    padding: 8px 12px;
+    font-size: 0.78rem;
   }
 }
